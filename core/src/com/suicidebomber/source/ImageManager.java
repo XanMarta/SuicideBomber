@@ -17,7 +17,12 @@ public class ImageManager {
     public void create() {
         images = new HashMap<>();
         batch = new SpriteBatch();
-        images.put("player", new Image(new Texture("image.png"), GameElement.blockSize));
+        images.put("player", new Image(
+                new Texture("image.png"),
+                GameElement.blockSize));
+        images.put("wall", new Image(
+                new Texture("wall.png"),
+                new Vector2(GameElement.blockSize.x, GameElement.blockSize.y * 2)));
     }
 
     public void dispose() {
@@ -44,6 +49,20 @@ public class ImageManager {
         if (images.containsKey(image)) {
             Image imageDraw = images.get(image);
             batch.draw(imageDraw.texture, x, y, imageDraw.size.x, imageDraw.size.y);
+        }
+    }
+
+    public void drawImage(String image, float x, float y, float w, float h) {
+        if (images.containsKey(image)) {
+            Image imageDraw = images.get(image);
+            batch.draw(imageDraw.texture, x, y, w, h);
+        }
+    }
+
+    public void drawImage(String image, Vector2 position) {
+        if (images.containsKey(image)) {
+            Image imageDraw = images.get(image);
+            batch.draw(imageDraw.texture, position.x, position.y);
         }
     }
 }
