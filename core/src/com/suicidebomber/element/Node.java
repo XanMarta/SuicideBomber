@@ -48,6 +48,12 @@ public class Node {
         children.parent = null;
     }
 
+    public void free() {
+        if (parent != null) {
+            parent.removeChild(this);
+        }
+    }
+
     public void create() {
 
     }

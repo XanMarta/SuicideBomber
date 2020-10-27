@@ -17,12 +17,18 @@ public class ImageManager {
     public void create() {
         images = new HashMap<>();
         batch = new SpriteBatch();
-        images.put("player", new Image(
+        images.put("IMAGE", new Image(
                 new Texture("image.png"),
                 GameElement.blockSize));
-        images.put("wall", new Image(
+        images.put("WALL", new Image(
                 new Texture("wall.png"),
                 new Vector2(GameElement.blockSize.x, GameElement.blockSize.y * 2)));
+        images.put("GRASS", new Image(
+                new Texture("grass.png"),
+                new Vector2(GameElement.blockSize.x, GameElement.blockSize.y)));
+        images.put("PLAYER", new Image(
+                new Texture("player.png"),
+                new Vector2(GameElement.blockSize.x, GameElement.blockSize.y)));
     }
 
     public void dispose() {
@@ -41,7 +47,7 @@ public class ImageManager {
     }
 
     public void clearScreen() {
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 
@@ -52,10 +58,10 @@ public class ImageManager {
         }
     }
 
-    public void drawImage(String image, float x, float y, float w, float h) {
+    public void drawImage(String image, Vector2 position, Vector2 size) {
         if (images.containsKey(image)) {
             Image imageDraw = images.get(image);
-            batch.draw(imageDraw.texture, x, y, w, h);
+            batch.draw(imageDraw.texture, position.x, position.y, size.x, size.y);
         }
     }
 

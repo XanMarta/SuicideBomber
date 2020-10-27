@@ -6,12 +6,13 @@ import com.badlogic.gdx.math.Vector2;
 public class Node2D extends Node {
 
     public Vector2 position = new Vector2();
+    public Vector2 global_position = new Vector2();
 
-    public Vector2 getGlobalPosition() {
+    public void render() {
         if (parent == null || !(parent instanceof Node2D)) {
-            return new Vector2(position);
+            global_position.set(position);
         } else {
-            return new Vector2(position).add(((Node2D) parent).position);
+            global_position.set(position).add(((Node2D) parent).global_position);
         }
     }
 }

@@ -1,8 +1,9 @@
 package com.suicidebomber;
 
+import com.suicidebomber.element.MapElement;
 import com.suicidebomber.element.Node;
-import com.suicidebomber.element.Node2D;
 import com.suicidebomber.element.Sprite;
+import com.suicidebomber.element.TileMap;
 
 
 public class Testing {
@@ -12,25 +13,31 @@ public class Testing {
     public Testing() {
         root = new Node();
 
-        Node object = new Node();
-        root.addChild(object);
+        Sprite temp1 = new Sprite();
+        temp1.image = "IMAGE";
+        root.addChild(temp1);
 
-        Node2D animal = new Node2D() {
-            public void render() {
-                super.render();
-                position.add(1, 1);
+        TileMap mapPlay = new TileMap();
+        GameElement.BlockType[][] tempMap = new GameElement.BlockType[12][12];
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 12; j++) {
+                if (i == 0 || j == 0 || i == 11 || j == 11) {
+                    tempMap[i][j] = GameElement.BlockType.WALL;
+                } else {
+                    tempMap[i][j] = GameElement.BlockType.GRASS;
+                }
             }
-        };
-        animal.position.set(100, 200);
-        object.addChild(animal);
+        }
+        mapPlay.blockSize = GameElement.blockSize;
+        mapPlay.position.set(GameElement.mapPosition);
+        mapPlay.generateMap(tempMap, 12, 12);
+        root.addChild(mapPlay);
 
-        Sprite sprite = new Sprite();
-        sprite.image = "player";
-        animal.addChild(sprite);
-    }
-
-    public static void main(String args[]) {
-        new Testing();
+        MapElement player = new MapElement();
+        player.sprite.image = "PLAYER";
+        player.setCurrentMap(mapPlay);
+        player.setBlock(3, 2);
+        mapPlay.addChild(player);
     }
 
 }
