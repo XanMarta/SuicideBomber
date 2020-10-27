@@ -1,8 +1,6 @@
 package com.suicidebomber;
 
 import com.badlogic.gdx.math.Vector2;
-import com.suicidebomber.element.TileMap;
-import com.suicidebomber.source.ImageManager;
 
 
 public class GameElement {

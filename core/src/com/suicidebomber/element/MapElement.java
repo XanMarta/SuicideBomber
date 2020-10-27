@@ -20,11 +20,6 @@ public class MapElement extends Node2D {
         currentBlock.set(x, y);
     }
 
-    public void setCurrentMap(TileMap currentMap) {
-        this.currentMap = currentMap;
-        position = currentMap.position;
-    }
-
     public void updateBlock() {
         currentBlock.set(currentMap.positionToBlock(position));
     }

@@ -2,8 +2,8 @@ package com.suicidebomber;
 
 import com.suicidebomber.element.MapElement;
 import com.suicidebomber.element.Node;
-import com.suicidebomber.element.Sprite;
 import com.suicidebomber.element.TileMap;
+import com.suicidebomber.game.Player;
 
 
 public class Testing {
@@ -12,10 +12,6 @@ public class Testing {
 
     public Testing() {
         root = new Node();
-
-        Sprite temp1 = new Sprite();
-        temp1.image = "IMAGE";
-        root.addChild(temp1);
 
         TileMap mapPlay = new TileMap();
         GameElement.BlockType[][] tempMap = new GameElement.BlockType[12][12];
@@ -33,9 +29,9 @@ public class Testing {
         mapPlay.generateMap(tempMap, 12, 12);
         root.addChild(mapPlay);
 
-        MapElement player = new MapElement();
+        Player player = new Player();
         player.sprite.image = "PLAYER";
-        player.setCurrentMap(mapPlay);
+        player.currentMap = mapPlay;
         player.setBlock(3, 2);
         mapPlay.addChild(player);
     }
