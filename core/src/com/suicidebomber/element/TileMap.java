@@ -37,6 +37,14 @@ public class TileMap extends Node2D {
         return block.set((int) block.x, (int) block.y);
     }
 
+    public MapBlock blockAt(Vector2 block) {
+        if (isInMap(block)) {
+            return mapBlock[(int) block.x][(int) block.y];
+        } else {
+            return null;
+        }
+    }
+
     public boolean isInMap(Vector2 block) {
         if (block.x >= 0 && block.x < mapSize.x && block.y >= 0 && block.y < mapSize.y) {
             return true;

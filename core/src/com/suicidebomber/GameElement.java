@@ -22,4 +22,9 @@ public class GameElement {
     // Source Manager
     public static ImageManager imageManager = new ImageManager();
 
+    // Actor
+    public static float changeDirectionMargin = 20;
+    public static float autoMargin = 2;
+    public static float defaultSpeed = 5;
+
 }

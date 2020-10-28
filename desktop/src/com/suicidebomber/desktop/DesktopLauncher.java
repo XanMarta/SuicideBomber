@@ -11,6 +11,7 @@ public class DesktopLauncher {
 		config.title = "SuicideBomber";
 		config.width = (int) GameElement.windowsSize.x;
 		config.height = (int) GameElement.windowsSize.y;
+		config.forceExit = true;
 		new LwjglApplication(new SuicideBomber(), config);
 	}
 }

@@ -1,9 +1,9 @@
 package com.suicidebomber;
 
-import com.suicidebomber.element.MapElement;
 import com.suicidebomber.element.Node;
+import com.suicidebomber.element.Node2D;
 import com.suicidebomber.element.TileMap;
-import com.suicidebomber.game.Player;
+import com.suicidebomber.game.Actor;
 
 
 public class Testing {
@@ -29,11 +29,14 @@ public class Testing {
         mapPlay.generateMap(tempMap, 12, 12);
         root.addChild(mapPlay);
 
-        Player player = new Player();
+        Node2D actor = new Node2D();
+        mapPlay.addChild(actor);
+
+        Actor player = new Actor();
         player.sprite.image = "PLAYER";
         player.currentMap = mapPlay;
         player.setBlock(3, 2);
-        mapPlay.addChild(player);
+        actor.addChild(player);
     }
 
 }
