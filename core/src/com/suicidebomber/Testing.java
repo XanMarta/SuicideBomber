@@ -3,12 +3,13 @@ package com.suicidebomber;
 import com.suicidebomber.element.Node;
 import com.suicidebomber.element.Node2D;
 import com.suicidebomber.element.TileMap;
-import com.suicidebomber.game.Actor;
+import com.suicidebomber.game.Player;
 
 
 public class Testing {
 
     public Node root;
+    public Node house;
 
     public Testing() {
         root = new Node();
@@ -32,7 +33,7 @@ public class Testing {
         Node2D actor = new Node2D();
         mapPlay.addChild(actor);
 
-        Actor player = new Actor();
+        Player player = new Player();
         player.sprite.image = "PLAYER";
         player.currentMap = mapPlay;
         player.setBlock(3, 2);
