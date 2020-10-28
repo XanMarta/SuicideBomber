@@ -2,58 +2,93 @@ package com.suicidebomber.element;
 
 import com.badlogic.gdx.utils.Array;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public class Node {
 
-    protected Array<Node> child = new Array<>();
+    protected ArrayList<Node> children = new ArrayList<>();
     protected HashMap<String, SignalPack> signals = new HashMap<>();
     protected Node parent = null;
+    public String name = "";
+
+    public Node() {
+        name = "" + hashCode();
+    }
 
     // ## Core method
 
     public void _create() {
         create();
-        for (Node children : child) {
-            children._create();
+        for (Node child : children) {
+            child._create();
         }
     }
 
     public void _render() {
         render();
-        for (Node children : child) {
-            children._render();
+        for (Node child : children) {
+            child._render();
         }
     }
 
     public void _dispose() {
         dispose();
-        for (Node children : child) {
-            children._dispose();
+        for (Node child : children) {
+            child._dispose();
         }
     }
 
     // ## Node method
 
-    public void addChild(Node children) {
-        child.add(children);
-        children.parent = this;
+    public void addChild(Node child) {
+        children.add(child);
+        child.parent = this;
+        System.out.println("Add child: " + name + " - " + child.name);
     }
 
-    public void deleteChild(Node children) {
-        removeChild(children);
-        children._dispose();
+    public void deleteChild(Node child) { // Delete and free
+        child._dispose();
+        child.freeNode();
+        children.remove(child);
+        System.out.println("Free node: " + child.name);
+        child = null;
     }
 
-    public void removeChild(Node children) {
-        child.removeValue(children, true);
-        children.parent = null;
+    public void removeChild(Node child) { // Only remove, doesn't free
+        children.remove(child);
+        child.parent = null;
     }
 
-    public void free() {
+    public Node getParent() {
+        return parent;
+    }
+
+    public Node getChild(String name) {
+        for (Node child : children) {
+            if (child.name.equals(name)) {
+                return child;
+            }
+        }
+        return null;
+    }
+
+    public void free() {    // Free
         if (parent != null) {
-            parent.removeChild(this);
+            parent.deleteChild(this);
+        } else {
+            _dispose();
+            freeNode();
+        }
+    }
+
+    protected void freeNode() {
+        for (Node child : children) {
+            child.freeNode();
+            children.remove(child);
+            System.out.println("Free node: " + child.name);
+            child = null;
         }
     }
 
@@ -111,7 +146,11 @@ class SignalPack {
 
     public void execute() {
         for (Signal signal : signals) {
-            signal.execute();
+            if (signal.target == null) {
+                signals.removeValue(signal, true);
+            } else {
+                signal.execute();
+            }
         }
     }
 

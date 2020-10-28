@@ -34,7 +34,6 @@ public class Actor extends MapElement {
             } else if (direction.hasOppositeDirection(directToCurrent)) {      // To opposite direction and current line
                 if (!isLegitBlock(nextBlock)) {
                     velocity.setZero();
-                    position.set(currentMap.blockToPosition(currentBlock));
                 }
             } else {                                                           // To opposite line
                 if (isLegitBlock(nextBlock)) {

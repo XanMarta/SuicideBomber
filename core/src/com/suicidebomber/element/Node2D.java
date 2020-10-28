@@ -9,6 +9,7 @@ public class Node2D extends Node {
     public Vector2 global_position = new Vector2();
 
     public void render() {
+        super.render();
         if (parent == null || !(parent instanceof Node2D)) {
             global_position.set(position);
         } else {

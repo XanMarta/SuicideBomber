@@ -5,13 +5,13 @@ import com.badlogic.gdx.ApplicationAdapter;
 
 public class SuicideBomber extends ApplicationAdapter {
 
-	private Testing test;
+	private PlayGround playground;
 	
 	@Override
 	public void create () {
-		test = new Testing();
+		playground = new PlayGround();
 		GameElement.imageManager.create();
-		test.root._create();
+		playground.root._create();
 	}
 
 	@Override
@@ -19,7 +19,7 @@ public class SuicideBomber extends ApplicationAdapter {
 		GameElement.imageManager.clearScreen();
 		GameElement.imageManager.startDraw();
 
-		test.root._render();
+		playground.root._render();
 
 		GameElement.imageManager.endDraw();
 
@@ -28,6 +28,6 @@ public class SuicideBomber extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		GameElement.imageManager.dispose();
-		test.root._dispose();
+		playground.root._dispose();
 	}
 }

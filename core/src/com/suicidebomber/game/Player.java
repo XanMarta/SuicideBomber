@@ -3,6 +3,7 @@ package com.suicidebomber.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
+import com.suicidebomber.GameElement;
 
 
 public class Player extends Actor {
@@ -10,6 +11,9 @@ public class Player extends Actor {
     public void render() {
         super.render();
         playerMovement();
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            dropBomb();
+        }
     }
 
     public void playerMovement() {
@@ -31,6 +35,17 @@ public class Player extends Actor {
             direction.x = 0;
         }
         moveActor(direction);
+    }
+
+    public void dropBomb() {
+        if (currentMap.getMapBlock(currentBlock).blockType == GameElement.BlockType.GRASS) {
+            Bomb bomb = new Bomb();
+            bomb.owner = this;
+            bomb.currentMap = currentMap;
+            bomb.setBlock((int) currentBlock.x, (int) currentBlock.y);
+            currentMap.getMapBlock(bomb.currentBlock).blockType = GameElement.BlockType.BOMB;
+            currentMap.getChild("bomb").addChild(bomb);
+        }
     }
 
 }

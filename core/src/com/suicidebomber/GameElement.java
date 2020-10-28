@@ -27,4 +27,7 @@ public class GameElement {
     public static float autoMargin = 2;
     public static float defaultSpeed = 5;
 
+    // Bomb
+    public static float bombTiming = 3.0f;
+
 }

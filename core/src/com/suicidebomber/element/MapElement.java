@@ -10,6 +10,7 @@ public class MapElement extends Node2D {
     public TileMap currentMap = null;
 
     public MapElement() {
+        super();
         sprite = new Sprite();
         sprite.showing = false;
         addChild(sprite);
