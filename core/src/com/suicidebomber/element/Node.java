@@ -65,6 +65,10 @@ public class Node {
         return parent;
     }
 
+    public ArrayList<Node> getChildren() {
+        return children;
+    }
+
     public Node getChild(String name) {
         for (Node child : children) {
             if (child.name.equals(name)) {

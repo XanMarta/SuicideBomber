@@ -21,12 +21,16 @@ public class MapElement extends Node2D {
         currentBlock.set(x, y);
     }
 
+    public void setBlock(Vector2 block) {
+        setBlock((int) block.x, (int) block.y);
+    }
+
     public void updateBlock() {
         currentBlock.set(currentMap.positionToBlock(position));
     }
 
     public void render() {
         super.render();
-        currentMap.addSprite(sprite, currentBlock);
+        currentMap.addElement(this, currentBlock);
     }
 }

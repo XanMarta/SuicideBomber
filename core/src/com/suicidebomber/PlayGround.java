@@ -11,6 +11,7 @@ public class PlayGround {
     public Node root;
     public Node2D actor;
     public Node2D bomb;
+    public Node2D fire;
 
     public PlayGround() {
         root = new Node();
@@ -47,6 +48,10 @@ public class PlayGround {
         bomb = new Node2D();
         bomb.name = "bomb";
         mapPlay.addChild(bomb);
+
+        fire = new Node2D();
+        fire.name = "fire";
+        mapPlay.addChild(fire);
     }
 
 }

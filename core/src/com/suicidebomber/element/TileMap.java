@@ -52,17 +52,13 @@ public class TileMap extends Node2D {
         return false;
     }
 
-    public MapBlock getMapBlock(float x, float y) {
-        return mapBlock[(int) x][(int) y];
-    }
-
     public MapBlock getMapBlock(Vector2 block) {
         return mapBlock[(int) block.x][(int) block.y];
     }
 
-    public void addSprite(Sprite sprite, Vector2 block) {
+    public void addElement(MapElement element, Vector2 block) {
         if (isInMap(block)) {
-            getMapBlock(block.x, block.y).element.add(sprite);
+            getMapBlock(block).elements.add(element);
         }
     }
 

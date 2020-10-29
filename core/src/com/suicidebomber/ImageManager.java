@@ -25,10 +25,13 @@ public class ImageManager {
                 new Vector2(GameElement.blockSize.x, GameElement.blockSize.y * 2)));
         images.put("GRASS", new Image(
                 new Texture("grass.png"),
-                new Vector2(GameElement.blockSize.x, GameElement.blockSize.y)));
+                new Vector2(GameElement.blockSize)));
         images.put("PLAYER", new Image(
                 new Texture("player.png"),
-                new Vector2(GameElement.blockSize.x, GameElement.blockSize.y)));
+                new Vector2(GameElement.blockSize)));
+        images.put("FIRE", new Image(
+                new Texture("fire.png"),
+                new Vector2(GameElement.blockSize)));
     }
 
     public void dispose() {

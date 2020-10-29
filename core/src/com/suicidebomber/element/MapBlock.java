@@ -1,14 +1,14 @@
 package com.suicidebomber.element;
 
+import com.badlogic.gdx.utils.Array;
 import com.suicidebomber.GameElement;
-import java.util.ArrayList;
 
 
 public class MapBlock extends Node2D {
 
     public GameElement.BlockType blockType = GameElement.BlockType.GRASS;
     private String image = "";
-    public ArrayList<Sprite> element = new ArrayList<>();
+    public Array<MapElement> elements = new Array<>();
 
     public void setBlockType(GameElement.BlockType blockType) {
         this.blockType = blockType;
@@ -24,9 +24,9 @@ public class MapBlock extends Node2D {
         if (!image.equals("")) {
             GameElement.imageManager.drawImage(image, global_position);
         }
-        for (Sprite sprite : element) {
-            sprite.renderImage();
+        for (MapElement element : elements) {
+            element.sprite.renderImage();
         }
-        element.clear();
+        elements.clear();
     }
 }

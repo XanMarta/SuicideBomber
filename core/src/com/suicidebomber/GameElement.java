@@ -29,5 +29,6 @@ public class GameElement {
 
     // Bomb
     public static float bombTiming = 3.0f;
+    public static float fireTiming = 0.8f;
 
 }

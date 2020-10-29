@@ -42,7 +42,7 @@ public class Player extends Actor {
             Bomb bomb = new Bomb();
             bomb.owner = this;
             bomb.currentMap = currentMap;
-            bomb.setBlock((int) currentBlock.x, (int) currentBlock.y);
+            bomb.setBlock(currentBlock);
             currentMap.getMapBlock(bomb.currentBlock).blockType = GameElement.BlockType.BOMB;
             currentMap.getChild("bomb").addChild(bomb);
         }
