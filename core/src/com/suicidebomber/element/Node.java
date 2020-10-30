@@ -89,11 +89,10 @@ public class Node {
 
     protected void freeNode() {
         for (Node child : children) {
-            child.freeNode();
-            children.remove(child);
             System.out.println("Free node: " + child.name);
-            child = null;
+            child.freeNode();
         }
+        children.clear();
     }
 
     public void connect_signal(String signal, Node target, String method) {

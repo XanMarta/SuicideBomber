@@ -3,6 +3,7 @@ package com.suicidebomber;
 import com.suicidebomber.element.Node;
 import com.suicidebomber.element.Node2D;
 import com.suicidebomber.element.TileMap;
+import com.suicidebomber.game.Box;
 import com.suicidebomber.game.Player;
 
 
@@ -12,6 +13,7 @@ public class PlayGround {
     public Node2D actor;
     public Node2D bomb;
     public Node2D fire;
+    public Node2D box;
 
     public PlayGround() {
         root = new Node();
@@ -38,13 +40,6 @@ public class PlayGround {
         actor.name = "actor";
         mapPlay.addChild(actor);
 
-        Player player = new Player();
-        player.name = "player";
-        player.sprite.image = "PLAYER";
-        player.currentMap = mapPlay;
-        player.setBlock(3, 2);
-        actor.addChild(player);
-
         bomb = new Node2D();
         bomb.name = "bomb";
         mapPlay.addChild(bomb);
@@ -52,6 +47,34 @@ public class PlayGround {
         fire = new Node2D();
         fire.name = "fire";
         mapPlay.addChild(fire);
+
+        box = new Node2D();
+        box.name = "box";
+        mapPlay.addChild(box);
+
+        for (int i = 1; i < 11; i++) {
+            for (int j = 1; j < 11; j++) {
+                if (i == 5 || j == 5) {
+                    if (i == j) {
+                        continue;
+                    }
+                    Box newBox = new Box();
+                    newBox.currentMap = mapPlay;
+                    newBox.setBlock(i, j);
+                    box.addChild(newBox);
+                    mapPlay.getMapBlock(newBox.currentBlock).blockType = GameElement.BlockType.BOX;
+                }
+            }
+        }
+
+        Player player = new Player();
+        player.name = "player";
+        player.sprite.image = "PLAYER";
+        player.currentMap = mapPlay;
+        player.setBlock(3, 2);
+        actor.addChild(player);
+
+
     }
 
 }

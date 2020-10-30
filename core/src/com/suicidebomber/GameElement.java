@@ -16,6 +16,7 @@ public class GameElement {
         WALL,
         GRASS,
         FIRE,
+        BOX,
         BOMB
     }
 

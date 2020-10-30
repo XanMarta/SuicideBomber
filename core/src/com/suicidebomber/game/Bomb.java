@@ -3,8 +3,6 @@ package com.suicidebomber.game;
 import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.GameElement;
 import com.suicidebomber.element.MapElement;
-import com.suicidebomber.element.Node;
-import com.suicidebomber.element.Node2D;
 import com.suicidebomber.element.Timing;
 
 
@@ -70,10 +68,14 @@ public class Bomb extends MapElement {
             for (MapElement element : currentMap.getMapBlock(pos).elements) {
                 if (element instanceof Bomb) {
                     ((Bomb) element).runoff(0.05f);
-                    System.out.println("Boom in");
                 }
             }
-            System.out.println("Boom out");
+        } else if (currentMap.getMapBlock(pos).blockType == GameElement.BlockType.BOX) {
+            for (MapElement element : currentMap.getMapBlock(pos).elements) {
+                if (element instanceof Box) {
+                    ((Box) element).runoff();
+                }
+            }
         }
     }
 

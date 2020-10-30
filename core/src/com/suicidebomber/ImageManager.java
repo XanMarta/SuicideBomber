@@ -17,21 +17,12 @@ public class ImageManager {
     public void create() {
         images = new HashMap<>();
         batch = new SpriteBatch();
-        images.put("IMAGE", new Image(
-                new Texture("image.png"),
-                GameElement.blockSize));
-        images.put("WALL", new Image(
-                new Texture("wall.png"),
-                new Vector2(GameElement.blockSize.x, GameElement.blockSize.y * 2)));
-        images.put("GRASS", new Image(
-                new Texture("grass.png"),
-                new Vector2(GameElement.blockSize)));
-        images.put("PLAYER", new Image(
-                new Texture("player.png"),
-                new Vector2(GameElement.blockSize)));
-        images.put("FIRE", new Image(
-                new Texture("fire.png"),
-                new Vector2(GameElement.blockSize)));
+        loadImage("IMAGE", "image.png", GameElement.blockSize);
+        loadImage("WALL", "wall.png", GameElement.blockSize.x, GameElement.blockSize.y * 2);
+        loadImage("GRASS", "grass.png", GameElement.blockSize);
+        loadImage("PLAYER", "player.png", GameElement.blockSize);
+        loadImage("FIRE", "fire.png", GameElement.blockSize);
+        loadImage("BOX", "box.png", GameElement.blockSize);
     }
 
     public void dispose() {
@@ -39,6 +30,14 @@ public class ImageManager {
             images.get(name).texture.dispose();
         }
         batch.dispose();
+    }
+
+    private void loadImage(String image, String path, Vector2 size) {
+        images.put(image, new Image(new Texture(path), size));
+    }
+
+    private void loadImage(String image, String path, float x, float y) {
+        images.put(image, new Image(new Texture(path), new Vector2(x, y)));
     }
 
     public void startDraw() {
