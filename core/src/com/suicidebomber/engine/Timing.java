@@ -1,4 +1,4 @@
-package com.suicidebomber.element;
+package com.suicidebomber.engine;
 
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;

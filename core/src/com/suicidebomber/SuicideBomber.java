@@ -1,6 +1,8 @@
 package com.suicidebomber;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.suicidebomber.game.GameElement;
+import com.suicidebomber.game.PlayGround;
 
 
 public class SuicideBomber extends ApplicationAdapter {

@@ -1,4 +1,4 @@
-package com.suicidebomber;
+package com.suicidebomber.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -17,12 +17,12 @@ public class ImageManager {
     public void create() {
         images = new HashMap<>();
         batch = new SpriteBatch();
-        loadImage("IMAGE", "image.png", GameElement.blockSize);
-        loadImage("WALL", "wall.png", GameElement.blockSize.x, GameElement.blockSize.y * 2);
-        loadImage("GRASS", "grass.png", GameElement.blockSize);
-        loadImage("PLAYER", "player.png", GameElement.blockSize);
-        loadImage("FIRE", "fire.png", GameElement.blockSize);
-        loadImage("BOX", "box.png", GameElement.blockSize);
+        loadImage("IMAGE", "image/image.png", GameElement.blockSize);
+        loadImage("WALL", "image/wall.png", GameElement.blockSize.x, GameElement.blockSize.y * 2);
+        loadImage("GRASS", "image/grass.png", GameElement.blockSize);
+        loadImage("PLAYER", "image/player.png", GameElement.blockSize);
+        loadImage("FIRE", "image/fire.png", GameElement.blockSize);
+        loadImage("BOX", "image/box.png", GameElement.blockSize);
     }
 
     public void dispose() {

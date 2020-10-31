@@ -1,10 +1,10 @@
-package com.suicidebomber;
+package com.suicidebomber.game;
 
-import com.suicidebomber.element.Node;
-import com.suicidebomber.element.Node2D;
-import com.suicidebomber.element.TileMap;
-import com.suicidebomber.game.Box;
-import com.suicidebomber.game.Player;
+import com.suicidebomber.engine.Node;
+import com.suicidebomber.engine.Node2D;
+import com.suicidebomber.engine.TileMap;
+import com.suicidebomber.element.Box;
+import com.suicidebomber.element.Player;
 
 
 public class PlayGround {

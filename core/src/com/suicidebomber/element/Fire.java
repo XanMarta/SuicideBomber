@@ -1,8 +1,8 @@
-package com.suicidebomber.game;
+package com.suicidebomber.element;
 
-import com.suicidebomber.GameElement;
-import com.suicidebomber.element.MapElement;
-import com.suicidebomber.element.Timing;
+import com.suicidebomber.game.GameElement;
+import com.suicidebomber.engine.MapElement;
+import com.suicidebomber.engine.Timing;
 
 
 public class Fire extends MapElement {

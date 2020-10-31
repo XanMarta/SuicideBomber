@@ -1,4 +1,4 @@
-package com.suicidebomber;
+package com.suicidebomber.game;
 
 import com.badlogic.gdx.math.Vector2;
 

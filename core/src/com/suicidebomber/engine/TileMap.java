@@ -1,7 +1,7 @@
-package com.suicidebomber.element;
+package com.suicidebomber.engine;
 
 import com.badlogic.gdx.math.Vector2;
-import com.suicidebomber.GameElement;
+import com.suicidebomber.game.GameElement;
 
 
 public class TileMap extends Node2D {

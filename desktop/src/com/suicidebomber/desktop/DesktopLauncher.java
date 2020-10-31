@@ -2,7 +2,7 @@ package com.suicidebomber.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.suicidebomber.GameElement;
+import com.suicidebomber.game.GameElement;
 import com.suicidebomber.SuicideBomber;
 
 public class DesktopLauncher {
