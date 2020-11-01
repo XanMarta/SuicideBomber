@@ -5,6 +5,7 @@ import com.suicidebomber.engine.Node2D;
 import com.suicidebomber.engine.TileMap;
 import com.suicidebomber.element.Box;
 import com.suicidebomber.element.Player;
+import com.suicidebomber.source.MapLoader;
 
 
 public class PlayGround {
@@ -74,7 +75,7 @@ public class PlayGround {
         player.setBlock(3, 2);
         actor.addChild(player);
 
-
+        new MapLoader();
     }
 
 }

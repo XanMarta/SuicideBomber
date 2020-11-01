@@ -2,6 +2,7 @@ package com.suicidebomber.engine;
 
 import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.game.GameElement;
+import com.suicidebomber.source.Map;
 
 
 public class TileMap extends Node2D {
@@ -17,6 +18,20 @@ public class TileMap extends Node2D {
             for (int i = x - 1; i >= 0; i--) {
                 mapBlock[i][j] = new MapBlock();
                 mapBlock[i][j].setBlockType(map[i][j]);
+                mapBlock[i][j].position.set(
+                        i * blockSize.x + global_position.x,
+                        j * blockSize.y + global_position.y);
+                addChild(mapBlock[i][j]);
+            }
+        }
+    }
+
+    public void generateMap(Map map) {
+        mapSize.set(map.width, map.height);
+        for (int j = map.height - 1; j >= 0; j--) {
+            for (int i = map.width - 1; i >= 0; i--) {
+                mapBlock[i][j] = new MapBlock();
+                mapBlock[i][j].setBlockType(map.element[i][j]);
                 mapBlock[i][j].position.set(
                         i * blockSize.x + global_position.x,
                         j * blockSize.y + global_position.y);
