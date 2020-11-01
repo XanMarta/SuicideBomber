@@ -9,10 +9,10 @@ public class Box extends MapElement {
     public Box() {
         super();
         sprite.image = "BOX";
+        blockType = GameElement.BlockType.BOX;
     }
 
     public void runoff() {
-        currentMap.getMapBlock(currentBlock).blockType = GameElement.BlockType.GRASS;
         free();
     }
 }

@@ -19,7 +19,7 @@ public class Map {
         }
     }
 
-    public void setBlock(int x, int y, String type) {
+    public void setBlock(int x, int y, String type) { // From code
         switch (type) {
             case "W":
                 element[x][y] = GameElement.BlockType.WALL;

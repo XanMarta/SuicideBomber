@@ -18,29 +18,30 @@ public class MapElement extends Node2D {
         addChild(sprite);
     }
 
-    public void setTileMap(TileMap map, int x, int y) {
-        this.currentMap = map;
-        setBlock(x, y);
-    }
-
-    public void setBlock(Vector2 block) {
-        setBlock((int) block.x, (int) block.y);
-    }
-
-    public void setBlock(int x, int y) {
-        position.set(currentMap.blockToPosition(new Vector2(x, y)));
-        currentBlock.set(x, y);
+    public void setMap(TileMap map, Vector2 block) {
+        currentMap = map;
+        currentBlock.set(block);
+        position.set(currentMap.blockToPosition(block));
         if (blockType != GameElement.BlockType.NONE) {
-            currentMap.getMapBlock(currentBlock).setBlockType(blockType);
+            currentMap.getMapBlock(currentBlock).blockType = this.blockType;
         }
     }
 
-    public void updateBlock() {
+    public void updateBlock() { // For moving element
         currentBlock.set(currentMap.positionToBlock(position));
     }
 
     public void render() {
         super.render();
-        currentMap.addElement(this, currentBlock);
+        if (currentMap.isInMap(currentBlock)) {
+            currentMap.getMapBlock(currentBlock).elements.add(this);
+        }
+    }
+
+    public void dispose() {
+        super.dispose();
+        if (currentMap.getMapBlock(currentBlock).blockType == blockType) {
+            currentMap.getMapBlock(currentBlock).blockType = GameElement.BlockType.GRASS;
+        }
     }
 }
