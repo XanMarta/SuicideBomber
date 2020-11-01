@@ -41,9 +41,7 @@ public class Player extends Actor {
         if (currentMap.getMapBlock(currentBlock).blockType == GameElement.BlockType.GRASS) {
             Bomb bomb = new Bomb();
             bomb.owner = this;
-            bomb.currentMap = currentMap;
-            bomb.setBlock(currentBlock);
-            currentMap.getMapBlock(bomb.currentBlock).blockType = GameElement.BlockType.BOMB;
+            bomb.setMap(currentMap, currentBlock);
             currentMap.getChild("bomb").addChild(bomb);
         }
     }

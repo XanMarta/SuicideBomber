@@ -12,12 +12,13 @@ public class Fire extends MapElement {
 
     public Fire() {
         super();
+        sprite.image = "FIRE";
+        blockType = GameElement.BlockType.FIRE;
         timer = new Timing();
         timer.wait_time = GameElement.fireTiming;
         timer.connect_signal("time_out", this, "runoff");
         timer.start();
         addChild(timer);
-        sprite.image = "FIRE";
     }
 
     public void execute_signal(String signal) {

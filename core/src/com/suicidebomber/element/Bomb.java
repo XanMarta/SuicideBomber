@@ -15,12 +15,13 @@ public class Bomb extends MapElement {
 
     public Bomb() {
         super();
+        sprite.image = "BOMB";
+        blockType = GameElement.BlockType.BOMB;
         timer = new Timing();
         timer.wait_time = GameElement.bombTiming;
         timer.connect_signal("time_out", this, "runoff");
         timer.start();
         addChild(timer);
-        sprite.image = "IMAGE";
     }
 
     public void execute_signal(String signal) {
@@ -49,10 +50,8 @@ public class Bomb extends MapElement {
                 currentMap.getMapBlock(pos).blockType == GameElement.BlockType.FIRE) {
             Fire fire = new Fire();
             fire.owner = owner;
-            fire.currentMap = currentMap;
-            fire.setBlock(pos);
+            fire.setMap(currentMap, pos);
             currentMap.getChild("fire").addChild(fire);
-            currentMap.getMapBlock(pos).blockType = GameElement.BlockType.FIRE;
 
             if (power > 1) {
                 if (direction.isZero()) {

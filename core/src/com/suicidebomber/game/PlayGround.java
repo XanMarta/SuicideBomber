@@ -1,11 +1,12 @@
 package com.suicidebomber.game;
 
+import com.badlogic.gdx.math.Vector2;
+import com.suicidebomber.element.Box;
+import com.suicidebomber.element.Wall;
 import com.suicidebomber.engine.Node;
 import com.suicidebomber.engine.Node2D;
 import com.suicidebomber.engine.TileMap;
-import com.suicidebomber.element.Box;
 import com.suicidebomber.element.Player;
-import com.suicidebomber.source.MapLoader;
 
 
 public class PlayGround {
@@ -15,26 +16,17 @@ public class PlayGround {
     public Node2D bomb;
     public Node2D fire;
     public Node2D box;
+    public Node2D wall;
 
     public PlayGround() {
         root = new Node();
         root.name = "root";
 
         TileMap mapPlay = new TileMap();
+        mapPlay.blockSize.set(GameElement.blockSize);
         mapPlay.name = "mapplay";
-        GameElement.BlockType[][] tempMap = new GameElement.BlockType[12][12];
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 12; j++) {
-                if (i == 0 || j == 0 || i == 11 || j == 11) {
-                    tempMap[i][j] = GameElement.BlockType.WALL;
-                } else {
-                    tempMap[i][j] = GameElement.BlockType.GRASS;
-                }
-            }
-        }
-        mapPlay.blockSize = GameElement.blockSize;
+        mapPlay.generateMap(GameElement.mapLoader.loadMap("SANDSTORM"));
         mapPlay.position.set(GameElement.mapPosition);
-        mapPlay.generateMap(tempMap, 12, 12);
         root.addChild(mapPlay);
 
         actor = new Node2D();
@@ -53,17 +45,22 @@ public class PlayGround {
         box.name = "box";
         mapPlay.addChild(box);
 
-        for (int i = 1; i < 11; i++) {
-            for (int j = 1; j < 11; j++) {
-                if (i == 5 || j == 5) {
-                    if (i == j) {
-                        continue;
-                    }
-                    Box newBox = new Box();
-                    newBox.currentMap = mapPlay;
-                    newBox.setBlock(i, j);
-                    box.addChild(newBox);
-                    mapPlay.getMapBlock(newBox.currentBlock).blockType = GameElement.BlockType.BOX;
+        wall = new Node2D();
+        wall.name = "wall";
+        mapPlay.addChild(wall);
+
+        for (int i = 0; i < mapPlay.mapSize.x; i++) {
+            for (int j = 0; j < mapPlay.mapSize.y; j++) {
+                Vector2 pos = new Vector2(i, j);
+                GameElement.BlockType type = mapPlay.getMapBlock(pos).blockType;
+                if (type == GameElement.BlockType.WALL) {
+                    Wall temp = new Wall();
+                    temp.setMap(mapPlay, pos);
+                    wall.addChild(temp);
+                } else if (type == GameElement.BlockType.BOX) {
+                    Box temp = new Box();
+                    temp.setMap(mapPlay, pos);
+                    box.addChild(temp);
                 }
             }
         }
@@ -71,11 +68,8 @@ public class PlayGround {
         Player player = new Player();
         player.name = "player";
         player.sprite.image = "PLAYER";
-        player.currentMap = mapPlay;
-        player.setBlock(3, 2);
+        player.setMap(mapPlay, new Vector2(1, 1));
         actor.addChild(player);
-
-        new MapLoader();
     }
 
 }

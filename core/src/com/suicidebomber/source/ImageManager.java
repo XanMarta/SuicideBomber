@@ -18,7 +18,7 @@ public class ImageManager {
     public void create() {
         images = new HashMap<>();
         batch = new SpriteBatch();
-        loadImage("IMAGE", "image/image.png", GameElement.blockSize);
+        loadImage("BOMB", "image/bomb.png", GameElement.blockSize);
         loadImage("WALL", "image/wall.png", GameElement.blockSize.x, GameElement.blockSize.y * 2);
         loadImage("GRASS", "image/grass.png", GameElement.blockSize);
         loadImage("PLAYER", "image/player.png", GameElement.blockSize);
