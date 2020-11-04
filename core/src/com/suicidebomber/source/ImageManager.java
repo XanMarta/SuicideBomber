@@ -25,6 +25,10 @@ public class ImageManager {
         loadImage("FIRE", "image/fire.png", GameElement.blockSize);
         loadImage("BOX", "image/box.png", GameElement.blockSize);
         loadImage("ITEM", "image/item.png", GameElement.blockSize);
+        loadImage("ITEM_BOMB", "image/item/item_bomb.png", GameElement.blockSize);
+        loadImage("ITEM_HEART", "image/item/item_heart.png", GameElement.blockSize);
+        loadImage("ITEM_POWER", "image/item/item_power.png", GameElement.blockSize);
+        loadImage("ITEM_SPEED", "image/item/item_speed.png", GameElement.blockSize);
     }
 
     public void dispose() {

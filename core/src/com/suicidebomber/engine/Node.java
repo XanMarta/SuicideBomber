@@ -21,9 +21,6 @@ public class Node {
 
     public void _create() {
         create();
-        for (Node child : children) {
-            child._create();
-        }
     }
 
     public void _render() {
@@ -45,6 +42,7 @@ public class Node {
     public void addChild(Node child) {
         children.add(child);
         child.parent = this;
+        child._create();
         System.out.println("Add child: " + name + " - " + child.name);
     }
 
@@ -116,7 +114,7 @@ public class Node {
 
     // ## Implement method
 
-    public void create() {
+    public void create() {  // Called when a node addChild(thisnode)
 
     }
 

@@ -2,6 +2,7 @@ package com.suicidebomber.game;
 
 import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.element.Box;
+import com.suicidebomber.element.Human;
 import com.suicidebomber.element.Wall;
 import com.suicidebomber.engine.Node;
 import com.suicidebomber.engine.Node2D;
@@ -70,7 +71,7 @@ public class PlayGround {
             }
         }
 
-        Player player = new Player();
+        Human player = new Human();
         player.name = "player";
         player.sprite.image = "PLAYER";
         player.setMap(mapPlay, new Vector2(1, 1));

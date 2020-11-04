@@ -37,4 +37,10 @@ public class GameElement {
     public static float fireTiming = 0.8f;
     public static float delayBombSpreadTime = 0.05f;
 
+    // Player
+    public static int init_bomb = 2;
+    public static int init_heart = 2;
+    public static int init_power = 3;
+    public static int init_speed = 4;
+
 }

@@ -42,6 +42,9 @@ public class Bomb extends MapElement {
     public void runoff() {
         timer.stop();
         currentMap.getMapBlock(currentBlock).blockType = GameElement.BlockType.GRASS;
+        if (owner != null) {
+            owner.current_bomb += 1;
+        }
         boom(new Vector2(currentBlock), new Vector2(0, 0), power);
         free();
     }
@@ -52,7 +55,7 @@ public class Bomb extends MapElement {
             fire.owner = owner;
             fire.setMap(currentMap, pos);
             currentMap.getChild("fire").addChild(fire);
-
+            // Spread boom
             if (power > 1) {
                 if (direction.isZero()) {
                     boom(new Vector2(pos.x, pos.y + 1), new Vector2(0, 1), power - 1);
