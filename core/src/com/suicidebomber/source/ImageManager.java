@@ -24,6 +24,7 @@ public class ImageManager {
         loadImage("PLAYER", "image/player.png", GameElement.blockSize);
         loadImage("FIRE", "image/fire.png", GameElement.blockSize);
         loadImage("BOX", "image/box.png", GameElement.blockSize);
+        loadImage("ITEM", "image/item.png", GameElement.blockSize);
     }
 
     public void dispose() {

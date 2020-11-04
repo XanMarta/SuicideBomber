@@ -7,9 +7,9 @@ import com.suicidebomber.game.GameElement;
 public class MapElement extends Node2D {
 
     public Sprite sprite;
-    public Vector2 currentBlock = new Vector2(0, 0);
     public TileMap currentMap = null;
     public GameElement.BlockType blockType = GameElement.BlockType.NONE;
+    public Vector2 currentBlock = new Vector2(0, 0);
 
     public MapElement() {
         super();
@@ -27,10 +27,6 @@ public class MapElement extends Node2D {
         }
     }
 
-    public void updateBlock() { // For moving element
-        currentBlock.set(currentMap.positionToBlock(position));
-    }
-
     public void render() {
         super.render();
         if (currentMap.isInMap(currentBlock)) {
@@ -43,5 +39,13 @@ public class MapElement extends Node2D {
         if (currentMap.getMapBlock(currentBlock).blockType == blockType) {
             currentMap.getMapBlock(currentBlock).blockType = GameElement.BlockType.GRASS;
         }
+    }
+
+    public void appear() {
+
+    }
+
+    public void disappear() {
+
     }
 }

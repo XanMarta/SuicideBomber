@@ -28,26 +28,26 @@ public class Bomb extends MapElement {
         super.execute_signal(signal);
         if (signal.equals("runoff")) {
             System.out.println("BOOM");
-            runoff(0);
+            runoff();
         }
     }
 
-    public void runoff(float delay) {
-        if (delay == 0) {
-            timer.stop();
-            currentMap.getMapBlock(currentBlock).blockType = GameElement.BlockType.GRASS;
-            boom(new Vector2(currentBlock), new Vector2(0, 0), power);
-            free();
-        } else {
-            timer.stop();
-            timer.wait_time = delay;
-            timer.start();
-        }
+    public void disappear() {
+        super.disappear();
+        timer.stop();
+        timer.wait_time = GameElement.delayBombSpreadTime;
+        timer.start();
+    }
+
+    public void runoff() {
+        timer.stop();
+        currentMap.getMapBlock(currentBlock).blockType = GameElement.BlockType.GRASS;
+        boom(new Vector2(currentBlock), new Vector2(0, 0), power);
+        free();
     }
 
     public void boom(Vector2 pos, Vector2 direction, int power) {
-        if (currentMap.getMapBlock(pos).blockType == GameElement.BlockType.GRASS ||
-                currentMap.getMapBlock(pos).blockType == GameElement.BlockType.FIRE) {
+        if (currentMap.getMapBlock(pos).blockType == GameElement.BlockType.GRASS) {
             Fire fire = new Fire();
             fire.owner = owner;
             fire.setMap(currentMap, pos);
@@ -66,13 +66,19 @@ public class Bomb extends MapElement {
         } else if (currentMap.getMapBlock(pos).blockType == GameElement.BlockType.BOMB) {
             for (MapElement element : currentMap.getMapBlock(pos).elements) {
                 if (element instanceof Bomb) {
-                    ((Bomb) element).runoff(0.05f);
+                    element.disappear();
                 }
             }
         } else if (currentMap.getMapBlock(pos).blockType == GameElement.BlockType.BOX) {
             for (MapElement element : currentMap.getMapBlock(pos).elements) {
                 if (element instanceof Box) {
-                    ((Box) element).runoff();
+                    element.disappear();
+                }
+            }
+        } else if (currentMap.getMapBlock(pos).blockType == GameElement.BlockType.ITEM) {
+            for (MapElement element : currentMap.getMapBlock(pos).elements) {
+                if (element instanceof Item) {
+                    element.disappear();
                 }
             }
         }

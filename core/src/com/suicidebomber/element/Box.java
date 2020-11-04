@@ -12,7 +12,11 @@ public class Box extends MapElement {
         blockType = GameElement.BlockType.BOX;
     }
 
-    public void runoff() {
+    public void disappear() {
+        super.disappear();
+        Item item = new Item();
+        item.setMap(currentMap, currentBlock);
+        currentMap.getChild("item").addChild(item);
         free();
     }
 }

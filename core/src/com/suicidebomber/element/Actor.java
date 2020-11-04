@@ -6,12 +6,14 @@ import com.suicidebomber.engine.MapBlock;
 import com.suicidebomber.engine.MapElement;
 
 
-public class Actor extends MapElement {
+public class Actor extends MapElement { // Movement element
 
     public float speed = GameElement.defaultSpeed;
+    public Vector2 nearbyBlock = new Vector2(-1, -1);
 
     public boolean isLegitBlock(MapBlock block) {
-        return (block.blockType == GameElement.BlockType.GRASS);
+        return (block.blockType == GameElement.BlockType.GRASS ||
+                block.blockType == GameElement.BlockType.ITEM);
     }
 
     public void moveActor(Vector2 direction) {
@@ -61,6 +63,16 @@ public class Actor extends MapElement {
 
             position.add(velocity);
             updateBlock();
+        }
+    }
+
+    public void updateBlock() {
+        currentBlock.set(currentMap.positionToBlock(position));
+        Vector2 exactPos = currentMap.blockToPosition(currentBlock);
+        if (position.epsilonEquals(exactPos, 0.05f)) {
+            nearbyBlock.set(-1, -1);
+        } else {
+            nearbyBlock.set(new Vector2(position).sub(exactPos).nor().add(currentBlock));
         }
     }
 }

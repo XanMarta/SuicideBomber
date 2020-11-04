@@ -19,6 +19,7 @@ public class GameElement {
         FIRE,
         BOX,
         BOMB,
+        ITEM,
         NONE
     }
 
@@ -34,5 +35,6 @@ public class GameElement {
     // Bomb
     public static float bombTiming = 3.0f;
     public static float fireTiming = 0.8f;
+    public static float delayBombSpreadTime = 0.05f;
 
 }

@@ -1,7 +1,6 @@
 package com.suicidebomber.engine;
 
 import com.badlogic.gdx.math.Vector2;
-import com.suicidebomber.game.GameElement;
 import com.suicidebomber.source.Map;
 
 

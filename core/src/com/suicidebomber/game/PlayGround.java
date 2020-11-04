@@ -17,6 +17,7 @@ public class PlayGround {
     public Node2D fire;
     public Node2D box;
     public Node2D wall;
+    public Node2D item;
 
     public PlayGround() {
         root = new Node();
@@ -28,10 +29,6 @@ public class PlayGround {
         mapPlay.generateMap(GameElement.mapLoader.loadMap("SANDSTORM"));
         mapPlay.position.set(GameElement.mapPosition);
         root.addChild(mapPlay);
-
-        actor = new Node2D();
-        actor.name = "actor";
-        mapPlay.addChild(actor);
 
         bomb = new Node2D();
         bomb.name = "bomb";
@@ -48,6 +45,14 @@ public class PlayGround {
         wall = new Node2D();
         wall.name = "wall";
         mapPlay.addChild(wall);
+
+        item = new Node2D();
+        item.name = "item";
+        mapPlay.addChild(item);
+
+        actor = new Node2D();
+        actor.name = "actor";
+        mapPlay.addChild(actor);
 
         for (int i = 0; i < mapPlay.mapSize.x; i++) {
             for (int j = 0; j < mapPlay.mapSize.y; j++) {

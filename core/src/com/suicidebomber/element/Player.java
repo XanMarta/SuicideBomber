@@ -3,6 +3,7 @@ package com.suicidebomber.element;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
+import com.suicidebomber.engine.MapElement;
 import com.suicidebomber.game.GameElement;
 
 
@@ -13,6 +14,10 @@ public class Player extends Actor {
         playerMovement();
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             dropBomb();
+        }
+        checkCollision(currentBlock);
+        if (nearbyBlock.x >= 0 && nearbyBlock.y >= 0) {
+            checkCollision(nearbyBlock);
         }
     }
 
@@ -43,6 +48,17 @@ public class Player extends Actor {
             bomb.owner = this;
             bomb.setMap(currentMap, currentBlock);
             currentMap.getChild("bomb").addChild(bomb);
+        }
+    }
+
+    public void checkCollision(Vector2 pos) {
+        System.out.println("Number element in " + pos.toString() + " : " + currentMap.getMapBlock(pos).elements.size);
+        if (currentMap.getMapBlock(pos).blockType == GameElement.BlockType.ITEM) {
+            for (MapElement element : currentMap.getMapBlock(pos).elements) {
+                if (element instanceof Item) {
+                    element.disappear();
+                }
+            }
         }
     }
 
