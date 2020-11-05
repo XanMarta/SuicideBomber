@@ -43,10 +43,10 @@ public class Bomb extends MapElement {
         timer.stop();
         currentMap.getMapBlock(currentBlock).blockType = GameElement.BlockType.GRASS;
         if (owner != null) {
-            owner.current_bomb += 1;
+            owner.used_bomb -= 1;
         }
         boom(new Vector2(currentBlock), new Vector2(0, 0), power);
-        free();
+        safefree();
     }
 
     public void boom(Vector2 pos, Vector2 direction, int power) {

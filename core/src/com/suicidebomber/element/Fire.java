@@ -25,7 +25,7 @@ public class Fire extends MapElement {
         super.execute_signal(signal);
         if (signal.equals("runoff")) {
             currentMap.getMapBlock(currentBlock).blockType = GameElement.BlockType.GRASS;
-            free();
+            safefree();
         }
     }
 }

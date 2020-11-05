@@ -11,6 +11,8 @@ public class Node {
     protected ArrayList<Node> children = new ArrayList<>();
     protected HashMap<String, SignalPack> signals = new HashMap<>();
     protected Node parent = null;
+    protected ArrayList<Node> freechild = new ArrayList<>();
+    protected boolean isRender = false;
     public String name = "";
 
     public Node() {
@@ -24,9 +26,17 @@ public class Node {
     }
 
     public void _render() {
+        isRender = true;
         render();
         for (Node child : children) {
             child._render();
+        }
+        isRender = false;
+        if (freechild.size() > 0) {
+            for (Node node : freechild) {
+                node.free();
+            }
+            freechild.clear();
         }
     }
 
@@ -51,7 +61,6 @@ public class Node {
         child.freeNode();
         children.remove(child);
         System.out.println("Free node: " + child.name);
-        child = null;
     }
 
     public void removeChild(Node child) { // Only remove, doesn't free
@@ -76,7 +85,19 @@ public class Node {
         return null;
     }
 
-    public void free() {    // Free
+    public void safefree() {
+        if (parent == null) {
+            free();
+        } else {
+            if (parent.isRender) {
+                parent.freechild.add(this);
+            } else {
+                free();
+            }
+        }
+    }
+
+    private void free() {    // Free
         if (parent != null) {
             parent.deleteChild(this);
         } else {

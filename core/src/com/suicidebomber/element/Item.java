@@ -32,6 +32,6 @@ public class Item extends MapElement {
 
     public void disappear() {
         super.disappear();
-        free();
+        safefree();
     }
 }

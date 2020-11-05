@@ -1,6 +1,7 @@
 package com.suicidebomber;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.suicidebomber.engine.Node;
 import com.suicidebomber.game.GameElement;
 import com.suicidebomber.game.PlayGround;
 
@@ -24,7 +25,6 @@ public class SuicideBomber extends ApplicationAdapter {
 		playground.root._render();
 
 		GameElement.imageManager.endDraw();
-
 	}
 	
 	@Override

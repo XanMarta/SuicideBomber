@@ -8,17 +8,18 @@ import com.suicidebomber.engine.MapElement;
 
 public class Actor extends MapElement { // Movement element
 
-    public float speed = GameElement.defaultSpeed;
+    public float moveSpeed = GameElement.defaultSpeed;
     public Vector2 nearbyBlock = new Vector2(-1, -1);
 
     public boolean isLegitBlock(MapBlock block) {
         return (block.blockType == GameElement.BlockType.GRASS ||
-                block.blockType == GameElement.BlockType.ITEM);
+                block.blockType == GameElement.BlockType.ITEM ||
+                block.blockType == GameElement.BlockType.FIRE);
     }
 
     public void moveActor(Vector2 direction) {
         if (!direction.isZero()) {
-            Vector2 velocity = new Vector2(direction).scl(speed);
+            Vector2 velocity = new Vector2(direction).scl(moveSpeed);
             Vector2 toCurrent = new Vector2(currentMap.blockToPosition(currentBlock)).sub(position);
             Vector2 directToCurrent = new Vector2(toCurrent).nor();
             MapBlock nextBlock = currentMap.blockAt(new Vector2(direction).add(currentBlock));

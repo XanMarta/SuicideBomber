@@ -22,6 +22,6 @@ public class Box extends MapElement {
             item.setMap(currentMap, currentBlock);
             currentMap.getChild("item").addChild(item);
         }
-        free();
+        safefree();
     }
 }

@@ -12,7 +12,7 @@ public class Player extends Actor {     // Of course this is Player
     public int power;
     public int speed;
 
-    public int current_bomb;
+    public int used_bomb = 0;
 
     public Player() {
         super();
@@ -20,7 +20,11 @@ public class Player extends Actor {     // Of course this is Player
         heart = GameElement.init_heart;
         power = GameElement.init_power;
         speed = GameElement.init_speed;
-        current_bomb = bomb;
+        updateElement();
+    }
+
+    public void updateElement() {
+        moveSpeed = GameElement.defaultSpeed * (1 + speed / 10.0f);
     }
 
     public void movePlayer(Vector2 direction) {
@@ -32,14 +36,14 @@ public class Player extends Actor {     // Of course this is Player
     }
 
     public void dropBomb() {
-        if (current_bomb > 0) {
+        if (used_bomb < bomb) {
             if (currentMap.getMapBlock(currentBlock).blockType == GameElement.BlockType.GRASS) {
                 Bomb bomb = new Bomb();
                 bomb.owner = this;
                 bomb.power = this.power;
                 bomb.setMap(currentMap, currentBlock);
                 currentMap.getChild("bomb").addChild(bomb);
-                current_bomb -= 1;
+                used_bomb += 1;
             }
         }
     }
@@ -51,22 +55,32 @@ public class Player extends Actor {     // Of course this is Player
                     Item item = (Item) element;
                     switch (item.item_name) {
                         case "BOMB":
-                            bomb += 1;
-                            current_bomb += 1;
+                            if (bomb < GameElement.max_element) {
+                                bomb += 1;
+                            }
                             break;
                         case "HEART":
-                            heart += 1;
+                            if (heart < GameElement.max_element) {
+                                heart += 1;
+                            }
                             break;
                         case "POWER":
-                            power += 1;
+                            if (power < GameElement.max_element) {
+                                power += 1;
+                            }
                             break;
                         case "SPEED":
-                            speed += 1;
+                            if (speed < GameElement.max_element) {
+                                speed += 1;
+                            }
                             break;
                     }
                     item.disappear();
+                    updateElement();
                 }
             }
+        } else if (currentMap.getMapBlock(pos).blockType == GameElement.BlockType.FIRE) {
+            safefree();
         }
     }
 

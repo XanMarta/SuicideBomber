@@ -1,6 +1,8 @@
 package com.suicidebomber.game;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
+import com.suicidebomber.engine.Node;
 import com.suicidebomber.source.ImageManager;
 import com.suicidebomber.source.MapLoader;
 
@@ -41,6 +43,7 @@ public class GameElement {
     public static int init_bomb = 2;
     public static int init_heart = 2;
     public static int init_power = 3;
-    public static int init_speed = 4;
+    public static int init_speed = 2;
+    public static int max_element = 5;
 
 }
