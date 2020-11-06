@@ -68,15 +68,16 @@ public class PlayGround {
             }
         }
 
-        PlayerTag tag = new PlayerTag();
-        root.addChild(tag);
-
         Human player = new Human();
         player.name = "player";
         player.sprite.image = "PLAYER";
         player.setMap(mapPlay, new Vector2(1, 1));
-        player.tag = tag;
         actor.addChild(player);
+
+        TagManager tagManager = new TagManager();
+        tagManager.position.set(20, 200);
+        root.addChild(tagManager);
+        tagManager.connectPlayer(player);
 
     }
 

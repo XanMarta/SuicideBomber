@@ -13,6 +13,8 @@ public class PlayerTag extends Node2D {
     public Node2D powers;
     public Node2D speeds;
 
+    public boolean hasPlayer = false;
+
     public void create() {
         super.create();
         Sprite mainImage = new Sprite();
@@ -45,6 +47,7 @@ public class PlayerTag extends Node2D {
             speed.position.set(110 + i * range, 10);
             speeds.addChild(speed);
         }
+        update(null);
     }
 
     public void update(Player player) {

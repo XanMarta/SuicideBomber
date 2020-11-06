@@ -27,6 +27,7 @@ public class Player extends Actor {     // Of course this is Player
     public void dispose() {
         super.dispose();
         if (tag != null) {
+            tag.hasPlayer = false;
             tag.update(null);
         }
     }
@@ -51,7 +52,7 @@ public class Player extends Actor {     // Of course this is Player
             if (currentMap.getMapBlock(currentBlock).blockType == GameElement.BlockType.GRASS) {
                 Bomb bomb = new Bomb();
                 bomb.owner = this;
-                bomb.power = this.power;
+                bomb.power = this.power + 1;
                 bomb.setMap(currentMap, currentBlock);
                 currentMap.getChild("bomb").addChild(bomb);
                 used_bomb += 1;
