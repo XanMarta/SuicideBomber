@@ -1,13 +1,10 @@
 package com.suicidebomber.game;
 
 import com.badlogic.gdx.math.Vector2;
-import com.suicidebomber.element.Box;
-import com.suicidebomber.element.Human;
-import com.suicidebomber.element.Wall;
+import com.suicidebomber.element.*;
 import com.suicidebomber.engine.Node;
 import com.suicidebomber.engine.Node2D;
 import com.suicidebomber.engine.TileMap;
-import com.suicidebomber.element.Player;
 
 
 public class PlayGround {
@@ -71,11 +68,16 @@ public class PlayGround {
             }
         }
 
+        PlayerTag tag = new PlayerTag();
+        root.addChild(tag);
+
         Human player = new Human();
         player.name = "player";
         player.sprite.image = "PLAYER";
         player.setMap(mapPlay, new Vector2(1, 1));
+        player.tag = tag;
         actor.addChild(player);
+
     }
 
 }

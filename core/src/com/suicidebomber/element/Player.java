@@ -7,15 +7,16 @@ import com.suicidebomber.game.GameElement;
 
 public class Player extends Actor {     // Of course this is Player
 
-    public int bomb;
-    public int heart;
-    public int power;
-    public int speed;
+    public int bomb = 0;
+    public int heart = 0;
+    public int power = 0;
+    public int speed = 0;
 
     public int used_bomb = 0;
+    public PlayerTag tag = null;
 
-    public Player() {
-        super();
+    public void create() {
+        super.create();
         bomb = GameElement.init_bomb;
         heart = GameElement.init_heart;
         power = GameElement.init_power;
@@ -23,8 +24,18 @@ public class Player extends Actor {     // Of course this is Player
         updateElement();
     }
 
+    public void dispose() {
+        super.dispose();
+        if (tag != null) {
+            tag.update(null);
+        }
+    }
+
     public void updateElement() {
         moveSpeed = GameElement.defaultSpeed * (1 + speed / 10.0f);
+        if (tag != null) {
+            tag.update(this);
+        }
     }
 
     public void movePlayer(Vector2 direction) {

@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.game.GameElement;
-
 import java.util.HashMap;
 
 
@@ -29,6 +28,11 @@ public class ImageManager {
         loadImage("ITEM_HEART", "image/item/item_heart.png", GameElement.blockSize);
         loadImage("ITEM_POWER", "image/item/item_power.png", GameElement.blockSize);
         loadImage("ITEM_SPEED", "image/item/item_speed.png", GameElement.blockSize);
+        loadImage("ICON_BOMB", "image/icon/icon_bomb.png", 40, 60);
+        loadImage("ICON_HEART", "image/icon/icon_heart.png", 40, 60);
+        loadImage("ICON_POWER", "image/icon/icon_power.png", 40, 60);
+        loadImage("ICON_SPEED", "image/icon/icon_speed.png", 40, 60);
+        loadImage("PLAYER_TAG", "image/player_tag.png", 300, 150);
     }
 
     public void dispose() {

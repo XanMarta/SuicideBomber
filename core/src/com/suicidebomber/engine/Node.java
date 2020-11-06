@@ -85,6 +85,14 @@ public class Node {
         return null;
     }
 
+    public Node getChild(int index) {
+        if (index >= children.size()) {
+            return null;
+        } else {
+            return children.get(index);
+        }
+    }
+
     public void safefree() {
         if (parent == null) {
             free();
