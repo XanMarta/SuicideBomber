@@ -40,7 +40,7 @@ public class Player extends Actor {     // Of course this is Player
     }
 
     public void movePlayer(Vector2 direction) {
-        moveActor(direction);
+        moveActorv(direction);
         checkCollision(currentBlock);
         if (nearbyBlock.x >= 0 && nearbyBlock.y >= 0) {
             checkCollision(nearbyBlock);

@@ -13,9 +13,6 @@ public class MapBlock extends Node2D {
     public void render() {
         super.render();
         GameElement.imageManager.drawImage(defaultImage, global_position);
-        for (MapElement element : elements) {
-            element.sprite.renderImage();
-        }
         elements.clear();
     }
 }

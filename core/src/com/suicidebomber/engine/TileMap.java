@@ -3,32 +3,41 @@ package com.suicidebomber.engine;
 import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.source.Map;
 
+import java.util.ArrayList;
+
 
 public class TileMap extends Node2D {
 
-    public Vector2 blockSize = new Vector2(10, 10);
+    public Vector2 blockSize = new Vector2(60, 60);
+    public Vector2 centerOffset = new Vector2(30, 30);
     public Vector2 mapSize = new Vector2(0, 0);
     public MapBlock[][] mapBlock;
+    public MapRow[] mapRows;
 
     public void generateMap(Map map) {
         mapSize.set(map.width, map.height);
         mapBlock = new MapBlock[map.width][map.height];
+        mapRows = new MapRow[map.height];
+        for (int j = 0; j < map.height; j++) {
+            mapRows[j] = new MapRow();
+        }
         for (int j = map.height - 1; j >= 0; j--) {
             for (int i = map.width - 1; i >= 0; i--) {
                 mapBlock[i][j] = new MapBlock();
                 mapBlock[i][j].blockType = map.element[i][j];
-                mapBlock[i][j].position.set(
-                        i * blockSize.x + global_position.x,
-                        j * blockSize.y + global_position.y);
+                mapBlock[i][j].position.set(i, j).scl(blockSize).add(global_position);
                 addChild(mapBlock[i][j]);
             }
+            addChild(mapRows[j]);
         }
     }
 
+    public Vector2 blockToCenter(Vector2 block) {
+        return new Vector2(block).scl(blockSize).add(centerOffset);
+    }
+
     public Vector2 blockToPosition(Vector2 block) {
-        return new Vector2(
-                block.x * blockSize.x,
-                block.y * blockSize.y);
+        return new Vector2(block).scl(blockSize);
     }
 
     public Vector2 positionToBlock(Vector2 pos) {
@@ -53,4 +62,23 @@ public class TileMap extends Node2D {
         return mapBlock[(int) block.x][(int) block.y];
     }
 
+    public void addElement(MapElement element) {
+        mapRows[(int) element.currentBlock.y].element.add(element.sprite);
+        mapBlock[(int) element.currentBlock.x][(int) element.currentBlock.y].elements.add(element);
+    }
+
+}
+
+
+class MapRow extends Node2D {
+
+    public ArrayList<Sprite> element = new ArrayList<>();
+
+    public void render() {
+        super.render();
+        for (Sprite sprite : element) {
+            sprite.renderImage();
+        }
+        element.clear();
+    }
 }

@@ -1,8 +1,6 @@
 package com.suicidebomber.game;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
-import com.suicidebomber.engine.Node;
 import com.suicidebomber.source.ImageManager;
 import com.suicidebomber.source.MapLoader;
 
@@ -14,6 +12,7 @@ public class GameElement {
 
     // Block
     public static Vector2 blockSize = new Vector2(60, 60);
+    public static Vector2 centerOffset = new Vector2(30, 30);
     public static Vector2 mapPosition = new Vector2(350, 20);
     public enum BlockType {
         WALL,
