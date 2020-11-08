@@ -39,8 +39,6 @@ public class MapElement extends Node2D {
         } else {
             nearbyBlock.set(new Vector2(center).sub(exactCen).nor().add(currentBlock));
         }
-        System.out.println("Current block: " + currentBlock.toString());
-        System.out.println("Center: " + center.toString());
     }
 
     public void render() {

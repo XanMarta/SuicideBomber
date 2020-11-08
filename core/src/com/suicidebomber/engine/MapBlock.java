@@ -7,12 +7,15 @@ import com.suicidebomber.game.GameElement;
 public class MapBlock extends Node2D {
 
     public GameElement.BlockType blockType = GameElement.BlockType.GRASS;
-    public static String defaultImage = "GRASS";
+    public Array<MapElement> newelements = new Array<>();
     public Array<MapElement> elements = new Array<>();
 
     public void render() {
         super.render();
-        GameElement.imageManager.drawImage(defaultImage, global_position);
         elements.clear();
+        for (MapElement element : newelements) {
+            elements.add(element);
+        }
+        newelements.clear();
     }
 }

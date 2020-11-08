@@ -13,7 +13,7 @@ public class GameElement {
     // Block
     public static Vector2 blockSize = new Vector2(60, 60);
     public static Vector2 centerOffset = new Vector2(30, 30);
-    public static Vector2 mapPosition = new Vector2(350, 20);
+    public static Vector2 mapPosition = new Vector2(350, 10);
     public enum BlockType {
         WALL,
         GRASS,

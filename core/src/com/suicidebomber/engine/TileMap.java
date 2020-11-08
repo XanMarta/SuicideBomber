@@ -13,8 +13,14 @@ public class TileMap extends Node2D {
     public Vector2 mapSize = new Vector2(0, 0);
     public MapBlock[][] mapBlock;
     public MapRow[] mapRows;
+    public Sprite ground;
 
     public void generateMap(Map map) {
+        // Ground
+        ground = new Sprite();
+        ground.image = "GROUND15";
+        addChild(ground);
+        // Map
         mapSize.set(map.width, map.height);
         mapBlock = new MapBlock[map.width][map.height];
         mapRows = new MapRow[map.height];
@@ -40,7 +46,7 @@ public class TileMap extends Node2D {
         return new Vector2(block).scl(blockSize);
     }
 
-    public Vector2 positionToBlock(Vector2 pos) {
+    public Vector2 positionToBlock(Vector2 pos) {           // position of map
         Vector2 block = new Vector2(pos);
         block.set(block.x / blockSize.x, block.y / blockSize.y);
         return block.set((int) block.x, (int) block.y);
@@ -64,10 +70,11 @@ public class TileMap extends Node2D {
 
     public void addElement(MapElement element) {
         mapRows[(int) element.currentBlock.y].element.add(element.sprite);
-        mapBlock[(int) element.currentBlock.x][(int) element.currentBlock.y].elements.add(element);
+        mapBlock[(int) element.currentBlock.x][(int) element.currentBlock.y].newelements.add(element);
     }
 
 }
+
 
 
 class MapRow extends Node2D {
