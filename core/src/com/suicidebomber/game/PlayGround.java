@@ -1,5 +1,6 @@
 package com.suicidebomber.game;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.element.*;
 import com.suicidebomber.engine.Node;
@@ -74,10 +75,22 @@ public class PlayGround {
         player.setMap(mapPlay, new Vector2(1, 1));
         actor.addChild(player);
 
+        Human playeralt = new Human();
+        playeralt.name = "playeralt";
+        playeralt.sprite.image = "PLAYER";
+        playeralt.setMap(mapPlay, new Vector2(mapPlay.mapSize).sub(2, 2));
+        playeralt.leftKey = Input.Keys.LEFT;
+        playeralt.rightKey = Input.Keys.RIGHT;
+        playeralt.upKey = Input.Keys.UP;
+        playeralt.downKey = Input.Keys.DOWN;
+        playeralt.bombKey = Input.Keys.ENTER;
+        actor.addChild(playeralt);
+
         TagManager tagManager = new TagManager();
         tagManager.position.set(20, 200);
         root.addChild(tagManager);
         tagManager.connectPlayer(player);
+        tagManager.connectPlayer(playeralt);
 
     }
 

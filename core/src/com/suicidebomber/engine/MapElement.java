@@ -10,6 +10,8 @@ public class MapElement extends Node2D {
     public TileMap currentMap = null;
     public GameElement.BlockType blockType = GameElement.BlockType.NONE;
     public Vector2 currentBlock = new Vector2(0, 0);
+    public Vector2 nearbyBlock = new Vector2(-1, -1);
+    public Vector2 center = new Vector2(0, 0);
 
     public MapElement() {
         super();
@@ -21,16 +23,28 @@ public class MapElement extends Node2D {
     public void setMap(TileMap map, Vector2 block) {
         currentMap = map;
         currentBlock.set(block);
-        position.set(currentMap.blockToPosition(block));
+        center.set(currentMap.blockToCenter(block));
+        updatePosition();
         if (blockType != GameElement.BlockType.NONE) {
             currentMap.getMapBlock(currentBlock).blockType = this.blockType;
+        }
+    }
+
+    public void updatePosition() {                              // Need calling after center change
+        position.set(center).sub(currentMap.centerOffset);
+        currentBlock.set(currentMap.positionToBlock(center));
+        Vector2 exactCen = currentMap.blockToCenter(currentBlock);
+        if (exactCen.epsilonEquals(center, 0.1f)) {
+            nearbyBlock.set(-1, -1);
+        } else {
+            nearbyBlock.set(new Vector2(center).sub(exactCen).nor().add(currentBlock));
         }
     }
 
     public void render() {
         super.render();
         if (currentMap.isInMap(currentBlock)) {
-            currentMap.getMapBlock(currentBlock).elements.add(this);
+            currentMap.addElement(this);
         }
     }
 

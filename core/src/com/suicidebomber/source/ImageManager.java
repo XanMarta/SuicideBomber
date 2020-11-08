@@ -33,6 +33,7 @@ public class ImageManager {
         loadImage("ICON_POWER", "image/icon/icon_power.png", 40, 60);
         loadImage("ICON_SPEED", "image/icon/icon_speed.png", 40, 60);
         loadImage("PLAYER_TAG", "image/player_tag.png", 300, 150);
+        loadImage("GROUND15", "image/ground15.png", 900, 900);
     }
 
     public void dispose() {
