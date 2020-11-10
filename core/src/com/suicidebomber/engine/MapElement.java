@@ -12,6 +12,7 @@ public class MapElement extends Node2D {
     public Vector2 currentBlock = new Vector2(0, 0);
     public Vector2 nearbyBlock = new Vector2(-1, -1);
     public Vector2 center = new Vector2(0, 0);
+    public boolean isElementShowing = true;
 
     public MapElement() {
         super();
@@ -20,8 +21,11 @@ public class MapElement extends Node2D {
         addChild(sprite);
     }
 
-    public void setMap(TileMap map, Vector2 block) {
+    public void setMap(TileMap map) {
         currentMap = map;
+    }
+
+    public void setBlock(Vector2 block) {
         currentBlock.set(block);
         center.set(currentMap.blockToCenter(block));
         updatePosition();
@@ -43,8 +47,10 @@ public class MapElement extends Node2D {
 
     public void render() {
         super.render();
-        if (currentMap.isInMap(currentBlock)) {
-            currentMap.addElement(this);
+        if (isElementShowing) {
+            if (currentMap.isInMap(currentBlock)) {
+                currentMap.addElement(this);
+            }
         }
     }
 

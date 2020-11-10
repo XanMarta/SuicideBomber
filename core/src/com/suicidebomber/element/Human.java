@@ -15,9 +15,11 @@ public class Human extends Player {
 
     public void render() {
         super.render();
-        playerMovement();
-        if (Gdx.input.isKeyJustPressed(bombKey)) {
-            dropBomb();
+        if (isLiving) {
+            playerMovement();
+            if (Gdx.input.isKeyJustPressed(bombKey)) {
+                dropBomb();
+            }
         }
     }
 

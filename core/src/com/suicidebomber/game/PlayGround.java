@@ -59,11 +59,13 @@ public class PlayGround {
                 GameElement.BlockType type = mapPlay.getMapBlock(pos).blockType;
                 if (type == GameElement.BlockType.WALL) {
                     Wall temp = new Wall();
-                    temp.setMap(mapPlay, pos);
+                    temp.setMap(mapPlay);
+                    temp.setBlock(pos);
                     wall.addChild(temp);
                 } else if (type == GameElement.BlockType.BOX) {
                     Box temp = new Box();
-                    temp.setMap(mapPlay, pos);
+                    temp.setMap(mapPlay);
+                    temp.setBlock(pos);
                     box.addChild(temp);
                 }
             }
@@ -72,13 +74,15 @@ public class PlayGround {
         Human player = new Human();
         player.name = "player";
         player.sprite.image = "PLAYER";
-        player.setMap(mapPlay, new Vector2(1, 1));
+        player.defaultBlock.set(1, 1);
+        player.setMap(mapPlay);
         actor.addChild(player);
 
         Human playeralt = new Human();
         playeralt.name = "playeralt";
         playeralt.sprite.image = "PLAYER";
-        playeralt.setMap(mapPlay, new Vector2(mapPlay.mapSize).sub(2, 2));
+        playeralt.defaultBlock.set(13, 13);
+        playeralt.setMap(mapPlay);
         playeralt.leftKey = Input.Keys.LEFT;
         playeralt.rightKey = Input.Keys.RIGHT;
         playeralt.upKey = Input.Keys.UP;

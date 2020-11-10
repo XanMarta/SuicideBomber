@@ -19,7 +19,8 @@ public class Box extends MapElement {
         Random random = new Random();
         if (random.nextInt(100) < 40) {
             Item item = new Item();
-            item.setMap(currentMap, currentBlock);
+            item.setMap(currentMap);
+            item.setBlock(currentBlock);
             currentMap.getChild("item").addChild(item);
         }
         safefree();

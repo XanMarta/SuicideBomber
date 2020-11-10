@@ -2,6 +2,7 @@ package com.suicidebomber.element;
 
 import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.engine.MapElement;
+import com.suicidebomber.engine.Timing;
 import com.suicidebomber.game.GameElement;
 
 
@@ -11,9 +12,13 @@ public class Player extends Actor {     // Of course this is Player
     public int heart = 0;
     public int power = 0;
     public int speed = 0;
+    public Vector2 defaultBlock = new Vector2(0, 0);
 
     public int used_bomb = 0;
     public PlayerTag tag = null;
+    public boolean isLiving = false;
+
+    public Timing deadTimer;
 
     public void create() {
         super.create();
@@ -22,6 +27,11 @@ public class Player extends Actor {     // Of course this is Player
         power = GameElement.init_power;
         speed = GameElement.init_speed;
         updateElement();
+        deadTimer = new Timing();
+        deadTimer.wait_time = 3.0f;
+        deadTimer.connect_signal("time_out", this, "deadtimer_time_out");
+        addChild(deadTimer);
+        playerSpawn();
     }
 
     public void dispose() {
@@ -30,6 +40,18 @@ public class Player extends Actor {     // Of course this is Player
             tag.hasPlayer = false;
             tag.update(null);
         }
+    }
+
+    public void playerSpawn() {
+        isElementShowing = true;
+        isLiving = true;
+        setBlock(defaultBlock);
+    }
+
+    public void playerDie() {
+        isElementShowing = false;
+        isLiving = false;
+        deadTimer.start();
     }
 
     public void updateElement() {
@@ -53,7 +75,8 @@ public class Player extends Actor {     // Of course this is Player
                 Bomb bomb = new Bomb();
                 bomb.owner = this;
                 bomb.power = this.power + 1;
-                bomb.setMap(currentMap, currentBlock);
+                bomb.setMap(currentMap);
+                bomb.setBlock(currentBlock);
                 currentMap.getChild("bomb").addChild(bomb);
                 used_bomb += 1;
             }
@@ -92,8 +115,20 @@ public class Player extends Actor {     // Of course this is Player
                 }
             }
         } else if (currentMap.getMapBlock(pos).blockType == GameElement.BlockType.FIRE) {
-            safefree();
+            heart -= 1;
+            updateElement();
+            playerDie();
         }
     }
 
+    public void execute_signal(String signal) {
+        super.execute_signal(signal);
+        if (signal.equals("deadtimer_time_out")) {
+            if (heart > 0) {
+                playerSpawn();
+            } else {
+                safefree();
+            }
+        }
+    }
 }

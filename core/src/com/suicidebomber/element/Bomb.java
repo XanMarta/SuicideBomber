@@ -53,7 +53,8 @@ public class Bomb extends MapElement {
         if (currentMap.getMapBlock(pos).blockType == GameElement.BlockType.GRASS) {
             Fire fire = new Fire();
             fire.owner = owner;
-            fire.setMap(currentMap, pos);
+            fire.setMap(currentMap);
+            fire.setBlock(pos);
             currentMap.getChild("fire").addChild(fire);
             // Spread boom
             if (power > 1) {

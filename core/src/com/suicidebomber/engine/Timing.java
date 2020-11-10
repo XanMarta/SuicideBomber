@@ -12,8 +12,7 @@ public class Timing extends Node {
 
     private Task task;
 
-    public Timing() {
-        super();
+    public void start() {
         task = new Task() {
             @Override
             public void run() {
@@ -23,9 +22,6 @@ public class Timing extends Node {
                 }
             }
         };
-    }
-
-    public void start() {
         Timer.schedule(task, wait_time);
     }
 
