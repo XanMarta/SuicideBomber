@@ -5,50 +5,54 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.suicidebomber.game.GameElement;
+import com.badlogic.gdx.utils.GdxRuntimeException;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.Scanner;
 
 
 public class ImageManager {
 
-    private HashMap<String, Image> images;
+    private HashMap<String, Texture> images;
     private SpriteBatch batch;
 
     public void create() {
         images = new HashMap<>();
         batch = new SpriteBatch();
-        loadImage("BOMB", "image/bomb.png", GameElement.blockSize);
-        loadImage("WALL", "image/wall.png", GameElement.blockSize.x, GameElement.blockSize.y * 2);
-        loadImage("GRASS", "image/grass.png", GameElement.blockSize);
-        loadImage("PLAYER", "image/player.png", GameElement.blockSize);
-        loadImage("FIRE", "image/fire.png", GameElement.blockSize);
-        loadImage("BOX", "image/box.png", GameElement.blockSize);
-        loadImage("ITEM", "image/item.png", GameElement.blockSize);
-        loadImage("ITEM_BOMB", "image/item/item_bomb.png", GameElement.blockSize);
-        loadImage("ITEM_HEART", "image/item/item_heart.png", GameElement.blockSize);
-        loadImage("ITEM_POWER", "image/item/item_power.png", GameElement.blockSize);
-        loadImage("ITEM_SPEED", "image/item/item_speed.png", GameElement.blockSize);
-        loadImage("ICON_BOMB", "image/icon/icon_bomb.png", 40, 60);
-        loadImage("ICON_HEART", "image/icon/icon_heart.png", 40, 60);
-        loadImage("ICON_POWER", "image/icon/icon_power.png", 40, 60);
-        loadImage("ICON_SPEED", "image/icon/icon_speed.png", 40, 60);
-        loadImage("PLAYER_TAG", "image/player_tag.png", 300, 150);
-        loadImage("GROUND15", "image/ground15.png", 900, 900);
+        loadImageFile("core/assets/image.dll");
     }
 
     public void dispose() {
         for (String name : images.keySet()) {
-            images.get(name).texture.dispose();
+            images.get(name).dispose();
         }
         batch.dispose();
     }
 
-    private void loadImage(String image, String path, Vector2 size) {
-        images.put(image, new Image(new Texture(path), size));
+    public void loadImageFile(String path) {              // Load image from file.       name|path
+        try {
+            Scanner scan = new Scanner(new File(path));
+            while (scan.hasNextLine()) {
+                String[] temp = scan.nextLine().split("\\|");
+                if (temp.length == 2) {
+                    loadImage(temp[0].trim(), temp[1].trim());
+                }
+            }
+            scan.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + path);
+        }
     }
 
-    private void loadImage(String image, String path, float x, float y) {
-        images.put(image, new Image(new Texture(path), new Vector2(x, y)));
+    private void loadImage(String image, String path) {
+        try {
+            Texture texture = new Texture(path);
+            images.put(image, texture);
+        } catch (GdxRuntimeException e) {
+            System.out.println("File not found: " + path);
+        }
     }
 
     public void startDraw() {
@@ -64,36 +68,9 @@ public class ImageManager {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 
-    public void drawImage(String image, float x, float y) {
-        if (images.containsKey(image)) {
-            Image imageDraw = images.get(image);
-            batch.draw(imageDraw.texture, x, y, imageDraw.size.x, imageDraw.size.y);
-        }
-    }
-
-    public void drawImage(String image, Vector2 position, Vector2 size) {
-        if (images.containsKey(image)) {
-            Image imageDraw = images.get(image);
-            batch.draw(imageDraw.texture, position.x, position.y, size.x, size.y);
-        }
-    }
-
     public void drawImage(String image, Vector2 position) {
         if (images.containsKey(image)) {
-            Image imageDraw = images.get(image);
-            batch.draw(imageDraw.texture, position.x, position.y);
+            batch.draw(images.get(image), position.x, position.y);
         }
-    }
-}
-
-
-class Image {
-
-    protected Texture texture;
-    protected Vector2 size;
-
-    public Image(Texture texture, Vector2 size) {
-        this.texture = texture;
-        this.size = size;
     }
 }

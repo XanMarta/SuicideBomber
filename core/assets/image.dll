@@ -1,0 +1,17 @@
+BOMB | image/bomb.png
+WALL | image/wall.png
+GRASS | image/grass.png
+PLAYER | image/player.png
+FIRE | image/fire.png
+BOX | image/box.png
+ITEM | image/item.png
+ITEM_BOMB | image/item/item_bomb.png
+ITEM_HEART | image/item/item_heart.png
+ITEM_POWER | image/item/item_power.png
+ITEM_SPEED | image/item/item_speed.png
+ICON_BOMB | image/icon/icon_bomb.png
+ICON_HEART | image/icon/icon_heart.png
+ICON_POWER | image/icon/icon_power.png
+ICON_SPEED | image/icon/icon_speed.png
+PLAYER_TAG | image/player_tag.png
+GROUND15 | image/ground15.png
