@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.game.GameElement;
 
 
-public class MapElement extends Node2D {
+public class MapElement extends Canvas2D {
 
     public Sprite sprite;
     public TileMap currentMap = null;

@@ -3,7 +3,7 @@ package com.suicidebomber.engine;
 import com.suicidebomber.game.GameElement;
 
 
-public class Sprite extends Node2D {
+public class Sprite extends Canvas2D {
 
     public String image = "";
     public boolean showing = true;
@@ -16,6 +16,6 @@ public class Sprite extends Node2D {
     }
 
     public void renderImage() {
-        GameElement.imageManager.drawImage(image, global_position);
+        GameElement.imageManager.drawImage(image, global_position, getAlpha());
     }
 }

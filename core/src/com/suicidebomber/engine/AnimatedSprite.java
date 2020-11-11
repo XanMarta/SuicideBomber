@@ -34,16 +34,24 @@ public class AnimatedSprite extends Sprite {
         }
     }
 
+    public void start() {
+        isPlaying = true;
+    }
+
     public void pause() {
-        isPlaying = false;
-        pauseWhile = timingWhile;
-        isPause = true;
+        if (isPlaying) {
+            isPlaying = false;
+            pauseWhile = timingWhile;
+            isPause = true;
+        }
     }
 
     public void resume() {
-        isPlaying = true;
-        isPause = false;
-        startTime = TimeUtils.millis() - pauseWhile;
+        if (isPause) {
+            isPlaying = true;
+            isPause = false;
+            startTime = TimeUtils.millis() - pauseWhile;
+        }
     }
 
     public void stop() {

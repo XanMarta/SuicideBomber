@@ -73,4 +73,14 @@ public class ImageManager {
             batch.draw(images.get(image), position.x, position.y);
         }
     }
+
+    public void drawImage(String image, Vector2 position, float alpha) {
+        if (alpha == 1) {
+            drawImage(image, position);
+        } else if (images.containsKey(image)) {
+            batch.setColor(1, 1, 1, alpha);
+            batch.draw(images.get(image), position.x, position.y);
+            batch.setColor(1, 1, 1, 1);
+        }
+    }
 }

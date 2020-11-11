@@ -1,10 +1,10 @@
 package com.suicidebomber.element;
 
-import com.suicidebomber.engine.Node2D;
+import com.suicidebomber.engine.Canvas2D;
 import java.util.ArrayList;
 
 
-public class TagManager extends Node2D {
+public class TagManager extends Canvas2D {
 
     public ArrayList<PlayerTag> tags = new ArrayList<>();
 

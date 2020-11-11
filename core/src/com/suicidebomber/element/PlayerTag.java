@@ -1,17 +1,17 @@
 package com.suicidebomber.element;
 
+import com.suicidebomber.engine.Canvas2D;
 import com.suicidebomber.engine.Node;
-import com.suicidebomber.engine.Node2D;
 import com.suicidebomber.engine.Sprite;
 import com.suicidebomber.game.GameElement;
 
 
-public class PlayerTag extends Node2D {
+public class PlayerTag extends Canvas2D {
 
-    public Node2D bombs;
-    public Node2D hearts;
-    public Node2D powers;
-    public Node2D speeds;
+    public Canvas2D bombs;
+    public Canvas2D hearts;
+    public Canvas2D powers;
+    public Canvas2D speeds;
 
     public boolean hasPlayer = false;
 
@@ -20,10 +20,10 @@ public class PlayerTag extends Node2D {
         Sprite mainImage = new Sprite();
         mainImage.image = "PLAYER_TAG";
         addChild(mainImage);
-        bombs = new Node2D();
-        hearts = new Node2D();
-        powers = new Node2D();
-        speeds = new Node2D();
+        bombs = new Canvas2D();
+        hearts = new Canvas2D();
+        powers = new Canvas2D();
+        speeds = new Canvas2D();
         addChild(bombs);
         addChild(hearts);
         addChild(powers);
