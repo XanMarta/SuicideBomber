@@ -17,7 +17,6 @@ public class Player extends Actor {     // Of course this is Player
     public int used_bomb = 0;
     public PlayerTag tag = null;
     public boolean isLiving = false;
-
     public Timing deadTimer;
 
     public void create() {

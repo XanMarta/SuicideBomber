@@ -17,6 +17,10 @@ public class MapElement extends Node2D {
     public MapElement() {
         super();
         sprite = new Sprite();
+    }
+
+    public void create() {
+        super.create();
         sprite.showing = false;
         addChild(sprite);
     }

@@ -3,9 +3,7 @@ package com.suicidebomber.game;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.element.*;
-import com.suicidebomber.engine.Node;
-import com.suicidebomber.engine.Node2D;
-import com.suicidebomber.engine.TileMap;
+import com.suicidebomber.engine.*;
 
 
 public class PlayGround {
@@ -80,7 +78,6 @@ public class PlayGround {
 
         Human playeralt = new Human();
         playeralt.name = "playeralt";
-        playeralt.sprite.image = "PLAYER";
         playeralt.defaultBlock.set(13, 13);
         playeralt.setMap(mapPlay);
         playeralt.leftKey = Input.Keys.LEFT;

@@ -3,6 +3,8 @@ package com.suicidebomber.element;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
+import com.suicidebomber.engine.AnimatedSprite;
+import com.suicidebomber.engine.AnimationSprite;
 
 
 public class Human extends Player {
@@ -13,6 +15,24 @@ public class Human extends Player {
     public int downKey = Input.Keys.S;
     public int bombKey = Input.Keys.J;
 
+    public AnimatedSprite animatedSprite;
+    public Vector2 direction = new Vector2(0, 0);
+
+    public Human() {
+        super();
+        sprite = new AnimatedSprite();
+        animatedSprite = (AnimatedSprite) sprite;
+        AnimationSprite runAnim = new AnimationSprite();
+        runAnim.addSprite("ITEM_BOMB");
+        runAnim.addSprite("ITEM_SPEED");
+        runAnim.addSprite("ITEM_HEART");
+        animatedSprite.addAnimation("RUN", runAnim);
+        AnimationSprite standAnim = new AnimationSprite();
+        standAnim.addSprite("PLAYER");
+        animatedSprite.addAnimation("STAND", standAnim);
+        animatedSprite.play("STAND");
+    }
+
     public void render() {
         super.render();
         if (isLiving) {
@@ -20,11 +40,16 @@ public class Human extends Player {
             if (Gdx.input.isKeyJustPressed(bombKey)) {
                 dropBomb();
             }
+            if (direction.isZero()) {
+                animatedSprite.pause();
+            } else {
+                animatedSprite.play("RUN");
+            }
         }
     }
 
     public void playerMovement() {
-        Vector2 direction = new Vector2().setZero();
+        direction = new Vector2().setZero();
         if (Gdx.input.isKeyPressed(leftKey)) {
             direction.x = -1;
             direction.y = 0;
