@@ -22,15 +22,48 @@ public class Human extends Player {
         super();
         sprite = new AnimatedSprite();
         animatedSprite = (AnimatedSprite) sprite;
-        AnimationSprite runAnim = new AnimationSprite();
-        runAnim.addSprite("ITEM_BOMB");
-        runAnim.addSprite("ITEM_SPEED");
-        runAnim.addSprite("ITEM_HEART");
-        animatedSprite.addAnimation("RUN", runAnim);
-        AnimationSprite standAnim = new AnimationSprite();
-        standAnim.addSprite("PLAYER");
-        animatedSprite.addAnimation("STAND", standAnim);
-        animatedSprite.play("STAND");
+
+        AnimationSprite upAnim = new AnimationSprite();
+        upAnim.addSprite("BLUE_UP_1");
+        upAnim.addSprite("BLUE_UP_2");
+        upAnim.addSprite("BLUE_UP_3");
+        upAnim.addSprite("BLUE_UP_4");
+        upAnim.addSprite("BLUE_UP_5");
+        upAnim.delay = 100;
+        animatedSprite.addAnimation("UP", upAnim);
+
+        AnimationSprite leftAnim = new AnimationSprite();
+        leftAnim.addSprite("BLUE_LEFT_1");
+        leftAnim.addSprite("BLUE_LEFT_2");
+        leftAnim.addSprite("BLUE_LEFT_3");
+        leftAnim.addSprite("BLUE_LEFT_4");
+        leftAnim.addSprite("BLUE_LEFT_5");
+        leftAnim.delay = 100;
+        animatedSprite.addAnimation("LEFT", leftAnim);
+
+        AnimationSprite rightAnim = new AnimationSprite();
+        rightAnim.addSprite("BLUE_RIGHT_1");
+        rightAnim.addSprite("BLUE_RIGHT_2");
+        rightAnim.addSprite("BLUE_RIGHT_3");
+        rightAnim.addSprite("BLUE_RIGHT_4");
+        rightAnim.addSprite("BLUE_RIGHT_5");
+        rightAnim.delay = 100;
+        animatedSprite.addAnimation("RIGHT", rightAnim);
+
+        AnimationSprite downAnim = new AnimationSprite();
+        downAnim.addSprite("BLUE_DOWN_1");
+        downAnim.addSprite("BLUE_DOWN_2");
+        downAnim.addSprite("BLUE_DOWN_3");
+        downAnim.addSprite("BLUE_DOWN_4");
+        downAnim.addSprite("BLUE_DOWN_5");
+        downAnim.delay = 100;
+        animatedSprite.addAnimation("DOWN", downAnim);
+
+        AnimationSprite normalAnim = new AnimationSprite();
+        normalAnim.addSprite("BLUE_NORMAL");
+
+        animatedSprite.addAnimation("NORMAL", normalAnim);
+        animatedSprite.play("NORMAL");
     }
 
     public void render() {
@@ -42,8 +75,14 @@ public class Human extends Player {
             }
             if (direction.isZero()) {
                 animatedSprite.pause();
+            } else if (direction.epsilonEquals(0, 1)) {
+                animatedSprite.play("UP");
+            } else if (direction.epsilonEquals(1, 0)) {
+                animatedSprite.play("LEFT");
+            } else if (direction.epsilonEquals(-1, 0)) {
+                animatedSprite.play("RIGHT");
             } else {
-                animatedSprite.play("RUN");
+                animatedSprite.play("DOWN");
             }
         }
     }
