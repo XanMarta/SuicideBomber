@@ -69,7 +69,7 @@ public class TileMap extends Node2D {
     }
 
     public void addElement(MapElement element) {
-        mapRows[(int) element.currentBlock.y].element.add(element.sprite);
+        mapRows[(int) element.currentBlock.y].elements.add(element);
         mapBlock[(int) element.currentBlock.x][(int) element.currentBlock.y].newelements.add(element);
     }
 
@@ -79,13 +79,13 @@ public class TileMap extends Node2D {
 
 class MapRow extends Node2D {
 
-    public ArrayList<Sprite> element = new ArrayList<>();
+    public ArrayList<MapElement> elements = new ArrayList<>();
 
     public void render() {
         super.render();
-        for (Sprite sprite : element) {
-            sprite.renderImage();
+        for (MapElement element : elements) {
+            element.renderImage();
         }
-        element.clear();
+        elements.clear();
     }
 }

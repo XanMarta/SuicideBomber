@@ -53,23 +53,23 @@ public class PlayerTag extends Canvas2D {
     public void update(Player player) {
         if (player == null) {
             for (Node node : bombs.getChildren()) {
-                ((Sprite) node).showing = false;
+                ((Sprite) node).visible = false;
             }
             for (Node node : hearts.getChildren()) {
-                ((Sprite) node).showing = false;
+                ((Sprite) node).visible = false;
             }
             for (Node node : powers.getChildren()) {
-                ((Sprite) node).showing = false;
+                ((Sprite) node).visible = false;
             }
             for (Node node : speeds.getChildren()) {
-                ((Sprite) node).showing = false;
+                ((Sprite) node).visible = false;
             }
         } else {
             for (int i = 0; i < GameElement.max_element; i++) {
-                ((Sprite) bombs.getChild(i)).showing = (i < player.bomb);
-                ((Sprite) hearts.getChild(i)).showing = (i < player.heart);
-                ((Sprite) powers.getChild(i)).showing = (i < player.power);
-                ((Sprite) speeds.getChild(i)).showing = (i < player.speed);
+                ((Sprite) bombs.getChild(i)).visible = (i < player.bomb);
+                ((Sprite) hearts.getChild(i)).visible = (i < player.heart);
+                ((Sprite) powers.getChild(i)).visible = (i < player.power);
+                ((Sprite) speeds.getChild(i)).visible = (i < player.speed);
             }
         }
     }

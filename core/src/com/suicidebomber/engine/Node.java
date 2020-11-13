@@ -12,7 +12,7 @@ public class Node {
     protected HashMap<String, SignalPack> signals = new HashMap<>();
     protected Node parent = null;
     protected ArrayList<Node> freechild = new ArrayList<>();
-    protected boolean isRender = false;
+    private boolean isRender = false;
     public String name = "";
 
     public Node() {

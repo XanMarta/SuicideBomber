@@ -1,6 +1,7 @@
 package com.suicidebomber.element;
 
 import com.badlogic.gdx.math.Vector2;
+import com.suicidebomber.engine.Sprite;
 import com.suicidebomber.game.GameElement;
 import com.suicidebomber.engine.MapElement;
 import com.suicidebomber.engine.Timing;
@@ -12,16 +13,20 @@ public class Bomb extends MapElement {
     public int power = 3;
 
     private Timing timer;
+    private Sprite sprite;
 
     public Bomb() {
         super();
+        sprite = new Sprite();
         sprite.image = "BOMB";
-        blockType = GameElement.BlockType.BOMB;
+        renderElement.add(sprite);
+        addChild(sprite);
         timer = new Timing();
         timer.wait_time = GameElement.bombTiming;
         timer.connect_signal("time_out", this, "runoff");
         timer.start();
         addChild(timer);
+        blockType = GameElement.BlockType.BOMB;
     }
 
     public void execute_signal(String signal) {

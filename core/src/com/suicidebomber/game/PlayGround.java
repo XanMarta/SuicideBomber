@@ -71,7 +71,6 @@ public class PlayGround {
 
         Human player = new Human();
         player.name = "player";
-        player.sprite.image = "PLAYER";
         player.defaultBlock.set(1, 1);
         player.setMap(mapPlay);
         actor.addChild(player);

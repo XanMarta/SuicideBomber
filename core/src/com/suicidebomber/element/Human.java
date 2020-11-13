@@ -20,8 +20,9 @@ public class Human extends Player {
 
     public Human() {
         super();
-        sprite = new AnimatedSprite();
-        animatedSprite = (AnimatedSprite) sprite;
+        animatedSprite = new AnimatedSprite();
+        renderElement.add(animatedSprite);
+        addChild(animatedSprite);
 
         AnimationSprite upAnim = new AnimationSprite();
         upAnim.addSprite("BLUE_UP_1");
