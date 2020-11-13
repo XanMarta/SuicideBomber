@@ -42,13 +42,13 @@ public class Player extends Actor {     // Of course this is Player
     }
 
     public void playerSpawn() {
-        isElementShowing = true;
+        elementVisible = true;
         isLiving = true;
         setBlock(defaultBlock);
     }
 
     public void playerDie() {
-        isElementShowing = false;
+        elementVisible = false;
         isLiving = false;
         deadTimer.start();
     }
@@ -63,8 +63,10 @@ public class Player extends Actor {     // Of course this is Player
     public void movePlayer(Vector2 direction) {
         moveActor(direction);
         checkCollision(currentBlock);
-        if (nearbyBlock.x >= 0 && nearbyBlock.y >= 0) {
-            checkCollision(nearbyBlock);
+        if (isLiving) {
+            if (nearbyBlock.x >= 0 && nearbyBlock.y >= 0) {
+                checkCollision(nearbyBlock);
+            }
         }
     }
 
@@ -126,7 +128,7 @@ public class Player extends Actor {     // Of course this is Player
             if (heart > 0) {
                 playerSpawn();
             } else {
-                safefree();
+//                safefree();
             }
         }
     }

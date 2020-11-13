@@ -2,27 +2,22 @@ package com.suicidebomber.engine;
 
 import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.game.GameElement;
+import java.util.ArrayList;
 
 
 public class MapElement extends Canvas2D {
 
-    public Sprite sprite;
     public TileMap currentMap = null;
     public GameElement.BlockType blockType = GameElement.BlockType.NONE;
     public Vector2 currentBlock = new Vector2(0, 0);
     public Vector2 nearbyBlock = new Vector2(-1, -1);
     public Vector2 center = new Vector2(0, 0);
-    public boolean isElementShowing = true;
-
-    public MapElement() {
-        super();
-        sprite = new Sprite();
-    }
+    public ArrayList<Sprite> renderElement = new ArrayList<>();             // Render to map
+    public boolean elementVisible = true;
 
     public void create() {
         super.create();
-        sprite.showing = false;
-        addChild(sprite);
+        visible = false;
     }
 
     public void setMap(TileMap map) {
@@ -51,10 +46,8 @@ public class MapElement extends Canvas2D {
 
     public void render() {
         super.render();
-        if (isElementShowing) {
-            if (currentMap.isInMap(currentBlock)) {
-                currentMap.addElement(this);
-            }
+        if (currentMap.isInMap(currentBlock)) {
+            currentMap.addElement(this);
         }
     }
 
@@ -71,5 +64,13 @@ public class MapElement extends Canvas2D {
 
     public void disappear() {
 
+    }
+
+    public void renderImage() {
+        if (elementVisible) {
+            for (Sprite sprite : renderElement) {
+                sprite.renderImage();
+            }
+        }
     }
 }
