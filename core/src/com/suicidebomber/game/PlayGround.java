@@ -91,7 +91,12 @@ public class PlayGround {
         root.addChild(tagManager);
         tagManager.connectPlayer(player);
         tagManager.connectPlayer(playeralt);
+        tagManager.connectPlayer(playeralt);
 
+        Label label = new Label();
+        label.text = "WELCOME TO WAKANDA";
+        label.position.set(500, 500);
+        root.addChild(label);
     }
 
 }

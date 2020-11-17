@@ -1,7 +1,8 @@
 package com.suicidebomber;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.suicidebomber.engine.Node;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.game.GameElement;
 import com.suicidebomber.game.PlayGround;
 
@@ -13,23 +14,26 @@ public class SuicideBomber extends ApplicationAdapter {
 	@Override
 	public void create () {
 		playground = new PlayGround();
+		GameElement.batch = new SpriteBatch();
 		GameElement.imageManager.create();
+		GameElement.fontManager.create();
 		playground.root._create();
 	}
 
 	@Override
 	public void render () {
 		GameElement.imageManager.clearScreen();
-		GameElement.imageManager.startDraw();
+		GameElement.batch.begin();
 
 		playground.root._render();
 
-		GameElement.imageManager.endDraw();
+		GameElement.batch.end();
 	}
 	
 	@Override
 	public void dispose () {
 		GameElement.imageManager.dispose();
+		GameElement.fontManager.dispose();
 		playground.root._dispose();
 	}
 }

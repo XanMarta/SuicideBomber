@@ -1,7 +1,7 @@
 package com.suicidebomber.engine;
 
 import com.badlogic.gdx.math.Vector2;
-import com.suicidebomber.source.Map;
+import com.suicidebomber.source.sourceelement.Map;
 
 import java.util.ArrayList;
 
