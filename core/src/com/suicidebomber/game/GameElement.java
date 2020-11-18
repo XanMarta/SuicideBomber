@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.source.FontManager;
 import com.suicidebomber.source.ImageManager;
 import com.suicidebomber.source.MapLoader;
+import com.suicidebomber.source.SoundManager;
 
 
 public class GameElement {
@@ -31,6 +32,7 @@ public class GameElement {
     public static ImageManager imageManager = new ImageManager();
     public static MapLoader mapLoader = new MapLoader();
     public static FontManager fontManager = new FontManager();
+    public static SoundManager soundManager = new SoundManager();
 
     // Actor
     public static float changeDirectionMargin = 20;

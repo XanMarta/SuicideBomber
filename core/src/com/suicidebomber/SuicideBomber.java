@@ -17,6 +17,7 @@ public class SuicideBomber extends ApplicationAdapter {
 		GameElement.batch = new SpriteBatch();
 		GameElement.imageManager.create();
 		GameElement.fontManager.create();
+		GameElement.soundManager.create();
 		playground.root._create();
 	}
 
@@ -32,8 +33,10 @@ public class SuicideBomber extends ApplicationAdapter {
 	
 	@Override
 	public void dispose () {
+		GameElement.batch.dispose();
 		GameElement.imageManager.dispose();
 		GameElement.fontManager.dispose();
+		GameElement.soundManager.dispose();
 		playground.root._dispose();
 	}
 }

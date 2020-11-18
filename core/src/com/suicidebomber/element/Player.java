@@ -16,6 +16,7 @@ public class Player extends Actor {     // Of course this is Player
     public int speed = 0;
     public Vector2 defaultBlock = new Vector2(0, 0);
     public String color = "BLUE";
+    public String playerName = "";
 
     public int used_bomb = 0;
     public PlayerTag tag = null;

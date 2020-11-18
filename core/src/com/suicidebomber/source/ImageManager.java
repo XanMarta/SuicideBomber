@@ -28,7 +28,6 @@ public class ImageManager {
         for (String name : images.keySet()) {
             images.get(name).dispose();
         }
-        GameElement.batch.dispose();
     }
 
     public void loadImageFile(String path) {              // Load image from file.       name|path

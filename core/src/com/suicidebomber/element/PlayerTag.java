@@ -1,6 +1,7 @@
 package com.suicidebomber.element;
 
 import com.suicidebomber.engine.Canvas2D;
+import com.suicidebomber.engine.Label;
 import com.suicidebomber.engine.Node;
 import com.suicidebomber.engine.Sprite;
 import com.suicidebomber.game.GameElement;
@@ -12,6 +13,7 @@ public class PlayerTag extends Canvas2D {
     public Canvas2D hearts;
     public Canvas2D powers;
     public Canvas2D speeds;
+    public Label playerName;
 
     public boolean hasPlayer = false;
 
@@ -47,6 +49,9 @@ public class PlayerTag extends Canvas2D {
             speed.position.set(110 + i * range, 10);
             speeds.addChild(speed);
         }
+        playerName = new Label();
+        playerName.position.set(10, 30);
+        addChild(playerName);
         update(null);
     }
 
@@ -71,6 +76,7 @@ public class PlayerTag extends Canvas2D {
                 ((Sprite) powers.getChild(i)).visible = (i < player.power);
                 ((Sprite) speeds.getChild(i)).visible = (i < player.speed);
             }
+            playerName.text = player.playerName;
         }
     }
 }

@@ -73,6 +73,7 @@ public class PlayGround {
         player.name = "player";
         player.defaultBlock.set(1, 1);
         player.setMap(mapPlay);
+        player.playerName = "Don";
         actor.addChild(player);
 
         Human playeralt = new Human();
@@ -84,6 +85,7 @@ public class PlayGround {
         playeralt.upKey = Input.Keys.UP;
         playeralt.downKey = Input.Keys.DOWN;
         playeralt.bombKey = Input.Keys.ENTER;
+        playeralt.playerName = "Bailey";
         actor.addChild(playeralt);
 
         TagManager tagManager = new TagManager();
@@ -91,12 +93,6 @@ public class PlayGround {
         root.addChild(tagManager);
         tagManager.connectPlayer(player);
         tagManager.connectPlayer(playeralt);
-        tagManager.connectPlayer(playeralt);
-
-        Label label = new Label();
-        label.text = "WELCOME TO WAKANDA";
-        label.position.set(500, 500);
-        root.addChild(label);
     }
 
 }
