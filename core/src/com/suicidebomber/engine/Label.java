@@ -1,6 +1,6 @@
 package com.suicidebomber.engine;
 
-import com.suicidebomber.game.GameElement;
+import com.suicidebomber.structure.GameElement;
 
 public class Label extends Canvas2D {
 

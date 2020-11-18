@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.suicidebomber.game.GameElement;
+import com.suicidebomber.structure.GameElement;
 
 import java.io.File;
 import java.io.FileNotFoundException;

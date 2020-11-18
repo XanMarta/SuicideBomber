@@ -1,4 +1,4 @@
-package com.suicidebomber.game;
+package com.suicidebomber.structure;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -33,6 +33,7 @@ public class GameElement {
     public static MapLoader mapLoader = new MapLoader();
     public static FontManager fontManager = new FontManager();
     public static SoundManager soundManager = new SoundManager();
+    public static SceneManager sceneManager = new SceneManager();
 
     // Actor
     public static float changeDirectionMargin = 20;
@@ -53,4 +54,5 @@ public class GameElement {
 
     // Font
     public static String defaultFont = "COMIC";
+
 }

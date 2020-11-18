@@ -10,7 +10,7 @@ public class Timing extends Node {
     public float wait_time = 1.0f;
     public boolean isLooping = false;
 
-    private Task task;
+    private Task task = null;
 
     public void start() {
         task = new Task() {
@@ -26,6 +26,13 @@ public class Timing extends Node {
     }
 
     public void stop() {
-        task.cancel();
+        if (task != null) {
+            task.cancel();
+        }
+    }
+
+    public void dispose() {
+        super.dispose();
+        stop();
     }
 }

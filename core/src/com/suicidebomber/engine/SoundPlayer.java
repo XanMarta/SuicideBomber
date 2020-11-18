@@ -1,6 +1,6 @@
 package com.suicidebomber.engine;
 
-import com.suicidebomber.game.GameElement;
+import com.suicidebomber.structure.GameElement;
 
 
 public class SoundPlayer extends Node {
@@ -18,5 +18,11 @@ public class SoundPlayer extends Node {
 
     public void stop() {
         GameElement.soundManager.stop(currentSound, currentCode);
+    }
+
+    public void dispose() {
+        super.dispose();
+        stop();
+        System.out.println("Sound Player dispose");
     }
 }

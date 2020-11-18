@@ -1,14 +1,15 @@
-package com.suicidebomber.game;
+package com.suicidebomber.scene;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.element.*;
 import com.suicidebomber.engine.*;
+import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.structure.Scene;
 
 
-public class PlayGround {
+public class PlayGround extends Scene {
 
-    public Node root;
     public Node2D actor;
     public Node2D bomb;
     public Node2D fire;
@@ -16,9 +17,8 @@ public class PlayGround {
     public Node2D wall;
     public Node2D item;
 
-    public PlayGround() {
-        root = new Node();
-        root.name = "root";
+    public void create() {
+        super.create();
 
         TileMap mapPlay = new TileMap();
         mapPlay.blockSize.set(GameElement.blockSize);

@@ -1,7 +1,7 @@
 package com.suicidebomber.element;
 
 import com.suicidebomber.engine.Sprite;
-import com.suicidebomber.game.GameElement;
+import com.suicidebomber.structure.GameElement;
 import com.suicidebomber.engine.MapElement;
 import java.util.Random;
 

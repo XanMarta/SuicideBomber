@@ -3,7 +3,7 @@ package com.suicidebomber.source;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
-import com.suicidebomber.game.GameElement;
+import com.suicidebomber.structure.GameElement;
 
 import java.util.HashMap;
 

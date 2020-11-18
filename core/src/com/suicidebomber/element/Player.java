@@ -5,7 +5,8 @@ import com.suicidebomber.engine.AnimatedSprite;
 import com.suicidebomber.engine.AnimationSprite;
 import com.suicidebomber.engine.MapElement;
 import com.suicidebomber.engine.Timing;
-import com.suicidebomber.game.GameElement;
+import com.suicidebomber.scene.Lobby;
+import com.suicidebomber.structure.GameElement;
 
 
 public class Player extends Actor {     // Of course this is Player
@@ -75,6 +76,7 @@ public class Player extends Actor {     // Of course this is Player
         elementVisible = false;
         isLiving = false;
         deadTimer.start();
+        GameElement.sceneManager.changeSceneTo(new Lobby());
     }
 
     public void updateElement() {
