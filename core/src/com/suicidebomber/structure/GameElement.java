@@ -38,8 +38,8 @@ public class GameElement {
     public static SceneManager sceneManager = new SceneManager();
 
     // Actor
-    public static float changeDirectionMargin = 20;
-    public static float autoMargin = 2;
+    public static float nearCenterMargin = 20;
+    public static float centerMargin = 2;
     public static float defaultSpeed = 4;
 
     // Bomb

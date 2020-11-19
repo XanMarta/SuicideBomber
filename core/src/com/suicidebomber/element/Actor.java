@@ -9,6 +9,8 @@ import com.suicidebomber.engine.MapElement;
 public class Actor extends MapElement { // Movement element
 
     public float moveSpeed = GameElement.defaultSpeed;
+    public Vector2 nearbyBlock = new Vector2(-1, -1);
+    public Vector2 center = new Vector2(0, 0);
 
     public boolean isLegitBlock(MapBlock block) {
         return (block.blockType == GameElement.BlockType.GRASS ||
@@ -41,9 +43,9 @@ public class Actor extends MapElement { // Movement element
                 if (!isLegitBlock(nextBlock)) {
                     velocity.setZero();
                 } else {
-                    if (toCenter.len() <= GameElement.autoMargin) {
+                    if (toCenter.len() <= GameElement.centerMargin) {
                         velocity.set(toCenter);
-                    } else if (toCenter.len() <= GameElement.changeDirectionMargin) {
+                    } else if (toCenter.len() <= GameElement.nearCenterMargin) {
                         if (velocity.len() > toCenter.len()) {
                             velocity.set(toCenter);
                         } else {
@@ -61,6 +63,24 @@ public class Actor extends MapElement { // Movement element
             return new Vector2(velocity).nor();
         }
         return new Vector2(0, 0);
+    }
+
+    public void updatePosition() {                              // Need calling after center change
+        position.set(center).sub(currentMap.centerOffset);
+        currentBlock.set(currentMap.positionToBlock(center));
+        Vector2 exactCen = currentMap.blockToCenter(currentBlock);
+        Vector2 exactMargin = new Vector2(center).sub(exactCen);
+        if (exactCen.epsilonEquals(center, 0.1f)) {
+            nearbyBlock.set(-1, -1);
+        } else {
+            nearbyBlock.set(new Vector2(exactMargin).nor().add(currentBlock));
+        }
+        isNearCenter = (exactMargin.len() < GameElement.nearCenterMargin);
+    }
+
+    public void setBlock(Vector2 block) {
+        super.setBlock(block);
+        center.set(currentMap.blockToCenter(block));
     }
 }
 
