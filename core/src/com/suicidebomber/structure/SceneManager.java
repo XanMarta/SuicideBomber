@@ -1,8 +1,8 @@
 package com.suicidebomber.structure;
 
+import com.badlogic.gdx.Gdx;
 import com.suicidebomber.engine.Node;
 import com.suicidebomber.scene.Lobby;
-import com.suicidebomber.scene.PlayGround;
 
 
 public class SceneManager {
@@ -40,7 +40,11 @@ public class SceneManager {
         currentScene.root.isSafeFree = true;
     }
 
-    public void setScene(Scene scene) {
+    public void exitGame() {
+        changeSceneTo(null);
+    }
+
+    private void setScene(Scene scene) {
         currentScene = scene;
         currentScene.create();
         currentScene.prepare();
@@ -48,8 +52,12 @@ public class SceneManager {
     }
 
     protected void changeScene() {
-        currentScene.dispose();
-        setScene(upcomingScene);
-        upcomingScene = null;
+        if (upcomingScene != null) {
+            currentScene.dispose();
+            setScene(upcomingScene);
+            upcomingScene = null;
+        } else {
+            Gdx.app.exit();
+        }
     }
 }

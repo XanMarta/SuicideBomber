@@ -137,7 +137,9 @@ public class Node {
     }
 
     public void emit_signal(String signal) {
-        signals.get(signal).execute();
+        if (signals.containsKey(signal)) {
+            signals.get(signal).execute();
+        }
     }
 
     public void execute_signal(String signal) {

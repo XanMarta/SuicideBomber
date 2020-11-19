@@ -36,3 +36,6 @@ BLUE_DOWN_2 | image/player/blue/blue_down_2.png
 BLUE_DOWN_3 | image/player/blue/blue_down_3.png
 BLUE_DOWN_4 | image/player/blue/blue_down_4.png
 BLUE_DOWN_5 | image/player/blue/blue_down_5.png
+START_SCENE | image/scene/startScene.png
+BUTTON_START | image/scene/buttonStart.png
+BUTTON_QUIT | image/scene/buttonQuit.png
