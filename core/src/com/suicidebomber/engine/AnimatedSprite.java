@@ -1,7 +1,7 @@
 package com.suicidebomber.engine;
 
 import com.badlogic.gdx.utils.TimeUtils;
-import com.suicidebomber.game.GameElement;
+import com.suicidebomber.structure.GameElement;
 import java.util.HashMap;
 
 

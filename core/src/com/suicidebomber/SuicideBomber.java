@@ -1,35 +1,35 @@
 package com.suicidebomber;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.suicidebomber.engine.Node;
-import com.suicidebomber.game.GameElement;
-import com.suicidebomber.game.PlayGround;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.suicidebomber.structure.GameElement;
 
 
 public class SuicideBomber extends ApplicationAdapter {
-
-	private PlayGround playground;
 	
 	@Override
 	public void create () {
-		playground = new PlayGround();
+		GameElement.batch = new SpriteBatch();
 		GameElement.imageManager.create();
-		playground.root._create();
+		GameElement.fontManager.create();
+		GameElement.soundManager.create();
+		GameElement.sceneManager.create();
 	}
 
 	@Override
 	public void render () {
 		GameElement.imageManager.clearScreen();
-		GameElement.imageManager.startDraw();
-
-		playground.root._render();
-
-		GameElement.imageManager.endDraw();
+		GameElement.batch.begin();
+		GameElement.sceneManager.render();
+		GameElement.batch.end();
 	}
 	
 	@Override
 	public void dispose () {
+		GameElement.batch.dispose();
 		GameElement.imageManager.dispose();
-		playground.root._dispose();
+		GameElement.fontManager.dispose();
+		GameElement.soundManager.dispose();
+		GameElement.sceneManager.dispose();
 	}
 }

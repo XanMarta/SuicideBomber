@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.suicidebomber.structure.GameElement;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,11 +17,10 @@ import java.util.Scanner;
 public class ImageManager {
 
     private HashMap<String, Texture> images;
-    private SpriteBatch batch;
 
     public void create() {
         images = new HashMap<>();
-        batch = new SpriteBatch();
+        GameElement.batch = new SpriteBatch();
         loadImageFile("core/assets/image.dll");
     }
 
@@ -28,7 +28,6 @@ public class ImageManager {
         for (String name : images.keySet()) {
             images.get(name).dispose();
         }
-        batch.dispose();
     }
 
     public void loadImageFile(String path) {              // Load image from file.       name|path
@@ -55,14 +54,6 @@ public class ImageManager {
         }
     }
 
-    public void startDraw() {
-        batch.begin();
-    }
-
-    public void endDraw() {
-        batch.end();
-    }
-
     public void clearScreen() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -70,7 +61,7 @@ public class ImageManager {
 
     public void drawImage(String image, Vector2 position) {
         if (images.containsKey(image)) {
-            batch.draw(images.get(image), position.x, position.y);
+            GameElement.batch.draw(images.get(image), position.x, position.y);
         }
     }
 
@@ -78,9 +69,9 @@ public class ImageManager {
         if (alpha == 1) {
             drawImage(image, position);
         } else if (images.containsKey(image)) {
-            batch.setColor(1, 1, 1, alpha);
-            batch.draw(images.get(image), position.x, position.y);
-            batch.setColor(1, 1, 1, 1);
+            GameElement.batch.setColor(1, 1, 1, alpha);
+            GameElement.batch.draw(images.get(image), position.x, position.y);
+            GameElement.batch.setColor(1, 1, 1, 1);
         }
     }
 }

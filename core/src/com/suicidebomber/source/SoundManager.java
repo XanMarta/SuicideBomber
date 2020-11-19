@@ -1,0 +1,60 @@
+package com.suicidebomber.source;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
+import java.util.HashMap;
+
+
+public class SoundManager {
+
+    public HashMap<String, Sound> sounds = new HashMap<>();
+
+    public void create() {
+        loadSound("BOMB_TIMER", "sound/bomb_timer.wav");
+    }
+
+    public void dispose() {
+        for (String sound : sounds.keySet()) {
+            sounds.get(sound).dispose();
+        }
+    }
+
+    public long play(String sound, boolean looping) {
+        if (sounds.containsKey(sound)) {
+            if (looping) {
+                return sounds.get(sound).loop();
+            } else {
+                return sounds.get(sound).play();
+            }
+        }
+        return -1;
+    }
+
+    public void pause(String sound, long code) {
+        if (sounds.containsKey(sound)) {
+            sounds.get(sound).pause(code);
+        }
+    }
+
+    public void resume(String sound, long code) {
+        if (sounds.containsKey(sound)) {
+            sounds.get(sound).resume(code);
+        }
+    }
+
+    public void stop(String sound, long code) {
+        if (sounds.containsKey(sound)) {
+            sounds.get(sound).stop(code);
+        }
+    }
+
+    private void loadSound(String sound, String path) {
+        try {
+            Sound newSound = Gdx.audio.newSound(Gdx.files.internal(path));
+            sounds.put(sound, newSound);
+        } catch (Exception e) {
+            System.out.println("Cannot load sound " + path + ". Error: " + e.toString());
+        }
+    }
+
+}

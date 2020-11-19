@@ -1,24 +1,24 @@
-package com.suicidebomber.game;
+package com.suicidebomber.scene;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.element.*;
 import com.suicidebomber.engine.*;
+import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.structure.Scene;
 
 
-public class PlayGround {
+public class PlayGround extends Scene {
 
-    public Node root;
-    public Node2D actor;
-    public Node2D bomb;
-    public Node2D fire;
-    public Node2D box;
-    public Node2D wall;
-    public Node2D item;
+    public PlayerManager playerManager;
+    public Canvas2D bomb;
+    public Canvas2D fire;
+    public Canvas2D box;
+    public Canvas2D wall;
+    public Canvas2D item;
 
-    public PlayGround() {
-        root = new Node();
-        root.name = "root";
+    public void create() {
+        super.create();
 
         TileMap mapPlay = new TileMap();
         mapPlay.blockSize.set(GameElement.blockSize);
@@ -27,29 +27,29 @@ public class PlayGround {
         mapPlay.position.set(GameElement.mapPosition);
         root.addChild(mapPlay);
 
-        bomb = new Node2D();
+        bomb = new Canvas2D();
         bomb.name = "bomb";
         mapPlay.addChild(bomb);
 
-        fire = new Node2D();
+        fire = new Canvas2D();
         fire.name = "fire";
         mapPlay.addChild(fire);
 
-        box = new Node2D();
+        box = new Canvas2D();
         box.name = "box";
         mapPlay.addChild(box);
 
-        wall = new Node2D();
+        wall = new Canvas2D();
         wall.name = "wall";
         mapPlay.addChild(wall);
 
-        item = new Node2D();
+        item = new Canvas2D();
         item.name = "item";
         mapPlay.addChild(item);
 
-        actor = new Node2D();
-        actor.name = "actor";
-        mapPlay.addChild(actor);
+        playerManager = new PlayerManager();
+        playerManager.name = "playerManager";
+        mapPlay.addChild(playerManager);
 
         for (int i = 0; i < mapPlay.mapSize.x; i++) {
             for (int j = 0; j < mapPlay.mapSize.y; j++) {
@@ -73,7 +73,9 @@ public class PlayGround {
         player.name = "player";
         player.defaultBlock.set(1, 1);
         player.setMap(mapPlay);
-        actor.addChild(player);
+        player.playerName = "Don";
+        playerManager.addChild(player);
+        playerManager.addPlayer(player);
 
         Human playeralt = new Human();
         playeralt.name = "playeralt";
@@ -84,14 +86,15 @@ public class PlayGround {
         playeralt.upKey = Input.Keys.UP;
         playeralt.downKey = Input.Keys.DOWN;
         playeralt.bombKey = Input.Keys.ENTER;
-        actor.addChild(playeralt);
+        playeralt.playerName = "Bailey";
+        playerManager.addChild(playeralt);
+        playerManager.addPlayer(playeralt);
 
         TagManager tagManager = new TagManager();
         tagManager.position.set(20, 200);
         root.addChild(tagManager);
         tagManager.connectPlayer(player);
         tagManager.connectPlayer(playeralt);
-
     }
 
 }
