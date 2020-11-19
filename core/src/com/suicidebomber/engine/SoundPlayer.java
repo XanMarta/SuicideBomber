@@ -23,6 +23,5 @@ public class SoundPlayer extends Node {
     public void dispose() {
         super.dispose();
         stop();
-        System.out.println("Sound Player dispose");
     }
 }

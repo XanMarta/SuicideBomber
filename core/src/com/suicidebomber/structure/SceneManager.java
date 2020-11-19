@@ -1,5 +1,6 @@
 package com.suicidebomber.structure;
 
+import com.suicidebomber.engine.Node;
 import com.suicidebomber.scene.Lobby;
 import com.suicidebomber.scene.PlayGround;
 
@@ -7,9 +8,22 @@ import com.suicidebomber.scene.PlayGround;
 public class SceneManager {
 
     public Scene currentScene = null;
+    private Node node;
+    private Scene upcomingScene = null;
 
-    public void create() {              // MainScene
-        setScene(new Lobby());
+    public SceneManager() {
+        node = new Node() {
+            public void execute_signal(String signal) {
+                super.execute_signal(signal);
+                if (signal.equals("safefree")) {
+                    changeScene();
+                }
+            }
+        };
+    }
+
+    public void create() {
+        setScene(new Lobby());     // MainScene
     }
 
     public void render() {
@@ -22,13 +36,20 @@ public class SceneManager {
     }
 
     public void changeSceneTo(Scene scene) {
-        currentScene.dispose();
-        setScene(scene);
+        upcomingScene = scene;
+        currentScene.root.isSafeFree = true;
     }
 
     public void setScene(Scene scene) {
         currentScene = scene;
         currentScene.create();
         currentScene.prepare();
+        currentScene.root.connect_signal("safefree", node, "safefree");
+    }
+
+    protected void changeScene() {
+        currentScene.dispose();
+        setScene(upcomingScene);
+        upcomingScene = null;
     }
 }

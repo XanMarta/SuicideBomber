@@ -31,8 +31,10 @@ public class Bomb extends MapElement {
         addChild(timer);
 
         soundPlayer = new SoundPlayer();
-        blockType = GameElement.BlockType.BOMB;
         soundPlayer.play("BOMB_TIMER");
+        addChild(soundPlayer);
+
+        blockType = GameElement.BlockType.BOMB;
     }
 
     public void execute_signal(String signal) {

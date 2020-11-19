@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// Signal: safefree
 
 public class Node {
 
@@ -14,6 +15,7 @@ public class Node {
     protected ArrayList<Node> freechild = new ArrayList<>();
     private boolean isRender = false;
     public String name = "";
+    public boolean isSafeFree = false;      // Emit signal 'safefree' after render
 
     public Node() {
         name = "" + hashCode();
@@ -21,9 +23,9 @@ public class Node {
 
     // ## Core method
 
-    public void _create() {
-        create();
-    }
+//    public void _create() {
+//        create();
+//    }
 
     public void _render() {
         isRender = true;
@@ -38,29 +40,31 @@ public class Node {
             }
             freechild.clear();
         }
-    }
-
-    public void _dispose() {
-        dispose();
-        for (Node child : children) {
-            child._dispose();
+        if (isSafeFree) {               // For scene
+            emit_signal("safefree");
         }
     }
+
+//    public void _dispose() {
+//        dispose();
+//        for (Node child : children) {
+//            child._dispose();
+//        }
+//    }
 
     // ## Node method
 
     public void addChild(Node child) {
         children.add(child);
         child.parent = this;
-        child._create();
+        child.create();
         System.out.println("Add child: " + name + " - " + child.name);
     }
 
     public void deleteChild(Node child) { // Delete and free
-        child._dispose();
-        child.freeNode();
-        children.remove(child);
-        System.out.println("Free node: " + child.name);
+        if (children.contains(child)) {
+            child.free();
+        }
     }
 
     public void removeChild(Node child) { // Only remove, doesn't free
@@ -107,14 +111,13 @@ public class Node {
 
     private void free() {    // Free
         if (parent != null) {
-            parent.deleteChild(this);
-        } else {
-            _dispose();
-            freeNode();
+            parent.children.remove(this);
         }
+        freeNode();
     }
 
     protected void freeNode() {
+        dispose();
         for (Node child : children) {
             System.out.println("Free node: " + child.name);
             child.freeNode();

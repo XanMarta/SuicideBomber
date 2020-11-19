@@ -12,7 +12,7 @@ public class Scene {
     }
 
     public void prepare() {
-        root._create();
+        root.create();
     }
 
     public void render() {
@@ -20,6 +20,6 @@ public class Scene {
     }
 
     public void dispose() {
-        root._dispose();
+        root.safefree();
     }
 }
