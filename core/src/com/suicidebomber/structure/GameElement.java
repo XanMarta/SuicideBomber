@@ -7,6 +7,8 @@ import com.suicidebomber.source.ImageManager;
 import com.suicidebomber.source.MapLoader;
 import com.suicidebomber.source.SoundManager;
 
+import java.util.Random;
+
 
 public class GameElement {
 
@@ -46,13 +48,15 @@ public class GameElement {
     public static float delayBombSpreadTime = 0.05f;
 
     // Player
-    public static int init_bomb = 2;
+    public static int init_bomb = 1;
     public static int init_heart = 2;
-    public static int init_power = 3;
-    public static int init_speed = 2;
+    public static int init_power = 2;
+    public static int init_speed = 1;
     public static int max_element = 5;
 
     // Font
     public static String defaultFont = "COMIC";
 
+    // Random
+    public static Random random = new Random();
 }

@@ -3,7 +3,6 @@ package com.suicidebomber.element;
 import com.suicidebomber.engine.MapElement;
 import com.suicidebomber.engine.Sprite;
 import com.suicidebomber.structure.GameElement;
-import java.util.Random;
 
 
 public class Item extends MapElement {
@@ -18,8 +17,7 @@ public class Item extends MapElement {
 
     public void create() {
         super.create();
-        Random random = new Random();
-        int key = random.nextInt(100);
+        int key = GameElement.random.nextInt(100);
         if (key < 25) {
             item_name = "BOMB";
         } else if (key < 50) {

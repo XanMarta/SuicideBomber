@@ -16,7 +16,7 @@ public class Actor extends MapElement { // Movement element
                 block.blockType == GameElement.BlockType.FIRE);
     }
 
-    public void moveActor(Vector2 direction) {
+    public Vector2 moveActor(Vector2 direction) {
         if (!direction.isZero()) {
             Vector2 velocity = new Vector2(direction).scl(moveSpeed);
             Vector2 toCenter = new Vector2(currentMap.blockToCenter(currentBlock)).sub(center);
@@ -58,7 +58,9 @@ public class Actor extends MapElement { // Movement element
 
             center.add(velocity);
             updatePosition();
+            return new Vector2(velocity).nor();
         }
+        return new Vector2(0, 0);
     }
 }
 

@@ -42,7 +42,7 @@ public class Lobby extends Scene {
     }
 
     public void startGame() {
-        GameElement.sceneManager.changeSceneTo(new PlayGround());
+        GameElement.sceneManager.changeSceneTo((new PlayGround()));
     }
 
     public void endGame() {

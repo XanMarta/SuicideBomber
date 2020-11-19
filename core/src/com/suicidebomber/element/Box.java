@@ -3,7 +3,6 @@ package com.suicidebomber.element;
 import com.suicidebomber.engine.Sprite;
 import com.suicidebomber.structure.GameElement;
 import com.suicidebomber.engine.MapElement;
-import java.util.Random;
 
 
 public class Box extends MapElement {
@@ -23,8 +22,7 @@ public class Box extends MapElement {
 
     public void disappear() {
         super.disappear();
-        Random random = new Random();
-        if (random.nextInt(100) < 40) {
+        if (GameElement.random.nextInt(100) < 40) {
             Item item = new Item();
             item.setMap(currentMap);
             item.setBlock(currentBlock);
