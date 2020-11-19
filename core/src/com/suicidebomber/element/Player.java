@@ -5,9 +5,9 @@ import com.suicidebomber.engine.AnimatedSprite;
 import com.suicidebomber.engine.AnimationSprite;
 import com.suicidebomber.engine.MapElement;
 import com.suicidebomber.engine.Timing;
-import com.suicidebomber.scene.Lobby;
 import com.suicidebomber.structure.GameElement;
 
+// Signal: player_die
 
 public class Player extends Actor {     // Of course this is Player
 
@@ -21,7 +21,8 @@ public class Player extends Actor {     // Of course this is Player
 
     public int used_bomb = 0;
     public PlayerTag tag = null;
-    public boolean isLiving = false;
+    public boolean isLiving = true;
+    public boolean isAppearing = false;
     public Timing deadTimer;
 
     public AnimatedSprite animatedSprite;
@@ -39,6 +40,7 @@ public class Player extends Actor {     // Of course this is Player
         deadTimer.wait_time = 3.0f;
         deadTimer.connect_signal("time_out", this, "deadtimer_time_out");
         addChild(deadTimer);
+        isLiving = true;
         generateAnimation();
         playerSpawn();
     }
@@ -68,15 +70,14 @@ public class Player extends Actor {     // Of course this is Player
 
     public void playerSpawn() {
         elementVisible = true;
-        isLiving = true;
+        isAppearing = true;
         setBlock(defaultBlock);
     }
 
     public void playerDie() {
         elementVisible = false;
-        isLiving = false;
+        isAppearing = false;
         deadTimer.start();
-        GameElement.sceneManager.changeSceneTo(new Lobby());
     }
 
     public void updateElement() {
@@ -89,7 +90,7 @@ public class Player extends Actor {     // Of course this is Player
     public void movePlayer(Vector2 direction) {
         moveActor(direction);
         checkCollision(currentBlock);
-        if (isLiving) {
+        if (isAppearing) {
             if (nearbyBlock.x >= 0 && nearbyBlock.y >= 0) {
                 checkCollision(nearbyBlock);
             }
@@ -154,7 +155,8 @@ public class Player extends Actor {     // Of course this is Player
             if (heart > 0) {
                 playerSpawn();
             } else {
-//                safefree();
+                isLiving = false;
+                emit_signal("player_die");
             }
         }
     }

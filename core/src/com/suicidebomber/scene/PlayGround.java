@@ -10,12 +10,12 @@ import com.suicidebomber.structure.Scene;
 
 public class PlayGround extends Scene {
 
-    public Node2D actor;
-    public Node2D bomb;
-    public Node2D fire;
-    public Node2D box;
-    public Node2D wall;
-    public Node2D item;
+    public PlayerManager playerManager;
+    public Canvas2D bomb;
+    public Canvas2D fire;
+    public Canvas2D box;
+    public Canvas2D wall;
+    public Canvas2D item;
 
     public void create() {
         super.create();
@@ -27,29 +27,29 @@ public class PlayGround extends Scene {
         mapPlay.position.set(GameElement.mapPosition);
         root.addChild(mapPlay);
 
-        bomb = new Node2D();
+        bomb = new Canvas2D();
         bomb.name = "bomb";
         mapPlay.addChild(bomb);
 
-        fire = new Node2D();
+        fire = new Canvas2D();
         fire.name = "fire";
         mapPlay.addChild(fire);
 
-        box = new Node2D();
+        box = new Canvas2D();
         box.name = "box";
         mapPlay.addChild(box);
 
-        wall = new Node2D();
+        wall = new Canvas2D();
         wall.name = "wall";
         mapPlay.addChild(wall);
 
-        item = new Node2D();
+        item = new Canvas2D();
         item.name = "item";
         mapPlay.addChild(item);
 
-        actor = new Node2D();
-        actor.name = "actor";
-        mapPlay.addChild(actor);
+        playerManager = new PlayerManager();
+        playerManager.name = "playerManager";
+        mapPlay.addChild(playerManager);
 
         for (int i = 0; i < mapPlay.mapSize.x; i++) {
             for (int j = 0; j < mapPlay.mapSize.y; j++) {
@@ -74,7 +74,8 @@ public class PlayGround extends Scene {
         player.defaultBlock.set(1, 1);
         player.setMap(mapPlay);
         player.playerName = "Don";
-        actor.addChild(player);
+        playerManager.addChild(player);
+        playerManager.addPlayer(player);
 
         Human playeralt = new Human();
         playeralt.name = "playeralt";
@@ -86,7 +87,8 @@ public class PlayGround extends Scene {
         playeralt.downKey = Input.Keys.DOWN;
         playeralt.bombKey = Input.Keys.ENTER;
         playeralt.playerName = "Bailey";
-        actor.addChild(playeralt);
+        playerManager.addChild(playeralt);
+        playerManager.addPlayer(playeralt);
 
         TagManager tagManager = new TagManager();
         tagManager.position.set(20, 200);
