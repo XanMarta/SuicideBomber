@@ -6,6 +6,7 @@ import com.suicidebomber.engine.Sprite;
 import com.suicidebomber.structure.GameElement;
 import com.suicidebomber.engine.MapElement;
 import com.suicidebomber.engine.Timing;
+import java.util.ArrayList;
 
 
 public class Bomb extends MapElement {
@@ -35,6 +36,7 @@ public class Bomb extends MapElement {
         addChild(soundPlayer);
 
         blockType = GameElement.BlockType.BOMB;
+        initScore = -1.0f;
     }
 
     public void execute_signal(String signal) {

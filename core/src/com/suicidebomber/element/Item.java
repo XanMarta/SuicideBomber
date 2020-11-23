@@ -13,6 +13,7 @@ public class Item extends MapElement {
     public Item() {
         super();
         blockType = GameElement.BlockType.ITEM;
+        initScore = 0.5f;
     }
 
     public void create() {

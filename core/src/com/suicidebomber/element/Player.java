@@ -22,7 +22,7 @@ public class Player extends Actor {     // Of course this is Player
     public int used_bomb = 0;
     public PlayerTag tag = null;
     public boolean isLiving = true;
-    public boolean isAppearing = false;
+    public boolean isPlaying = false;
     public Timing deadTimer;
 
     public AnimatedSprite animatedSprite;
@@ -55,13 +55,13 @@ public class Player extends Actor {     // Of course this is Player
 
     public void playerSpawn() {
         elementVisible = true;
-        isAppearing = true;
+        isPlaying = true;
         setBlock(defaultBlock);
     }
 
     public void playerDie() {
         elementVisible = false;
-        isAppearing = false;
+        isPlaying = false;
         deadTimer.start();
     }
 
@@ -86,7 +86,7 @@ public class Player extends Actor {     // Of course this is Player
         }
         direction.set(moveActor(direction));
         checkCollision(currentBlock);
-        if (isAppearing) {
+        if (isPlaying) {
             if (nearbyBlock.x >= 0 && nearbyBlock.y >= 0) {
                 checkCollision(nearbyBlock);
             }

@@ -1,8 +1,8 @@
 15 15
 W W W W W W W W W W W W W W W
-W _ _ B B B B _ B B B B _ _ W
+W _ _ _ B B B _ B B B B _ _ W
 W _ W W W W B W B W W W W _ W
-W B W _ _ B B B B B _ _ W B W
+W B W _ _ B B B B B _ _ W _ W
 W B W _ W B W W W B W _ W B W
 W B W B W _ B B B _ W B W B W
 W B B B B B W W W B B B B B W
@@ -10,7 +10,7 @@ W _ W W W B B _ B B W W W _ W
 W B B B B B W W W B B B B B W
 W B W B W _ B B B _ W B W B W
 W B W _ W B W W W B W _ W B W
-W B W _ _ B B B B B _ _ W B W
+W _ W _ _ B B B B B _ _ W _ W
 W _ W W W W B W B W W W W _ W
-W _ _ B B B B _ B B B B _ _ W
+W _ _ _ _ _ _ _ _ _ _ _ _ _ W
 W W W W W W W W W W W W W W W

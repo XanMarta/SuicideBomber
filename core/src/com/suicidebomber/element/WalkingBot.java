@@ -6,7 +6,7 @@ import com.suicidebomber.structure.GameElement;
 import java.util.ArrayList;
 
 
-public class WalkingBot extends Player {
+public class WalkingBot extends Bot {
 
     protected Timing delayBot;
     protected boolean isDelaying = false;
@@ -14,7 +14,7 @@ public class WalkingBot extends Player {
     public void create() {
         super.create();
         delayBot = new Timing();
-        delayBot.wait_time = 0.1f;
+        delayBot.wait_time = 0.5f;
         delayBot.connect_signal("time_out", this, "bot_enddelay");
         addChild(delayBot);
     }
@@ -41,34 +41,48 @@ public class WalkingBot extends Player {
     }
 
     public void botMovement() {
-        if (!isDelaying) {
-            if (direction.isZero()) {
-                if (GameElement.random.nextInt(100) < 80) {
+        if (isPlaying) {
+            if (!isDelaying) {
+                if (direction.isZero()) {
                     findWay();
-                } else {
-                    botStartDelay();
+                } else if (isNearCenter) {
+                    if (GameElement.random.nextInt(100) < 10) {
+                        findWay();
+                    }
                 }
             }
             movePlayer(direction);
+            if (!direction.isZero()) {
+                botStartDelay();
+            }
         }
     }
 
     protected void findWay() {
-        ArrayList<Vector2> legalWay = new ArrayList<>();
-        checkLegitDirection(new Vector2(-1, 0), legalWay);
-        checkLegitDirection(new Vector2(1, 0), legalWay);
-        checkLegitDirection(new Vector2(0, -1), legalWay);
-        checkLegitDirection(new Vector2(0, 1), legalWay);
-        if (legalWay.size() > 0) {
-            direction.set(legalWay.get(GameElement.random.nextInt(legalWay.size())));
-        } else {
-            direction.setZero();
+        ArrayList<Vector2> availableWay = new ArrayList<>();
+        availableWay.add(new Vector2(-1, 0));
+        availableWay.add(new Vector2(1, 0));
+        availableWay.add(new Vector2(0, 1));
+        availableWay.add(new Vector2(0, -1));
+        availableWay.add(new Vector2(0, 0));
+        float maxScore = -2.0f;
+        for (Vector2 checkWay : availableWay) {
+            float checkScore = currentMap.getScore(new Vector2(checkWay).add(currentBlock));
+            if (checkScore > maxScore) {
+                maxScore = checkScore;
+            }
         }
-    }
-
-    protected void checkLegitDirection(Vector2 direction, ArrayList<Vector2> legalWay) {
-        if (isLegitBlock(currentMap.getMapBlock(new Vector2(direction).add(currentBlock)))) {
-            legalWay.add(direction);
+        ArrayList<Vector2> legitWay = new ArrayList<>();
+        for (Vector2 checkWay : availableWay) {
+            if (currentMap.getScore(new Vector2(checkWay).add(currentBlock)) == maxScore) {
+                legitWay.add(checkWay);
+                if (checkWay.epsilonEquals(direction)) {
+                    if (GameElement.random.nextInt(100) < 50) {
+                        return;
+                    }
+                }
+            }
         }
+        direction.set(legitWay.get(GameElement.random.nextInt(legitWay.size())));
     }
 }

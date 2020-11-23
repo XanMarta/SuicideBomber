@@ -12,7 +12,7 @@ public class MapElement extends Canvas2D {
     public Vector2 currentBlock = new Vector2(0, 0);
     public ArrayList<Sprite> renderElement = new ArrayList<>();             // Render to map
     public boolean elementVisible = true;
-    public boolean isNearCenter = false;
+    public float initScore = 0.0f;
 
     public void create() {
         super.create();
@@ -29,6 +29,10 @@ public class MapElement extends Canvas2D {
         if (blockType != GameElement.BlockType.NONE) {
             currentMap.getMapBlock(currentBlock).blockType = this.blockType;
         }
+    }
+
+    public void specialScore() {
+
     }
 
     public void render() {

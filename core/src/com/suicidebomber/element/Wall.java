@@ -16,5 +16,6 @@ public class Wall extends MapElement {
         renderElement.add(sprite);
         addChild(sprite);
         blockType = GameElement.BlockType.WALL;
+        initScore = -1.0f;
     }
 }

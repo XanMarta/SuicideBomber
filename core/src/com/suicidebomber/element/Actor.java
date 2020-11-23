@@ -11,11 +11,13 @@ public class Actor extends MapElement { // Movement element
     public float moveSpeed = GameElement.defaultSpeed;
     public Vector2 nearbyBlock = new Vector2(-1, -1);
     public Vector2 center = new Vector2(0, 0);
+    public boolean isNearCenter = false;
 
-    public boolean isLegitBlock(MapBlock block) {
-        return (block.blockType == GameElement.BlockType.GRASS ||
-                block.blockType == GameElement.BlockType.ITEM ||
-                block.blockType == GameElement.BlockType.FIRE);
+    public boolean isLegitBlock(Vector2 block) {
+        MapBlock blockType = currentMap.getMapBlock(block);
+        return (blockType.blockType == GameElement.BlockType.GRASS ||
+                blockType.blockType == GameElement.BlockType.ITEM ||
+                blockType.blockType == GameElement.BlockType.FIRE);
     }
 
     public Vector2 moveActor(Vector2 direction) {
@@ -23,7 +25,7 @@ public class Actor extends MapElement { // Movement element
             Vector2 velocity = new Vector2(direction).scl(moveSpeed);
             Vector2 toCenter = new Vector2(currentMap.blockToCenter(currentBlock)).sub(center);
             Vector2 directToCenter = new Vector2(toCenter).nor();
-            MapBlock nextBlock = currentMap.blockAt(new Vector2(direction).add(currentBlock));
+            Vector2 nextBlock = new Vector2(direction).add(currentBlock);
 
             if (directToCenter.isZero()) {
                 if (!isLegitBlock(nextBlock)) {
