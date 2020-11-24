@@ -1,11 +1,9 @@
 package com.suicidebomber.element;
 
 import com.suicidebomber.engine.Canvas2D;
-import com.suicidebomber.scene.Lobby;
-import com.suicidebomber.structure.GameElement;
-
 import java.util.ArrayList;
 
+// Signal: end_game
 
 public class PlayerManager extends Canvas2D {
 
@@ -31,7 +29,7 @@ public class PlayerManager extends Canvas2D {
             }
         }
         if (remainPlayer <= 1) {
-            GameElement.sceneManager.changeSceneTo(new Lobby());
+            emit_signal("end_game");
         }
     }
 

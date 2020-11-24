@@ -9,14 +9,19 @@ import com.suicidebomber.structure.Scene;
 
 public class Lobby extends Scene {
 
+    private TransitionScene transitionScene;
+    private boolean isQuitting = false;
+
     public void create() {
         root = new Node() {
             public void execute_signal(String signal) {
                 super.execute_signal(signal);
                 if (signal.equals("startButtonPressed")) {
-                    startGame();
+                    startButton();
                 } else if (signal.equals("quitButtonPressed")) {
-                    endGame();
+                    quitButton();
+                } else if (signal.equals("disappear_ended")) {
+                    animEnded();
                 }
             }
         };
@@ -39,6 +44,28 @@ public class Lobby extends Scene {
         quitButton.size.set(430, 196);
         quitButton.connect_signal("button_pressed", root, "quitButtonPressed");
         root.addChild(quitButton);
+
+        transitionScene = new TransitionScene();
+        root.addChild(transitionScene);
+        transitionScene.appear();
+        transitionScene.connect_signal("disappear_ended", root, "disappear_ended");
+    }
+
+    public void startButton() {
+        transitionScene.disappear();
+    }
+
+    public void quitButton() {
+        transitionScene.disappear();
+        isQuitting = true;
+    }
+
+    public void animEnded() {
+        if (isQuitting) {
+            endGame();
+        } else {
+            startGame();
+        }
     }
 
     public void startGame() {

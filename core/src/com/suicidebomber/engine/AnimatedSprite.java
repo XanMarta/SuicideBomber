@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.suicidebomber.structure.GameElement;
 import java.util.HashMap;
 
+// Signal: animation_ended
 
 public class AnimatedSprite extends Sprite {
 
@@ -18,24 +19,37 @@ public class AnimatedSprite extends Sprite {
 
     public void addAnimation(String name, AnimationSprite animation) {
         animations.put(name, animation);
+        addChild(animation);
+        animation.connect_signal("animation_ended", this, "animation_ended");
     }
 
-    public void play(String name) {
-        if (animations.containsKey(name)) {
-            if (currentAnimation.equals(name)) {
+    public void execute_signal(String signal) {
+        super.execute_signal(signal);
+        if (signal.equals("animation_ended")) {
+            emit_signal("animation_ended");
+        }
+    }
+
+    public void play(String animName) {
+        if (animations.containsKey(animName)) {
+            if (currentAnimation.equals(animName)) {
                 if (isPause) {
                     resume();
                 }
+                if (!animations.get(currentAnimation).isRunning) {
+                    startTime = TimeUtils.millis();
+                    animations.get(currentAnimation).start();
+                }
             } else {
-                currentAnimation = name;
+                if (isPlaying) {
+                    animations.get(currentAnimation).stop();
+                }
+                currentAnimation = animName;
+                animations.get(animName).start();
                 startTime = TimeUtils.millis();
             }
             isPlaying = true;
         }
-    }
-
-    public void start() {
-        isPlaying = true;
     }
 
     public void pause() {

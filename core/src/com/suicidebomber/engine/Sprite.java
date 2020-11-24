@@ -9,14 +9,14 @@ public class Sprite extends Canvas2D {
 
     public void render() {
         super.render();
-        if (!image.equals("")) {
-            if (getVisible()) {
-                renderImage();
-            }
+        if (getVisible()) {
+            renderImage();
         }
     }
 
     public void renderImage() {
-        GameElement.imageManager.drawImage(image, global_position, getAlpha());
+        if (!image.equals("")) {
+            GameElement.imageManager.drawImage(image, global_position, getAlpha());
+        }
     }
 }

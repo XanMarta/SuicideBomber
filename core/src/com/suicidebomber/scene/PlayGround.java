@@ -11,6 +11,7 @@ import com.suicidebomber.structure.Scene;
 public class PlayGround extends Scene {
 
     public PlayerManager playerManager;
+    public TransitionScene transitionScene;
     public Canvas2D bomb;
     public Canvas2D fire;
     public Canvas2D box;
@@ -19,6 +20,16 @@ public class PlayGround extends Scene {
 
     public void create() {
         super.create();
+        root = new Node() {
+            public void execute_signal(String signal) {
+                super.execute_signal(signal);
+                if (signal.equals("end_game")) {
+                    end_game();
+                } else if (signal.equals("change_scene")) {
+                    change_scene();
+                }
+            }
+        };
 
         TileMap mapPlay = new TileMap();
         mapPlay.blockSize.set(GameElement.blockSize);
@@ -49,6 +60,7 @@ public class PlayGround extends Scene {
 
         playerManager = new PlayerManager();
         playerManager.name = "playerManager";
+        playerManager.connect_signal("end_game", root, "end_game");
         mapPlay.addChild(playerManager);
 
         for (int i = 0; i < mapPlay.mapSize.x; i++) {
@@ -94,7 +106,7 @@ public class PlayGround extends Scene {
         walkingBot.name = "walkingbot";
         walkingBot.defaultBlock.set(1, 13);
         walkingBot.setMap(mapPlay);
-        walkingBot.playerName = "WALKING DEAD";
+        walkingBot.playerName = "WALKING";
         playerManager.addChild(walkingBot);
         playerManager.addPlayer(walkingBot);
 
@@ -102,7 +114,7 @@ public class PlayGround extends Scene {
         dodgeBot.name = "dodgebot";
         dodgeBot.defaultBlock.set(13, 1);
         dodgeBot.setMap(mapPlay);
-        dodgeBot.playerName = "BOT";
+        dodgeBot.playerName = "DODGE";
         playerManager.addChild(dodgeBot);
         playerManager.addPlayer(dodgeBot);
 
@@ -111,7 +123,21 @@ public class PlayGround extends Scene {
         root.addChild(tagManager);
         tagManager.connectPlayer(player);
         tagManager.connectPlayer(playeralt);
+        tagManager.connectPlayer(walkingBot);
         tagManager.connectPlayer(dodgeBot);
+
+        transitionScene = new TransitionScene();
+        transitionScene.connect_signal("disappear_ended", root, "change_scene");
+        root.addChild(transitionScene);
+        transitionScene.appear();
+    }
+
+    public void end_game() {
+        transitionScene.disappear();
+    }
+
+    public void change_scene() {
+        GameElement.sceneManager.changeSceneTo(new Lobby());
     }
 
 }
