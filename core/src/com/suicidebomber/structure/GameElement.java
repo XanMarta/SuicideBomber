@@ -7,6 +7,8 @@ import com.suicidebomber.source.ImageManager;
 import com.suicidebomber.source.MapLoader;
 import com.suicidebomber.source.SoundManager;
 
+import java.util.Random;
+
 
 public class GameElement {
 
@@ -36,8 +38,8 @@ public class GameElement {
     public static SceneManager sceneManager = new SceneManager();
 
     // Actor
-    public static float changeDirectionMargin = 20;
-    public static float autoMargin = 2;
+    public static float nearCenterMargin = 20;
+    public static float centerMargin = 2;
     public static float defaultSpeed = 4;
 
     // Bomb
@@ -46,13 +48,28 @@ public class GameElement {
     public static float delayBombSpreadTime = 0.05f;
 
     // Player
-    public static int init_bomb = 2;
+    public static int init_bomb = 1;
     public static int init_heart = 2;
-    public static int init_power = 3;
-    public static int init_speed = 2;
+    public static int init_power = 2;
+    public static int init_speed = 1;
     public static int max_element = 5;
 
     // Font
     public static String defaultFont = "COMIC";
 
+    // Random
+    public static Random random = new Random();
+
+
+
+
+    // Other method
+    public static float clamp(float source, float min, float max) {
+        if (source < min) {
+            return min;
+        } else if (source > max) {
+            return max;
+        }
+        return source;
+    }
 }

@@ -35,6 +35,7 @@ public class Bomb extends MapElement {
         addChild(soundPlayer);
 
         blockType = GameElement.BlockType.BOMB;
+        initScore = -1.0f;
     }
 
     public void execute_signal(String signal) {
@@ -61,6 +62,23 @@ public class Bomb extends MapElement {
         boom(new Vector2(currentBlock), new Vector2(0, 0), power);
         soundPlayer.stop();
         safefree();
+    }
+
+    public void specialScore() {
+        super.specialScore();
+        checkSpreadScore(new Vector2(currentBlock).add(-1, 0), new Vector2(-1, 0), power);
+        checkSpreadScore(new Vector2(currentBlock).add(1, 0), new Vector2(1, 0), power);
+        checkSpreadScore(new Vector2(currentBlock).add(0, -1), new Vector2(0, -1), power);
+        checkSpreadScore(new Vector2(currentBlock).add(0, 1), new Vector2(0, 1), power);
+    }
+
+    private void checkSpreadScore(Vector2 pos, Vector2 dir, int pow) {
+        if (currentMap.isInMap(pos) && pow > 1) {
+            if (currentMap.getMapBlock(pos).blockType == GameElement.BlockType.GRASS) {
+                currentMap.mapScore.addScore(pos, -0.7f);
+                checkSpreadScore(new Vector2(pos).add(dir), dir, pow - 1);
+            }
+        }
     }
 
     public void boom(Vector2 pos, Vector2 direction, int power) {

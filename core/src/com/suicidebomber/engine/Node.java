@@ -23,10 +23,6 @@ public class Node {
 
     // ## Core method
 
-//    public void _create() {
-//        create();
-//    }
-
     public void _render() {
         isRender = true;
         render();
@@ -45,20 +41,12 @@ public class Node {
         }
     }
 
-//    public void _dispose() {
-//        dispose();
-//        for (Node child : children) {
-//            child._dispose();
-//        }
-//    }
-
     // ## Node method
 
     public void addChild(Node child) {
         children.add(child);
         child.parent = this;
         child.create();
-        System.out.println("Add child: " + name + " - " + child.name);
     }
 
     public void deleteChild(Node child) { // Delete and free
@@ -119,7 +107,6 @@ public class Node {
     protected void freeNode() {
         dispose();
         for (Node child : children) {
-            System.out.println("Free node: " + child.name);
             child.freeNode();
         }
         children.clear();

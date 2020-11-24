@@ -1,8 +1,8 @@
 package com.suicidebomber.engine;
 
 import com.badlogic.gdx.math.Vector2;
+import com.suicidebomber.element.MapScore;
 import com.suicidebomber.source.sourceelement.Map;
-
 import java.util.ArrayList;
 
 
@@ -14,6 +14,14 @@ public class TileMap extends Node2D {
     public MapBlock[][] mapBlock;
     public MapRow[] mapRows;
     public Sprite ground;
+    public MapScore mapScore = new MapScore();                  // Score to write
+    public MapScore updateMapScore = new MapScore();            // Score to read
+    public ArrayList<MapElement> elementScore = new ArrayList<>();
+
+    public void render() {
+        super.render();
+        generateMapScore();
+    }
 
     public void generateMap(Map map) {
         // Ground
@@ -23,6 +31,8 @@ public class TileMap extends Node2D {
         // Map
         mapSize.set(map.width, map.height);
         mapBlock = new MapBlock[map.width][map.height];
+        mapScore.generateMap(map.width, map.height);
+        updateMapScore.generateMap(map.width, map.height);
         mapRows = new MapRow[map.height];
         for (int j = 0; j < map.height; j++) {
             mapRows[j] = new MapRow();
@@ -36,6 +46,33 @@ public class TileMap extends Node2D {
             }
             addChild(mapRows[j]);
         }
+    }
+
+    public void generateMapScore() {
+        for (MapElement element : elementScore) {
+            element.specialScore();
+        }
+        elementScore.clear();
+//        printMapScore();
+        updateMapScore.copy(mapScore);
+        mapScore.reset();
+    }
+
+    private void printMapScore() {
+        for (int j = (int) mapSize.y - 1; j >= 0; j--) {
+            for (int i = 0; i < mapSize.x; i++) {
+                if (mapScore.score[i][j] >= 0.0) {
+                    System.out.print(" ");
+                }
+                System.out.print(mapScore.score[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    public float getScore(Vector2 block) {
+        return updateMapScore.score[(int) block.x][(int) block.y];
     }
 
     public Vector2 blockToCenter(Vector2 block) {
@@ -70,11 +107,13 @@ public class TileMap extends Node2D {
 
     public void addElement(MapElement element) {
         mapRows[(int) element.currentBlock.y].elements.add(element);
-        mapBlock[(int) element.currentBlock.x][(int) element.currentBlock.y].newelements.add(element);
+        MapBlock block = mapBlock[(int) element.currentBlock.x][(int) element.currentBlock.y];
+        block.newelements.add(element);
+        mapScore.addScore(element.currentBlock, element.initScore);
+        elementScore.add(element);
     }
 
 }
-
 
 
 class MapRow extends Node2D {

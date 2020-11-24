@@ -24,6 +24,7 @@ public class Fire extends MapElement {
         timer.start();
         addChild(timer);
         blockType = GameElement.BlockType.FIRE;
+        initScore = -1.0f;
     }
 
     public void execute_signal(String signal) {

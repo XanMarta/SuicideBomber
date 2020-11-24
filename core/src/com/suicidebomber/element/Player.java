@@ -22,7 +22,7 @@ public class Player extends Actor {     // Of course this is Player
     public int used_bomb = 0;
     public PlayerTag tag = null;
     public boolean isLiving = true;
-    public boolean isAppearing = false;
+    public boolean isPlaying = false;
     public Timing deadTimer;
 
     public AnimatedSprite animatedSprite;
@@ -45,21 +45,6 @@ public class Player extends Actor {     // Of course this is Player
         playerSpawn();
     }
 
-    public void render() {
-        super.render();
-        if (direction.isZero()) {
-            animatedSprite.pause();
-        } else if (direction.epsilonEquals(0, 1)) {
-            animatedSprite.play("UP");
-        } else if (direction.epsilonEquals(1, 0)) {
-            animatedSprite.play("LEFT");
-        } else if (direction.epsilonEquals(-1, 0)) {
-            animatedSprite.play("RIGHT");
-        } else {
-            animatedSprite.play("DOWN");
-        }
-    }
-
     public void dispose() {
         super.dispose();
         if (tag != null) {
@@ -70,13 +55,13 @@ public class Player extends Actor {     // Of course this is Player
 
     public void playerSpawn() {
         elementVisible = true;
-        isAppearing = true;
+        isPlaying = true;
         setBlock(defaultBlock);
     }
 
     public void playerDie() {
         elementVisible = false;
-        isAppearing = false;
+        isPlaying = false;
         deadTimer.start();
     }
 
@@ -88,9 +73,20 @@ public class Player extends Actor {     // Of course this is Player
     }
 
     public void movePlayer(Vector2 direction) {
-        moveActor(direction);
+        if (direction.isZero()) {
+            animatedSprite.pause();
+        } else if (direction.epsilonEquals(0, 1)) {
+            animatedSprite.play("UP");
+        } else if (direction.epsilonEquals(1, 0)) {
+            animatedSprite.play("LEFT");
+        } else if (direction.epsilonEquals(-1, 0)) {
+            animatedSprite.play("RIGHT");
+        } else {
+            animatedSprite.play("DOWN");
+        }
+        direction.set(moveActor(direction));
         checkCollision(currentBlock);
-        if (isAppearing) {
+        if (isPlaying) {
             if (nearbyBlock.x >= 0 && nearbyBlock.y >= 0) {
                 checkCollision(nearbyBlock);
             }

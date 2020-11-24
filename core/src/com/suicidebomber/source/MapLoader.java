@@ -35,7 +35,7 @@ public class MapLoader {
             for (int j = 0; j < width; j++) {
                 String[] line = scan.nextLine().split(" ");
                 for (int i = 0; i < height; i++) {
-                    map.setBlock(i, j, line[i]);
+                    map.setBlock(i, width - 1 - j, line[i]);
                 }
             }
             scan.close();

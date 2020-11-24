@@ -8,6 +8,7 @@ public class MapBlock extends Node2D {
 
     public GameElement.BlockType blockType = GameElement.BlockType.GRASS;
     public Array<MapElement> newelements = new Array<>();
+    // Accessible from outside
     public Array<MapElement> elements = new Array<>();
 
     public void render() {
