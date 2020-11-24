@@ -10,7 +10,6 @@ public class MapBlock extends Node2D {
     public Array<MapElement> newelements = new Array<>();
     // Accessible from outside
     public Array<MapElement> elements = new Array<>();
-    public float score = 0.0f;
 
     public void render() {
         super.render();
@@ -18,7 +17,6 @@ public class MapBlock extends Node2D {
         for (MapElement element : newelements) {
             elements.add(element);
         }
-        score = 0.0f;
         newelements.clear();
     }
 }

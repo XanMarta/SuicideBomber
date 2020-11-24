@@ -59,4 +59,17 @@ public class GameElement {
 
     // Random
     public static Random random = new Random();
+
+
+
+
+    // Other method
+    public static float clamp(float source, float min, float max) {
+        if (source < min) {
+            return min;
+        } else if (source > max) {
+            return max;
+        }
+        return source;
+    }
 }

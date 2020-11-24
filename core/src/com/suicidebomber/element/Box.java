@@ -10,7 +10,7 @@ public class Box extends MapElement {
     public Box() {
         super();
         blockType = GameElement.BlockType.BOX;
-        initScore = -0.25f;
+        initScore = -1.0f;
     }
 
     public void create() {

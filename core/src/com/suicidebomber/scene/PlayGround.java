@@ -92,18 +92,26 @@ public class PlayGround extends Scene {
 
         WalkingBot walkingBot = new WalkingBot();
         walkingBot.name = "walkingbot";
-        walkingBot.defaultBlock.set(13, 1);
+        walkingBot.defaultBlock.set(1, 13);
         walkingBot.setMap(mapPlay);
-        walkingBot.playerName = "BOT";
+        walkingBot.playerName = "WALKING DEAD";
         playerManager.addChild(walkingBot);
         playerManager.addPlayer(walkingBot);
+
+        DodgeBot dodgeBot = new DodgeBot();
+        dodgeBot.name = "dodgebot";
+        dodgeBot.defaultBlock.set(13, 1);
+        dodgeBot.setMap(mapPlay);
+        dodgeBot.playerName = "BOT";
+        playerManager.addChild(dodgeBot);
+        playerManager.addPlayer(dodgeBot);
 
         TagManager tagManager = new TagManager();
         tagManager.position.set(20, 200);
         root.addChild(tagManager);
         tagManager.connectPlayer(player);
         tagManager.connectPlayer(playeralt);
-        tagManager.connectPlayer(walkingBot);
+        tagManager.connectPlayer(dodgeBot);
     }
 
 }
