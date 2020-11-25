@@ -11,7 +11,7 @@ public class Bot extends Player {
     public void create() {
         super.create();
         delayBot = new Timing();
-        delayBot.wait_time = 0.5f;
+        delayBot.wait_time = 500;
         delayBot.connect_signal("time_out", this, "bot_enddelay");
         addChild(delayBot);
     }
@@ -29,7 +29,7 @@ public class Bot extends Player {
 
     }
 
-    public void botStartDelay(float time) {
+    public void botStartDelay(long time) {
         delayBot.wait_time = time;
         delayBot.start();
         isDelaying = true;

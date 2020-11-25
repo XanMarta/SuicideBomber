@@ -43,9 +43,9 @@ public class GameElement {
     public static float defaultSpeed = 4;
 
     // Bomb
-    public static float bombTiming = 3.0f;
-    public static float fireTiming = 0.8f;
-    public static float delayBombSpreadTime = 0.05f;
+    public static long bombTiming = 3000;
+    public static long fireTiming = 800;
+    public static long delayBombSpreadTime = 50;
 
     // Player
     public static int init_bomb = 1;
@@ -59,6 +59,9 @@ public class GameElement {
 
     // Random
     public static Random random = new Random();
+
+    // Match
+    public static int matchTime = 20;
 
 
 

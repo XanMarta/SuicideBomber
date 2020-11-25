@@ -50,3 +50,4 @@ BLACK_SCREEN_8 | image/scene/Transition/BLACK_SCREEN_8.png
 BLACK_SCREEN_9 | image/scene/Transition/BLACK_SCREEN_9.png
 BLACK_SCREEN_10 | image/scene/Transition/BLACK_SCREEN_10.png
 BLACK_SCREEN_11 | image/scene/Transition/BLACK_SCREEN_11.png
+PLAY_SCENE | image/scene/playScene.png

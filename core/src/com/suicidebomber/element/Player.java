@@ -37,7 +37,7 @@ public class Player extends Actor {     // Of course this is Player
         speed = GameElement.init_speed;
         updateElement();
         deadTimer = new Timing();
-        deadTimer.wait_time = 3.0f;
+        deadTimer.wait_time = 3000;
         deadTimer.connect_signal("time_out", this, "deadtimer_time_out");
         addChild(deadTimer);
         isLiving = true;

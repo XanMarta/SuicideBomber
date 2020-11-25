@@ -51,7 +51,7 @@ public class DodgeBot extends Bot {
             direction.set(legitWay.get(GameElement.random.nextInt(legitWay.size())));
         } else {
             direction.setZero();
-            botStartDelay(0.7f);
+            botStartDelay(700);
         }
     }
 }

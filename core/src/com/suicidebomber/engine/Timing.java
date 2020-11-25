@@ -1,38 +1,44 @@
 package com.suicidebomber.engine;
 
-import com.badlogic.gdx.utils.Timer;
-import com.badlogic.gdx.utils.Timer.Task;
+import com.badlogic.gdx.utils.TimeUtils;
 
 // Signal: time_out
 
 public class Timing extends Node {
 
-    public float wait_time = 1.0f;
-    public boolean isLooping = false;
+    public long wait_time = 1000;
+    public boolean looping = false;
 
-    private Task task = null;
+    private long startTime = 0;
+    private boolean isPlaying = false;
+    private boolean forceStop = false;
 
     public void start() {
-        task = new Task() {
-            @Override
-            public void run() {
-                emit_signal("time_out");
-                if (isLooping) {
-                    start();
-                }
-            }
-        };
-        Timer.schedule(task, wait_time);
-    }
-
-    public void stop() {
-        if (task != null) {
-            task.cancel();
+        if (!isPlaying) {
+            isPlaying = true;
+            startTime = TimeUtils.millis();
         }
     }
 
-    public void dispose() {
-        super.dispose();
-        stop();
+    public void render() {
+        super.render();
+        if (isPlaying) {
+            if (TimeUtils.timeSinceMillis(startTime) >= wait_time) {
+                isPlaying = false;
+                emit_signal("time_out");
+                if (looping) {
+                    if (!forceStop) {
+                        start();
+                    }
+                    forceStop = false;
+                }
+            }
+        }
     }
+
+    public void stop() {
+        isPlaying = false;
+        forceStop = true;
+    }
+
 }

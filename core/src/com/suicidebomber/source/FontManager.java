@@ -2,6 +2,7 @@ package com.suicidebomber.source;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.structure.GameElement;
 
@@ -14,6 +15,7 @@ public class FontManager {
 
     public void create() {
         loadFont("COMIC", "font/comic.fnt", "font/comic_0.png");
+        loadFont("COMIC_LARGE", "font/comic_large.fnt", "font/comic_large.png");
     }
 
     public void dispose() {
@@ -22,9 +24,14 @@ public class FontManager {
         }
     }
 
-    public void drawText(String font, String text, Vector2 position) {
+    public void drawText(String font, String text, Vector2 position, boolean center) {
         if (fonts.containsKey(font)) {
-            fonts.get(font).draw(GameElement.batch, text, position.x, position.y);
+            if (center) {
+                GlyphLayout layout = fonts.get(font).getCache().addText(text, position.x, position.y);
+                fonts.get(font).draw(GameElement.batch, text, position.x - layout.width / 2, position.y);
+            } else {
+                fonts.get(font).draw(GameElement.batch, text, position.x, position.y);
+            }
         }
     }
 

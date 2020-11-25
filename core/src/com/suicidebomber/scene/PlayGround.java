@@ -17,6 +17,9 @@ public class PlayGround extends Scene {
     public Canvas2D box;
     public Canvas2D wall;
     public Canvas2D item;
+    public Gui gui;
+
+    private boolean isPLaying = true;
 
     public void create() {
         super.create();
@@ -27,9 +30,15 @@ public class PlayGround extends Scene {
                     end_game();
                 } else if (signal.equals("change_scene")) {
                     change_scene();
+                } else if (signal.equals("text_out")) {
+                    text_out();
                 }
             }
         };
+
+        Sprite background = new Sprite();
+        background.image = "PLAY_SCENE";
+        root.addChild(background);
 
         TileMap mapPlay = new TileMap();
         mapPlay.blockSize.set(GameElement.blockSize);
@@ -126,14 +135,33 @@ public class PlayGround extends Scene {
         tagManager.connectPlayer(walkingBot);
         tagManager.connectPlayer(dodgeBot);
 
+        gui = new Gui();
+        gui.connect_signal("time_out", root, "end_game");
+        gui.connect_signal("text_out", root, "text_out");
+        root.addChild(gui);
+
         transitionScene = new TransitionScene();
         transitionScene.connect_signal("disappear_ended", root, "change_scene");
         root.addChild(transitionScene);
         transitionScene.appear();
+
+        start_game();
+    }
+
+    public void start_game() {
+        gui.show_text("START");
+        isPLaying = true;
+    }
+
+    public void text_out() {
+        if (!isPLaying) {
+            transitionScene.disappear();
+        }
     }
 
     public void end_game() {
-        transitionScene.disappear();
+        gui.show_text("END");
+        isPLaying = false;
     }
 
     public void change_scene() {

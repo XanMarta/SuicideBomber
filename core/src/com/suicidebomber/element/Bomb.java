@@ -41,7 +41,6 @@ public class Bomb extends MapElement {
     public void execute_signal(String signal) {
         super.execute_signal(signal);
         if (signal.equals("runoff")) {
-            System.out.println("BOOM");
             runoff();
         }
     }
