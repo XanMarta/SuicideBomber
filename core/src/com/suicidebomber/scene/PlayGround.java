@@ -4,10 +4,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.element.*;
 import com.suicidebomber.engine.*;
+import com.suicidebomber.source.manager.GameHelper;
 import com.suicidebomber.source.manager.MapLoader;
 import com.suicidebomber.source.manager.SceneManager;
 import com.suicidebomber.autoload.GameElement;
 import com.suicidebomber.source.Scene;
+import java.util.ArrayList;
 
 
 public class PlayGround extends Scene {
@@ -74,6 +76,7 @@ public class PlayGround extends Scene {
         playerManager.connect_signal("end_game", root, "end_game");
         mapPlay.addChild(playerManager);
 
+        ArrayList<Vector2> boxes = new ArrayList<>();
         for (int i = 0; i < mapPlay.mapSize.x; i++) {
             for (int j = 0; j < mapPlay.mapSize.y; j++) {
                 Vector2 pos = new Vector2(i, j);
@@ -84,11 +87,21 @@ public class PlayGround extends Scene {
                     temp.setBlock(pos);
                     wall.addChild(temp);
                 } else if (type == GameElement.BlockType.BOX) {
-                    Box temp = new Box();
-                    temp.setMap(mapPlay);
-                    temp.setBlock(pos);
-                    box.addChild(temp);
+                    Vector2 boxPos = new Vector2(i, j);
+                    boxes.add(boxPos);
+                    mapPlay.getMapBlock(boxPos).blockType = GameElement.BlockType.GRASS;
                 }
+            }
+        }
+        if (boxes.size() > 2) {
+            int numBox = boxes.size() * 80 / 100;
+            for (int i = 1; i <= numBox; i++) {
+                Vector2 pos = boxes.get(GameHelper.instance().random.nextInt(boxes.size()));
+                boxes.remove(pos);
+                Box temp = new Box();
+                temp.setMap(mapPlay);
+                temp.setBlock(pos);
+                box.addChild(temp);
             }
         }
 
