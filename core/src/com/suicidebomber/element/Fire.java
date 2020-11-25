@@ -10,6 +10,7 @@ public class Fire extends MapElement {
 
     public Player owner = null;
     public Timing timer;
+
     private Sprite sprite;
 
     public Fire() {

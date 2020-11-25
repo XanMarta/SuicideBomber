@@ -5,22 +5,22 @@ import com.suicidebomber.structure.GameElement;
 import com.suicidebomber.engine.MapBlock;
 import com.suicidebomber.engine.MapElement;
 
+// Movement element
+public class Actor extends MapElement {
 
-public class Actor extends MapElement { // Movement element
+    protected float moveSpeed = GameElement.defaultSpeed;
+    protected Vector2 nearbyBlock = new Vector2(-1, -1);
+    protected Vector2 center = new Vector2(0, 0);
+    protected boolean isNearCenter = false;
 
-    public float moveSpeed = GameElement.defaultSpeed;
-    public Vector2 nearbyBlock = new Vector2(-1, -1);
-    public Vector2 center = new Vector2(0, 0);
-    public boolean isNearCenter = false;
-
-    public boolean isLegitBlock(Vector2 block) {
+    protected boolean isLegitBlock(Vector2 block) {    // Check if block can go through
         MapBlock blockType = currentMap.getMapBlock(block);
         return (blockType.blockType == GameElement.BlockType.GRASS ||
                 blockType.blockType == GameElement.BlockType.ITEM ||
                 blockType.blockType == GameElement.BlockType.FIRE);
     }
 
-    public Vector2 moveActor(Vector2 direction) {
+    protected Vector2 moveActor(Vector2 direction) {
         if (!direction.isZero()) {
             Vector2 velocity = new Vector2(direction).scl(moveSpeed);
             Vector2 toCenter = new Vector2(currentMap.blockToCenter(currentBlock)).sub(center);
@@ -67,7 +67,7 @@ public class Actor extends MapElement { // Movement element
         return new Vector2(0, 0);
     }
 
-    public void updatePosition() {                              // Need calling after center change
+    protected void updatePosition() {                              // Need calling after center change
         position.set(center).sub(currentMap.centerOffset);
         currentBlock.set(currentMap.positionToBlock(center));
         Vector2 exactCen = currentMap.blockToCenter(currentBlock);
@@ -83,6 +83,7 @@ public class Actor extends MapElement { // Movement element
     public void setBlock(Vector2 block) {
         super.setBlock(block);
         center.set(currentMap.blockToCenter(block));
+        updatePosition();
     }
 }
 

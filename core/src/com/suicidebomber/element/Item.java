@@ -8,6 +8,7 @@ import com.suicidebomber.structure.GameElement;
 public class Item extends MapElement {
 
     public String item_name = "";
+
     private Sprite sprite;
 
     public Item() {

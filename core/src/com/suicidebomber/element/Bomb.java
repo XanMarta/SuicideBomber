@@ -74,7 +74,7 @@ public class Bomb extends MapElement {
     private void checkSpreadScore(Vector2 pos, Vector2 dir, int pow) {
         if (currentMap.isInMap(pos) && pow > 1) {
             if (currentMap.getMapBlock(pos).blockType == GameElement.BlockType.GRASS) {
-                currentMap.mapScore.addScore(pos, -0.7f);
+                currentMap.setScore(pos, -0.7f);
                 checkSpreadScore(new Vector2(pos).add(dir), dir, pow - 1);
             }
         }

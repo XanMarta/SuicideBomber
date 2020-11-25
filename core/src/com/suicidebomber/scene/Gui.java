@@ -10,11 +10,11 @@ import com.suicidebomber.structure.GameElement;
 
 public class Gui extends Canvas2D {
 
-    protected Label timerLabel;
-    protected Timing timerCount;
-    protected Label textLabel;
-    protected Timing textCount;
-    protected int remainTime;
+    private Label timerLabel;
+    private Timing timerCount;
+    private Label textLabel;
+    private Timing textCount;
+    private int remainTime;
 
     public void create() {
         super.create();

@@ -12,7 +12,8 @@ public class Button extends Canvas2D {
     public Vector2 size = new Vector2(100, 100);
     public String mouseInTexture = "";
     public String mouseOutTexture = "";
-    public Sprite sprite;
+    
+    private Sprite sprite;
 
     public Button() {
         super();

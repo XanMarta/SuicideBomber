@@ -5,9 +5,10 @@ import com.suicidebomber.structure.GameElement;
 
 public class SoundPlayer extends Node {
 
-    public String currentSound = "";
-    public long currentCode = -1;
     public boolean looping = false;
+
+    private String currentSound = "";
+    private long currentCode = -1;
 
     public void play(String sound) {
         currentCode = GameElement.soundManager.play(sound, looping);

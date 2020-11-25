@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class TagManager extends Canvas2D {
 
-    public ArrayList<PlayerTag> tags = new ArrayList<>();
+    private ArrayList<PlayerTag> tags = new ArrayList<>();
 
     public void create() {
         for (int i = 3; i >= 0; i--) {

@@ -8,10 +8,9 @@ import java.util.HashMap;
 
 public class AnimatedSprite extends Sprite {
 
-    public HashMap<String, AnimationSprite> animations = new HashMap<>();
-    public String currentAnimation = "";
-    public boolean isPlaying = false;
-
+    private HashMap<String, AnimationSprite> animations = new HashMap<>();
+    private String currentAnimation = "";
+    private boolean isPlaying = false;
     private long startTime = 0;
     private long timingWhile = 0;
     private long pauseWhile = 0;
@@ -70,7 +69,6 @@ public class AnimatedSprite extends Sprite {
 
     public void stop() {
         isPlaying = false;
-        currentAnimation = "";
     }
 
     public void renderImage() {

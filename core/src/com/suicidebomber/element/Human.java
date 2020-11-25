@@ -22,7 +22,7 @@ public class Human extends Player {
         }
     }
 
-    public void playerMovement() {
+    protected void playerMovement() {
         direction.setZero();
         if (Gdx.input.isKeyPressed(leftKey)) {
             direction.x = -1;

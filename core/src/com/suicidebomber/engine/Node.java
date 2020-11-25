@@ -1,7 +1,6 @@
 package com.suicidebomber.engine;
 
 import com.badlogic.gdx.utils.Array;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,19 +8,18 @@ import java.util.HashMap;
 
 public class Node {
 
-    protected ArrayList<Node> children = new ArrayList<>();
-    protected HashMap<String, SignalPack> signals = new HashMap<>();
-    protected Node parent = null;
-    protected ArrayList<Node> freechild = new ArrayList<>();
+    private ArrayList<Node> children = new ArrayList<>();
+    private HashMap<String, SignalPack> signals = new HashMap<>();
+    private Node parent = null;
+    private ArrayList<Node> freechild = new ArrayList<>();
     private boolean isRender = false;
+
     public String name = "";
     public boolean isSafeFree = false;      // Emit signal 'safefree' after render
 
     public Node() {
         name = "" + hashCode();
     }
-
-    // ## Core method
 
     public void _render() {
         isRender = true;
@@ -40,8 +38,6 @@ public class Node {
             emit_signal("safefree");
         }
     }
-
-    // ## Node method
 
     public void addChild(Node child) {
         children.add(child);
@@ -139,11 +135,11 @@ public class Node {
 
     }
 
-    public void render() {
+    public void render() {  // Called in each frame
 
     }
 
-    public void dispose() {
+    public void dispose() { // Called when being deleted
 
     }
 }
@@ -152,7 +148,7 @@ public class Node {
 
 class SignalPack {
 
-    public Array<Signal> signals = new Array<>();
+    private Array<Signal> signals = new Array<>();
 
     public void add(Node target, String method) {
         signals.add(new Signal(target, method));
@@ -175,8 +171,8 @@ class SignalPack {
             }
         }
     }
-
 }
+
 
 class Signal {
 

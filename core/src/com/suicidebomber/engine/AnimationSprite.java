@@ -6,10 +6,11 @@ import java.util.ArrayList;
 
 public class AnimationSprite extends Node {
 
-    public ArrayList<String> sprites = new ArrayList<>();
     public long delay = 500;
     public boolean looping = true;
     public boolean isRunning = false;
+
+    private ArrayList<String> sprites = new ArrayList<>();
 
     public void addSprite(String sprite) {
         sprites.add(sprite);

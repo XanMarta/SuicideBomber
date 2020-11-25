@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class PlayerManager extends Canvas2D {
 
-    public ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Player> players = new ArrayList<>();
 
     public void addPlayer(Player player) {
         players.add(player);

@@ -18,16 +18,15 @@ public class Player extends Actor {     // Of course this is Player
     public Vector2 defaultBlock = new Vector2(0, 0);
     public String color = "BLUE";
     public String playerName = "";
-
-    public int used_bomb = 0;
     public PlayerTag tag = null;
     public boolean isLiving = true;
-    public boolean isPlaying = false;
-    public Timing deadTimer;
 
-    public AnimatedSprite animatedSprite;
-    public Vector2 direction = new Vector2(0, 0);
+    protected int used_bomb = 0;
+    protected boolean isPlaying = false;
+    protected Vector2 direction = new Vector2(0, 0);
 
+    private Timing deadTimer;
+    private AnimatedSprite animatedSprite;
 
     public void create() {
         super.create();
@@ -53,19 +52,19 @@ public class Player extends Actor {     // Of course this is Player
         }
     }
 
-    public void playerSpawn() {
+    protected void playerSpawn() {
         elementVisible = true;
         isPlaying = true;
         setBlock(defaultBlock);
     }
 
-    public void playerDie() {
+    protected void playerDie() {
         elementVisible = false;
         isPlaying = false;
         deadTimer.start();
     }
 
-    public void updateElement() {
+    protected void updateElement() {
         moveSpeed = GameElement.defaultSpeed * (1 + speed / 10.0f);
         if (tag != null) {
             tag.update(this);
@@ -93,7 +92,7 @@ public class Player extends Actor {     // Of course this is Player
         }
     }
 
-    public void dropBomb() {
+    protected void dropBomb() {
         if (used_bomb < bomb) {
             if (currentMap.getMapBlock(currentBlock).blockType == GameElement.BlockType.GRASS) {
                 Bomb bomb = new Bomb();

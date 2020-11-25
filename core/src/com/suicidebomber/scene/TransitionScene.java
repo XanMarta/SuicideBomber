@@ -8,7 +8,7 @@ import com.suicidebomber.engine.Canvas2D;
 
 public class TransitionScene extends Canvas2D {
 
-    public AnimatedSprite animatedSprite;
+    private AnimatedSprite animatedSprite;
 
     public void create() {
         super.create();

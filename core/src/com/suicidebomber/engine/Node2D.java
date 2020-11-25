@@ -10,10 +10,10 @@ public class Node2D extends Node {
 
     public void render() {
         super.render();
-        if (parent == null || !(parent instanceof Node2D)) {
+        if (getParent() == null || !(getParent() instanceof Node2D)) {
             global_position.set(position);
         } else {
-            global_position.set(position).add(((Node2D) parent).global_position);
+            global_position.set(position).add(((Node2D) getParent()).global_position);
         }
     }
 }

@@ -5,12 +5,13 @@ import com.suicidebomber.structure.GameElement;
 import java.util.ArrayList;
 
 
-public class MapElement extends Canvas2D {
+public abstract class MapElement extends Canvas2D {
 
-    public TileMap currentMap = null;
-    public GameElement.BlockType blockType = GameElement.BlockType.NONE;
+    protected TileMap currentMap = null;
+    protected GameElement.BlockType blockType = GameElement.BlockType.NONE;
+    protected ArrayList<Sprite> renderElement = new ArrayList<>();             // Render to map
+
     public Vector2 currentBlock = new Vector2(0, 0);
-    public ArrayList<Sprite> renderElement = new ArrayList<>();             // Render to map
     public boolean elementVisible = true;
     public float initScore = 0.0f;
 
@@ -31,10 +32,6 @@ public class MapElement extends Canvas2D {
         }
     }
 
-    public void specialScore() {
-
-    }
-
     public void render() {
         super.render();
         if (currentMap.isInMap(currentBlock)) {
@@ -47,6 +44,12 @@ public class MapElement extends Canvas2D {
         if (currentMap.getMapBlock(currentBlock).blockType == blockType) {
             currentMap.getMapBlock(currentBlock).blockType = GameElement.BlockType.GRASS;
         }
+    }
+
+    // # Override method
+
+    public void specialScore() {
+
     }
 
     public void appear() {
