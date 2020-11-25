@@ -27,6 +27,7 @@ public class Player extends Actor {     // Of course this is Player
     private AnimatedSprite shieldSprite;
     private boolean shieldEnable = false;
     private Timing shieldTimer;
+    private boolean skipCheck = false;
 
     public void create() {
         super.create();
@@ -73,6 +74,7 @@ public class Player extends Actor {     // Of course this is Player
         elementVisible = false;
         isPlaying = false;
         deadTimer.start();
+        skipCheck = true;
     }
 
     protected void updateElement() {
@@ -101,11 +103,12 @@ public class Player extends Actor {     // Of course this is Player
         }
         direction.set(moveActor(direction));
         checkCollision(currentBlock);
-        if (isPlaying) {
+        if (!skipCheck) {
             if (nearbyBlock.x >= 0 && nearbyBlock.y >= 0) {
                 checkCollision(nearbyBlock);
             }
         }
+        skipCheck = false;
     }
 
     public void renderImage() {
@@ -130,7 +133,8 @@ public class Player extends Actor {     // Of course this is Player
     }
 
     public void checkCollision(Vector2 pos) {
-        if (currentMap.getMapBlock(pos).blockType == GameElement.BlockType.ITEM) {
+        GameElement.BlockType blockType = currentMap.getMapBlock(pos).blockType;
+        if (blockType == GameElement.BlockType.ITEM) {
             for (MapElement element : currentMap.getMapBlock(pos).elements) {
                 if (element instanceof Item) {
                     Item item = (Item) element;
@@ -160,11 +164,20 @@ public class Player extends Actor {     // Of course this is Player
                     updateElement();
                 }
             }
-        } else if (currentMap.getMapBlock(pos).blockType == GameElement.BlockType.FIRE) {
+        } else if (blockType == GameElement.BlockType.FIRE) {
             if (!shieldEnable) {
                 heart -= 1;
                 updateElement();
                 playerDie();
+            }
+        } else if (blockType == GameElement.BlockType.PORTAL) {
+            for (MapElement element : currentMap.getMapBlock(pos).elements) {
+                if (element instanceof Portal) {
+                    setBlock(((Portal) element).getRandomBlock());
+                    skipCheck = true;
+                    System.out.println("Teleport");
+                    break;
+                }
             }
         }
     }

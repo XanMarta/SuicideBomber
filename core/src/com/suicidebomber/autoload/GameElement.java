@@ -18,6 +18,7 @@ public class GameElement {
         BOX,
         BOMB,
         ITEM,
+        PORTAL,
         NONE
     }
 

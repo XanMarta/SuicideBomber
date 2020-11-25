@@ -17,7 +17,8 @@ public class Actor extends MapElement {
         MapBlock blockType = currentMap.getMapBlock(block);
         return (blockType.blockType == GameElement.BlockType.GRASS ||
                 blockType.blockType == GameElement.BlockType.ITEM ||
-                blockType.blockType == GameElement.BlockType.FIRE);
+                blockType.blockType == GameElement.BlockType.FIRE ||
+                blockType.blockType == GameElement.BlockType.PORTAL);
     }
 
     protected Vector2 moveActor(Vector2 direction) {

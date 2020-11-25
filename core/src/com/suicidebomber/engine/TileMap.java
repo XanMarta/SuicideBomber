@@ -1,6 +1,7 @@
 package com.suicidebomber.engine;
 
 import com.badlogic.gdx.math.Vector2;
+import com.suicidebomber.autoload.GameElement;
 import com.suicidebomber.element.MapScore;
 import com.suicidebomber.source.Map;
 import java.util.ArrayList;
@@ -42,11 +43,24 @@ public class TileMap extends Canvas2D {
             for (int i = map.width - 1; i >= 0; i--) {
                 mapBlock[i][j] = new MapBlock();
                 mapBlock[i][j].blockType = map.element[i][j];
+                mapBlock[i][j].currentBlock.set(i, j);
                 mapBlock[i][j].position.set(i, j).scl(blockSize).add(global_position);
                 addChild(mapBlock[i][j]);
             }
             addChild(mapRows[j]);
         }
+    }
+
+    public ArrayList<Vector2> getMapBlockList(GameElement.BlockType blockType) {
+        ArrayList<Vector2> list = new ArrayList<>();
+        for (int i = 0; i < mapSize.x; i++) {
+            for (int j = 0; j < mapSize.y; j++) {
+                if (mapBlock[i][j].blockType == blockType) {
+                    list.add(mapBlock[i][j].currentBlock);
+                }
+            }
+        }
+        return list;
     }
 
     public void generateMapScore() {

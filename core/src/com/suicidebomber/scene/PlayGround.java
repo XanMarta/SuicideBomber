@@ -21,6 +21,7 @@ public class PlayGround extends Scene {
     public Canvas2D box;
     public Canvas2D wall;
     public Canvas2D item;
+    public Canvas2D other;
     public Gui gui;
 
     private boolean isPLaying = true;
@@ -70,6 +71,10 @@ public class PlayGround extends Scene {
         item = new Canvas2D();
         item.name = "item";
         mapPlay.addChild(item);
+
+        other = new Canvas2D();
+        other.name = "other";
+        mapPlay.addChild(other);
 
         playerManager = new PlayerManager();
         playerManager.name = "playerManager";
@@ -141,6 +146,13 @@ public class PlayGround extends Scene {
         dodgeBot.playerName = "DODGE";
         playerManager.addChild(dodgeBot);
         playerManager.addPlayer(dodgeBot);
+
+        for (int i = 1; i <= 2; i++) {
+            Portal portal = new Portal();
+            portal.name = "portal";
+            portal.setMap(mapPlay);
+            other.addChild(portal);
+        }
 
         TagManager tagManager = new TagManager();
         tagManager.position.set(20, 200);
