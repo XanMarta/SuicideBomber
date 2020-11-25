@@ -1,7 +1,7 @@
 package com.suicidebomber.engine;
 
 import com.badlogic.gdx.utils.TimeUtils;
-import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.source.ImageManager;
 import java.util.HashMap;
 
 // Signal: animation_ended
@@ -76,7 +76,7 @@ public class AnimatedSprite extends Sprite {
             if (isPlaying) {
                 timingWhile = TimeUtils.timeSinceMillis(startTime);
             }
-            GameElement.imageManager.drawImage(
+            ImageManager.instance().drawImage(
                     animations.get(currentAnimation).getSprite(timingWhile),
                     global_position);
         }

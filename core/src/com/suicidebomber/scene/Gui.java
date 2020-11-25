@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.engine.Canvas2D;
 import com.suicidebomber.engine.Label;
 import com.suicidebomber.engine.Timing;
-import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.autoload.GameElement;
 
 // Signal: time_out, text_out
 

@@ -1,7 +1,7 @@
 package com.suicidebomber.engine;
 
 import com.badlogic.gdx.utils.Array;
-import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.autoload.GameElement;
 
 
 public class MapBlock extends Node2D {

@@ -1,6 +1,6 @@
 package com.suicidebomber.engine;
 
-import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.source.SoundManager;
 
 
 public class SoundPlayer extends Node {
@@ -11,14 +11,14 @@ public class SoundPlayer extends Node {
     private long currentCode = -1;
 
     public void play(String sound) {
-        currentCode = GameElement.soundManager.play(sound, looping);
+        currentCode = SoundManager.instance().play(sound, looping);
         if (currentCode != -1) {
             currentSound = sound;
         }
     }
 
     public void stop() {
-        GameElement.soundManager.stop(currentSound, currentCode);
+        SoundManager.instance().stop(currentSound, currentCode);
     }
 
     public void dispose() {

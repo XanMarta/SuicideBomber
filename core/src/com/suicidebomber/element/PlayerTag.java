@@ -4,7 +4,7 @@ import com.suicidebomber.engine.Canvas2D;
 import com.suicidebomber.engine.Label;
 import com.suicidebomber.engine.Node;
 import com.suicidebomber.engine.Sprite;
-import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.autoload.GameElement;
 
 
 public class PlayerTag extends Canvas2D {

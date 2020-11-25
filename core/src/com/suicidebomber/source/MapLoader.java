@@ -1,7 +1,6 @@
 package com.suicidebomber.source;
 
 import com.suicidebomber.source.sourceelement.Map;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -10,9 +9,21 @@ import java.util.Scanner;
 
 public class MapLoader {
 
-    public HashMap<String, Map> mapList = new HashMap<>();
+    private static MapLoader mapLoader = null;
+    private HashMap<String, Map> mapList = new HashMap<>();
 
-    public MapLoader() {
+    private MapLoader() {
+
+    }
+
+    public static MapLoader instance() {
+        if (mapLoader == null) {
+            mapLoader = new MapLoader();
+        }
+        return mapLoader;
+    }
+
+    public void create() {
         importMap("SANDSTORM", "core/assets/map/Sandstorm.dll");
     }
 

@@ -1,7 +1,7 @@
 package com.suicidebomber.element;
 
 import com.badlogic.gdx.math.Vector2;
-import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.source.GameHelper;
 import java.util.ArrayList;
 
 
@@ -18,7 +18,7 @@ public class DodgeBot extends Bot {
                 if (direction.isZero()) {
                     botFindway();
                 } else if (isNearCenter) {
-                    if (GameElement.random.nextInt(100) < 10) {
+                    if (GameHelper.instance().random.nextInt(100) < 10) {
                         botFindway();
                     }
                 }
@@ -48,7 +48,7 @@ public class DodgeBot extends Bot {
             }
         }
         if (legitWay.size() > 0) {
-            direction.set(legitWay.get(GameElement.random.nextInt(legitWay.size())));
+            direction.set(legitWay.get(GameHelper.instance().random.nextInt(legitWay.size())));
         } else {
             direction.setZero();
             botStartDelay(700);

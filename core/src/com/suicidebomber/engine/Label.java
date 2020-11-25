@@ -1,6 +1,8 @@
 package com.suicidebomber.engine;
 
-import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.source.FontManager;
+import com.suicidebomber.autoload.GameElement;
+
 
 public class Label extends Canvas2D {
 
@@ -11,7 +13,7 @@ public class Label extends Canvas2D {
     public void render() {
         super.render();
         if (getVisible()) {
-            GameElement.fontManager.drawText(font, text, global_position, center);
+            FontManager.instance().drawText(font, text, global_position, center);
         }
     }
 }

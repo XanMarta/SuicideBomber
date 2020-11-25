@@ -5,7 +5,7 @@ import com.suicidebomber.engine.AnimatedSprite;
 import com.suicidebomber.engine.AnimationSprite;
 import com.suicidebomber.engine.MapElement;
 import com.suicidebomber.engine.Timing;
-import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.autoload.GameElement;
 
 // Signal: player_die
 
