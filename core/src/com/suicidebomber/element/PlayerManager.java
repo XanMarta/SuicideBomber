@@ -33,6 +33,22 @@ public class PlayerManager extends Canvas2D {
         }
     }
 
+    public String getWinner() {
+        String remain = "";
+        int remainPlayer = 0;
+        for (Player player : players) {
+            if (player.isLiving) {
+                remainPlayer += 1;
+                remain = player.playerName;
+            }
+        }
+        if (remainPlayer > 1) {
+            return "";
+        } else {
+            return remain;
+        }
+    }
+
     public void dispose() {
         super.dispose();
         players.clear();

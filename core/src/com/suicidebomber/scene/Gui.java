@@ -3,6 +3,7 @@ package com.suicidebomber.scene;
 import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.engine.Canvas2D;
 import com.suicidebomber.engine.Label;
+import com.suicidebomber.engine.Sprite;
 import com.suicidebomber.engine.Timing;
 import com.suicidebomber.autoload.GameElement;
 
@@ -14,10 +15,17 @@ public class Gui extends Canvas2D {
     private Timing timerCount;
     private Label textLabel;
     private Timing textCount;
+    private Sprite winSprite;
     private int remainTime;
 
     public void create() {
         super.create();
+        //
+        winSprite = new Sprite();
+        winSprite.image = "WIN_SPRITE";
+        winSprite.alpha = 0.5f;
+        winSprite.visible = false;
+        addChild(winSprite);
         //
         timerLabel = new Label();
         timerLabel.font = GameElement.defaultFont;
@@ -79,11 +87,13 @@ public class Gui extends Canvas2D {
     public void show_text(String text) {
         textLabel.text = text;
         textLabel.visible = true;
+        winSprite.visible = true;
         textCount.start();
     }
 
     protected void text_out() {
         textLabel.visible = false;
+        winSprite.visible = false;
         emit_signal("text_out");
     }
 }

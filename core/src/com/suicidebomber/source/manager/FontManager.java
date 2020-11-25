@@ -1,6 +1,7 @@
 package com.suicidebomber.source.manager;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.Vector2;
@@ -26,6 +27,7 @@ public class FontManager {
     public void create() {
         loadFont("COMIC", "font/comic.fnt", "font/comic_0.png");
         loadFont("COMIC_LARGE", "font/comic_large.fnt", "font/comic_large.png");
+        fonts.get("COMIC_LARGE").setColor(Color.GOLDENROD);
     }
 
     public void dispose() {
