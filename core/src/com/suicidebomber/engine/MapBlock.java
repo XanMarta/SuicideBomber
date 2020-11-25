@@ -1,15 +1,14 @@
 package com.suicidebomber.engine;
 
 import com.badlogic.gdx.utils.Array;
-import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.autoload.GameElement;
 
 
 public class MapBlock extends Node2D {
 
     public GameElement.BlockType blockType = GameElement.BlockType.GRASS;
-    public Array<MapElement> newelements = new Array<>();
-    // Accessible from outside
-    public Array<MapElement> elements = new Array<>();
+    public Array<MapElement> elements = new Array<>();           // Element to read
+    private Array<MapElement> newelements = new Array<>();       // Element to write
 
     public void render() {
         super.render();
@@ -18,5 +17,9 @@ public class MapBlock extends Node2D {
             elements.add(element);
         }
         newelements.clear();
+    }
+
+    public void addElement(MapElement element) {
+        newelements.add(element);
     }
 }

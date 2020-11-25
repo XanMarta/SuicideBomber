@@ -1,17 +1,30 @@
-package com.suicidebomber.structure;
+package com.suicidebomber.source;
 
 import com.badlogic.gdx.Gdx;
 import com.suicidebomber.engine.Node;
 import com.suicidebomber.scene.Lobby;
+import com.suicidebomber.structure.Scene;
 
 
 public class SceneManager {
 
-    public Scene currentScene = null;
+    private static SceneManager sceneManager = null;
+    private Scene currentScene = null;
     private Node node;
     private Scene upcomingScene = null;
 
-    public SceneManager() {
+    private SceneManager() {
+
+    }
+
+    public static SceneManager instance() {
+        if (sceneManager == null) {
+            sceneManager = new SceneManager();
+        }
+        return sceneManager;
+    }
+
+    public void create() {
         node = new Node() {
             public void execute_signal(String signal) {
                 super.execute_signal(signal);
@@ -20,9 +33,6 @@ public class SceneManager {
                 }
             }
         };
-    }
-
-    public void create() {
         setScene(new Lobby());     // MainScene
     }
 

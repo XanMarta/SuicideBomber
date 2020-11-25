@@ -3,7 +3,7 @@ package com.suicidebomber.scene;
 import com.suicidebomber.engine.Button;
 import com.suicidebomber.engine.Node;
 import com.suicidebomber.engine.Sprite;
-import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.source.SceneManager;
 import com.suicidebomber.structure.Scene;
 
 
@@ -69,10 +69,10 @@ public class Lobby extends Scene {
     }
 
     public void startGame() {
-        GameElement.sceneManager.changeSceneTo((new PlayGround()));
+        SceneManager.instance().changeSceneTo((new PlayGround()));
     }
 
     public void endGame() {
-        GameElement.sceneManager.exitGame();
+        SceneManager.instance().exitGame();
     }
 }

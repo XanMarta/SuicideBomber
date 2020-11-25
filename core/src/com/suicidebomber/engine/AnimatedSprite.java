@@ -1,17 +1,16 @@
 package com.suicidebomber.engine;
 
 import com.badlogic.gdx.utils.TimeUtils;
-import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.source.ImageManager;
 import java.util.HashMap;
 
 // Signal: animation_ended
 
 public class AnimatedSprite extends Sprite {
 
-    public HashMap<String, AnimationSprite> animations = new HashMap<>();
-    public String currentAnimation = "";
-    public boolean isPlaying = false;
-
+    private HashMap<String, AnimationSprite> animations = new HashMap<>();
+    private String currentAnimation = "";
+    private boolean isPlaying = false;
     private long startTime = 0;
     private long timingWhile = 0;
     private long pauseWhile = 0;
@@ -70,7 +69,6 @@ public class AnimatedSprite extends Sprite {
 
     public void stop() {
         isPlaying = false;
-        currentAnimation = "";
     }
 
     public void renderImage() {
@@ -78,7 +76,7 @@ public class AnimatedSprite extends Sprite {
             if (isPlaying) {
                 timingWhile = TimeUtils.timeSinceMillis(startTime);
             }
-            GameElement.imageManager.drawImage(
+            ImageManager.instance().drawImage(
                     animations.get(currentAnimation).getSprite(timingWhile),
                     global_position);
         }

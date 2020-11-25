@@ -1,6 +1,6 @@
 package com.suicidebomber.engine;
 
-import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.source.ImageManager;
 
 
 public class Sprite extends Canvas2D {
@@ -16,7 +16,7 @@ public class Sprite extends Canvas2D {
 
     public void renderImage() {
         if (!image.equals("")) {
-            GameElement.imageManager.drawImage(image, global_position, getAlpha());
+            ImageManager.instance().drawImage(image, global_position, getAlpha());
         }
     }
 }

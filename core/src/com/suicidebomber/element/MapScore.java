@@ -1,7 +1,7 @@
 package com.suicidebomber.element;
 
 import com.badlogic.gdx.math.Vector2;
-import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.source.GameHelper;
 
 
 public class MapScore {
@@ -27,8 +27,7 @@ public class MapScore {
 
     public void addScore(Vector2 pos, float sc) {
         float current = sc + score[(int) pos.x][(int) pos.y];
-        score[(int) pos.x][(int) pos.y] = GameElement.clamp(current, -1.0f, 1.0f);
-//        score[(int) pos.x][(int) pos.y] = current;
+        score[(int) pos.x][(int) pos.y] = GameHelper.instance().clamp(current, -1.0f, 1.0f);
     }
 
     public void copy(MapScore map) {

@@ -6,17 +6,18 @@ import com.suicidebomber.source.sourceelement.Map;
 import java.util.ArrayList;
 
 
-public class TileMap extends Node2D {
+public class TileMap extends Canvas2D {
 
     public Vector2 blockSize = new Vector2(60, 60);
     public Vector2 centerOffset = new Vector2(30, 30);
     public Vector2 mapSize = new Vector2(0, 0);
-    public MapBlock[][] mapBlock;
-    public MapRow[] mapRows;
-    public Sprite ground;
-    public MapScore mapScore = new MapScore();                  // Score to write
-    public MapScore updateMapScore = new MapScore();            // Score to read
-    public ArrayList<MapElement> elementScore = new ArrayList<>();
+
+    private MapBlock[][] mapBlock;
+    private MapRow[] mapRows;
+    private Sprite ground;
+    private MapScore mapScore = new MapScore();                  // Score to write
+    private MapScore updateMapScore = new MapScore();            // Score to read
+    private ArrayList<MapElement> elementScore = new ArrayList<>();
 
     public void render() {
         super.render();
@@ -75,6 +76,10 @@ public class TileMap extends Node2D {
         return updateMapScore.score[(int) block.x][(int) block.y];
     }
 
+    public void setScore(Vector2 block, float score) {
+        mapScore.addScore(block, score);
+    }
+
     public Vector2 blockToCenter(Vector2 block) {
         return new Vector2(block).scl(blockSize).add(centerOffset);
     }
@@ -108,17 +113,16 @@ public class TileMap extends Node2D {
     public void addElement(MapElement element) {
         mapRows[(int) element.currentBlock.y].elements.add(element);
         MapBlock block = mapBlock[(int) element.currentBlock.x][(int) element.currentBlock.y];
-        block.newelements.add(element);
+        block.addElement(element);
         mapScore.addScore(element.currentBlock, element.initScore);
         elementScore.add(element);
     }
-
 }
 
 
 class MapRow extends Node2D {
 
-    public ArrayList<MapElement> elements = new ArrayList<>();
+    protected ArrayList<MapElement> elements = new ArrayList<>();
 
     public void render() {
         super.render();

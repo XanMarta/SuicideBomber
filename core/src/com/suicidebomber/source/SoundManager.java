@@ -7,7 +7,19 @@ import java.util.HashMap;
 
 public class SoundManager {
 
-    public HashMap<String, Sound> sounds = new HashMap<>();
+    private static SoundManager soundManager = null;
+    private HashMap<String, Sound> sounds = new HashMap<>();
+
+    private SoundManager() {
+
+    }
+
+    public static SoundManager instance() {
+        if (soundManager == null) {
+            soundManager = new SoundManager();
+        }
+        return soundManager;
+    }
 
     public void create() {
         loadSound("BOMB_TIMER", "sound/bomb_timer.wav");

@@ -21,21 +21,13 @@ public class Bot extends Player {
         botMovement();
     }
 
-    public void botMovement() {
-
-    }
-
-    public void botFindway() {
-
-    }
-
-    public void botStartDelay(long time) {
+    protected void botStartDelay(long time) {
         delayBot.wait_time = time;
         delayBot.start();
         isDelaying = true;
     }
 
-    public void botEndDelay() {
+    protected void botEndDelay() {
         isDelaying = false;
     }
 
@@ -44,5 +36,15 @@ public class Bot extends Player {
         if (signal.equals("bot_enddelay")) {
             botEndDelay();
         }
+    }
+
+    // # Override method
+
+    public void botMovement() {
+
+    }
+
+    public void botFindway() {
+
     }
 }

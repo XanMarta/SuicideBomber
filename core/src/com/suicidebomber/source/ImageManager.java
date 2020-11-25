@@ -6,8 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.suicidebomber.structure.GameElement;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -16,11 +14,25 @@ import java.util.Scanner;
 
 public class ImageManager {
 
+    private static ImageManager imageManager = null;
     private HashMap<String, Texture> images;
+
+    public static SpriteBatch batch;
+
+    private ImageManager() {
+
+    }
+
+    public static ImageManager instance() {
+        if (imageManager == null) {
+            imageManager = new ImageManager();
+        }
+        return imageManager;
+    }
 
     public void create() {
         images = new HashMap<>();
-        GameElement.batch = new SpriteBatch();
+        batch = new SpriteBatch();
         loadImageFile("core/assets/image.dll");
     }
 
@@ -30,7 +42,7 @@ public class ImageManager {
         }
     }
 
-    public void loadImageFile(String path) {              // Load image from file.       name|path
+    private void loadImageFile(String path) {              // Load image from file.       name|path
         try {
             Scanner scan = new Scanner(new File(path));
             while (scan.hasNextLine()) {
@@ -61,7 +73,7 @@ public class ImageManager {
 
     public void drawImage(String image, Vector2 position) {
         if (images.containsKey(image)) {
-            GameElement.batch.draw(images.get(image), position.x, position.y);
+            batch.draw(images.get(image), position.x, position.y);
         }
     }
 
@@ -69,9 +81,9 @@ public class ImageManager {
         if (alpha == 1) {
             drawImage(image, position);
         } else if (images.containsKey(image)) {
-            GameElement.batch.setColor(1, 1, 1, alpha);
-            GameElement.batch.draw(images.get(image), position.x, position.y);
-            GameElement.batch.setColor(1, 1, 1, 1);
+            batch.setColor(1, 1, 1, alpha);
+            batch.draw(images.get(image), position.x, position.y);
+            batch.setColor(1, 1, 1, 1);
         }
     }
 }

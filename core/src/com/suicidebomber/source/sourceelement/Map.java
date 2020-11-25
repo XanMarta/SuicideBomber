@@ -1,6 +1,6 @@
 package com.suicidebomber.source.sourceelement;
 
-import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.autoload.GameElement;
 
 
 public class Map {

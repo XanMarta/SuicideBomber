@@ -1,7 +1,7 @@
 package com.suicidebomber.element;
 
 import com.badlogic.gdx.math.Vector2;
-import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.source.GameHelper;
 import java.util.ArrayList;
 
 
@@ -29,7 +29,7 @@ public class WalkingBot extends Bot {
             }
         }
         if (legitWay.size() > 0) {
-            direction.set(legitWay.get(GameElement.random.nextInt(legitWay.size())));
+            direction.set(legitWay.get(GameHelper.instance().random.nextInt(legitWay.size())));
         }
     }
 }

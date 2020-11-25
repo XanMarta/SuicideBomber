@@ -7,18 +7,18 @@ public class Canvas2D extends Node2D {
     public float alpha = 1;
 
     public boolean getVisible() {
-        if (parent != null) {
-            if (parent instanceof Canvas2D) {
-                return (((Canvas2D) parent).getVisible() && this.visible);
+        if (getParent() != null) {
+            if (getParent() instanceof Canvas2D) {
+                return (((Canvas2D) getParent()).getVisible() && this.visible);
             }
         }
         return this.visible;
     }
 
     public float getAlpha() {
-        if (parent != null) {
-            if (parent instanceof Canvas2D) {
-                return (((Canvas2D) parent).getAlpha() * this.alpha);
+        if (getParent() != null) {
+            if (getParent() instanceof Canvas2D) {
+                return (((Canvas2D) getParent()).getAlpha() * this.alpha);
             }
         }
         return this.alpha;

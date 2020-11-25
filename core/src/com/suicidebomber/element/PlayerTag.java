@@ -4,16 +4,16 @@ import com.suicidebomber.engine.Canvas2D;
 import com.suicidebomber.engine.Label;
 import com.suicidebomber.engine.Node;
 import com.suicidebomber.engine.Sprite;
-import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.autoload.GameElement;
 
 
 public class PlayerTag extends Canvas2D {
 
-    public Canvas2D bombs;
-    public Canvas2D hearts;
-    public Canvas2D powers;
-    public Canvas2D speeds;
-    public Label playerName;
+    private Canvas2D bombs;
+    private Canvas2D hearts;
+    private Canvas2D powers;
+    private Canvas2D speeds;
+    private Label playerName;
 
     public boolean hasPlayer = false;
 

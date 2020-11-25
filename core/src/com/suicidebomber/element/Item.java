@@ -2,12 +2,14 @@ package com.suicidebomber.element;
 
 import com.suicidebomber.engine.MapElement;
 import com.suicidebomber.engine.Sprite;
-import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.source.GameHelper;
+import com.suicidebomber.autoload.GameElement;
 
 
 public class Item extends MapElement {
 
     public String item_name = "";
+
     private Sprite sprite;
 
     public Item() {
@@ -18,7 +20,7 @@ public class Item extends MapElement {
 
     public void create() {
         super.create();
-        int key = GameElement.random.nextInt(100);
+        int key = GameHelper.instance().random.nextInt(100);
         if (key < 25) {
             item_name = "BOMB";
         } else if (key < 50) {

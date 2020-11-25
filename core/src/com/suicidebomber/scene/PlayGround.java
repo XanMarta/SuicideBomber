@@ -4,7 +4,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.element.*;
 import com.suicidebomber.engine.*;
-import com.suicidebomber.structure.GameElement;
+import com.suicidebomber.source.MapLoader;
+import com.suicidebomber.source.SceneManager;
+import com.suicidebomber.autoload.GameElement;
 import com.suicidebomber.structure.Scene;
 
 
@@ -43,7 +45,7 @@ public class PlayGround extends Scene {
         TileMap mapPlay = new TileMap();
         mapPlay.blockSize.set(GameElement.blockSize);
         mapPlay.name = "mapplay";
-        mapPlay.generateMap(GameElement.mapLoader.loadMap("SANDSTORM"));
+        mapPlay.generateMap(MapLoader.instance().loadMap("SANDSTORM"));
         mapPlay.position.set(GameElement.mapPosition);
         root.addChild(mapPlay);
 
@@ -165,7 +167,7 @@ public class PlayGround extends Scene {
     }
 
     public void change_scene() {
-        GameElement.sceneManager.changeSceneTo(new Lobby());
+        SceneManager.instance().changeSceneTo(new Lobby());
     }
 
 }
