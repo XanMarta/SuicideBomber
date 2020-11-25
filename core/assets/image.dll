@@ -51,3 +51,9 @@ BLACK_SCREEN_9 | image/scene/Transition/BLACK_SCREEN_9.png
 BLACK_SCREEN_10 | image/scene/Transition/BLACK_SCREEN_10.png
 BLACK_SCREEN_11 | image/scene/Transition/BLACK_SCREEN_11.png
 PLAY_SCENE | image/scene/playScene.png
+SHIELD_1 | image/animation/shield/SHIELD_1.png
+SHIELD_2 | image/animation/shield/SHIELD_2.png
+SHIELD_3 | image/animation/shield/SHIELD_3.png
+SHIELD_4 | image/animation/shield/SHIELD_4.png
+SHIELD_5 | image/animation/shield/SHIELD_5.png
+SHIELD_6 | image/animation/shield/SHIELD_6.png

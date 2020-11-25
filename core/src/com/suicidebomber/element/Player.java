@@ -1,10 +1,7 @@
 package com.suicidebomber.element;
 
 import com.badlogic.gdx.math.Vector2;
-import com.suicidebomber.engine.AnimatedSprite;
-import com.suicidebomber.engine.AnimationSprite;
-import com.suicidebomber.engine.MapElement;
-import com.suicidebomber.engine.Timing;
+import com.suicidebomber.engine.*;
 import com.suicidebomber.autoload.GameElement;
 
 // Signal: player_die
@@ -27,18 +24,31 @@ public class Player extends Actor {     // Of course this is Player
 
     private Timing deadTimer;
     private AnimatedSprite animatedSprite;
+    private AnimatedSprite shieldSprite;
+    private boolean shieldEnable = false;
+    private Timing shieldTimer;
 
     public void create() {
         super.create();
+        deadTimer = new Timing();
+        deadTimer.wait_time = 3000;
+        deadTimer.connect_signal("time_out", this, "deadtimer_time_out");
+        addChild(deadTimer);
+
+        shieldSprite = new AnimatedSprite();
+        shieldSprite.position.set(-10, -10);
+        addChild(shieldSprite);
+
+        shieldTimer = new Timing();
+        shieldTimer.wait_time = 5000;
+        shieldTimer.connect_signal("time_out", this, "shield_out");
+        addChild(shieldTimer);
+
         bomb = GameElement.init_bomb;
         heart = GameElement.init_heart;
         power = GameElement.init_power;
         speed = GameElement.init_speed;
         updateElement();
-        deadTimer = new Timing();
-        deadTimer.wait_time = 3000;
-        deadTimer.connect_signal("time_out", this, "deadtimer_time_out");
-        addChild(deadTimer);
         isLiving = true;
         generateAnimation();
         playerSpawn();
@@ -56,6 +66,7 @@ public class Player extends Actor {     // Of course this is Player
         elementVisible = true;
         isPlaying = true;
         setBlock(defaultBlock);
+        enableShield();
     }
 
     protected void playerDie() {
@@ -69,6 +80,11 @@ public class Player extends Actor {     // Of course this is Player
         if (tag != null) {
             tag.update(this);
         }
+    }
+
+    protected void enableShield() {
+        shieldEnable = true;
+        shieldTimer.start();
     }
 
     public void movePlayer(Vector2 direction) {
@@ -89,6 +105,13 @@ public class Player extends Actor {     // Of course this is Player
             if (nearbyBlock.x >= 0 && nearbyBlock.y >= 0) {
                 checkCollision(nearbyBlock);
             }
+        }
+    }
+
+    public void renderImage() {
+        super.renderImage();
+        if (shieldEnable) {
+            shieldSprite.renderImage();
         }
     }
 
@@ -138,9 +161,11 @@ public class Player extends Actor {     // Of course this is Player
                 }
             }
         } else if (currentMap.getMapBlock(pos).blockType == GameElement.BlockType.FIRE) {
-            heart -= 1;
-            updateElement();
-            playerDie();
+            if (!shieldEnable) {
+                heart -= 1;
+                updateElement();
+                playerDie();
+            }
         }
     }
 
@@ -153,6 +178,8 @@ public class Player extends Actor {     // Of course this is Player
                 isLiving = false;
                 emit_signal("player_die");
             }
+        } else if (signal.equals("shield_out")) {
+            shieldEnable = false;
         }
     }
 
@@ -202,5 +229,16 @@ public class Player extends Actor {     // Of course this is Player
 
         animatedSprite.addAnimation("NORMAL", normalAnim);
         animatedSprite.play("NORMAL");
+
+        AnimationSprite shield = new AnimationSprite();
+        shield.addSprite("SHIELD_1");
+        shield.addSprite("SHIELD_2");
+        shield.addSprite("SHIELD_3");
+        shield.addSprite("SHIELD_4");
+        shield.addSprite("SHIELD_5");
+        shield.addSprite("SHIELD_6");
+        shield.delay = 50;
+        shieldSprite.addAnimation("SHIELD", shield);
+        shieldSprite.play("SHIELD");
     }
 }

@@ -115,7 +115,7 @@ public class PlayGround extends Scene {
 
         WalkingBot walkingBot = new WalkingBot();
         walkingBot.name = "walkingbot";
-        walkingBot.defaultBlock.set(1, 13);
+        walkingBot.defaultBlock.set(13, 1);
         walkingBot.setMap(mapPlay);
         walkingBot.playerName = "WALKING";
         playerManager.addChild(walkingBot);
@@ -123,7 +123,7 @@ public class PlayGround extends Scene {
 
         DodgeBot dodgeBot = new DodgeBot();
         dodgeBot.name = "dodgebot";
-        dodgeBot.defaultBlock.set(13, 1);
+        dodgeBot.defaultBlock.set(1, 13);
         dodgeBot.setMap(mapPlay);
         dodgeBot.playerName = "DODGE";
         playerManager.addChild(dodgeBot);

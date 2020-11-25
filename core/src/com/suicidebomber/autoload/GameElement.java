@@ -42,6 +42,6 @@ public class GameElement {
     public static String defaultFont = "COMIC";
 
     // Match
-    public static int matchTime = 20;
+    public static int matchTime = 60;
 
 }
