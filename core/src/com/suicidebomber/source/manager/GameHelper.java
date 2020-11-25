@@ -1,4 +1,4 @@
-package com.suicidebomber.source;
+package com.suicidebomber.source.manager;
 
 import java.util.Random;
 

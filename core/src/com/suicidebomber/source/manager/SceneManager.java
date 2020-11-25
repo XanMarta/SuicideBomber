@@ -1,9 +1,9 @@
-package com.suicidebomber.source;
+package com.suicidebomber.source.manager;
 
 import com.badlogic.gdx.Gdx;
 import com.suicidebomber.engine.Node;
 import com.suicidebomber.scene.Lobby;
-import com.suicidebomber.structure.Scene;
+import com.suicidebomber.source.Scene;
 
 
 public class SceneManager {

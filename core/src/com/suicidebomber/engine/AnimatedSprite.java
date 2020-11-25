@@ -1,7 +1,7 @@
 package com.suicidebomber.engine;
 
 import com.badlogic.gdx.utils.TimeUtils;
-import com.suicidebomber.source.ImageManager;
+import com.suicidebomber.source.manager.ImageManager;
 import java.util.HashMap;
 
 // Signal: animation_ended

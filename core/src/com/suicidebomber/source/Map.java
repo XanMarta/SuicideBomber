@@ -1,4 +1,4 @@
-package com.suicidebomber.source.sourceelement;
+package com.suicidebomber.source;
 
 import com.suicidebomber.autoload.GameElement;
 

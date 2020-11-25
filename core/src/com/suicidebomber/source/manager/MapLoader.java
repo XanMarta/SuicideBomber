@@ -1,6 +1,6 @@
-package com.suicidebomber.source;
+package com.suicidebomber.source.manager;
 
-import com.suicidebomber.source.sourceelement.Map;
+import com.suicidebomber.source.Map;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;

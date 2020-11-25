@@ -1,7 +1,7 @@
 package com.suicidebomber.element;
 
 import com.suicidebomber.engine.Sprite;
-import com.suicidebomber.source.GameHelper;
+import com.suicidebomber.source.manager.GameHelper;
 import com.suicidebomber.autoload.GameElement;
 import com.suicidebomber.engine.MapElement;
 

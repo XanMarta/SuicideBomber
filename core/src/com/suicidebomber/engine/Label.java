@@ -1,6 +1,6 @@
 package com.suicidebomber.engine;
 
-import com.suicidebomber.source.FontManager;
+import com.suicidebomber.source.manager.FontManager;
 import com.suicidebomber.autoload.GameElement;
 
 

@@ -1,4 +1,4 @@
-package com.suicidebomber.structure;
+package com.suicidebomber.source;
 
 import com.suicidebomber.engine.Node;
 

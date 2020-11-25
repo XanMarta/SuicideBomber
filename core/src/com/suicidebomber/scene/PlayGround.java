@@ -4,10 +4,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.element.*;
 import com.suicidebomber.engine.*;
-import com.suicidebomber.source.MapLoader;
-import com.suicidebomber.source.SceneManager;
+import com.suicidebomber.source.manager.MapLoader;
+import com.suicidebomber.source.manager.SceneManager;
 import com.suicidebomber.autoload.GameElement;
-import com.suicidebomber.structure.Scene;
+import com.suicidebomber.source.Scene;
 
 
 public class PlayGround extends Scene {

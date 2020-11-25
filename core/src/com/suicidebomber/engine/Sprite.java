@@ -1,6 +1,6 @@
 package com.suicidebomber.engine;
 
-import com.suicidebomber.source.ImageManager;
+import com.suicidebomber.source.manager.ImageManager;
 
 
 public class Sprite extends Canvas2D {

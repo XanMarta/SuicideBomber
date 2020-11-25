@@ -1,6 +1,6 @@
 package com.suicidebomber.engine;
 
-import com.suicidebomber.source.SoundManager;
+import com.suicidebomber.source.manager.SoundManager;
 
 
 public class SoundPlayer extends Node {

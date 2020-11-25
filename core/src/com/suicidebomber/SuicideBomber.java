@@ -1,7 +1,7 @@
 package com.suicidebomber;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.suicidebomber.source.*;
+import com.suicidebomber.source.manager.*;
 
 
 public class SuicideBomber extends ApplicationAdapter {

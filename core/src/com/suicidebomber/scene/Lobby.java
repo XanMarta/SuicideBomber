@@ -3,8 +3,8 @@ package com.suicidebomber.scene;
 import com.suicidebomber.engine.Button;
 import com.suicidebomber.engine.Node;
 import com.suicidebomber.engine.Sprite;
-import com.suicidebomber.source.SceneManager;
-import com.suicidebomber.structure.Scene;
+import com.suicidebomber.source.manager.SceneManager;
+import com.suicidebomber.source.Scene;
 
 
 public class Lobby extends Scene {
