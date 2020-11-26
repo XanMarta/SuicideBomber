@@ -2,7 +2,6 @@ package com.suicidebomber.element;
 
 import com.badlogic.gdx.math.Vector2;
 import com.suicidebomber.source.manager.GameHelper;
-import java.util.ArrayList;
 
 
 public class WalkingBot extends Bot {
@@ -17,19 +16,21 @@ public class WalkingBot extends Bot {
     }
 
     public void botFindway() {
-        ArrayList<Vector2> availableWay = new ArrayList<>();
+        availableWay.clear();
         availableWay.add(new Vector2(-1, 0));
         availableWay.add(new Vector2(1, 0));
         availableWay.add(new Vector2(0, 1));
         availableWay.add(new Vector2(0, -1));
-        ArrayList<Vector2> legitWay = new ArrayList<>();
+        legitWay.clear();
         for (Vector2 checkWay : availableWay) {
-            if (currentMap.getScore(new Vector2(checkWay).add(currentBlock)) != -0.768f) {
+            float score = currentMap.getScore(new Vector2(checkWay).add(currentBlock));
+            if (score > -0.5f) {
                 legitWay.add(checkWay);
             }
         }
         if (legitWay.size() > 0) {
             direction.set(legitWay.get(GameHelper.instance().random.nextInt(legitWay.size())));
         }
+        botDropBomb();
     }
 }
