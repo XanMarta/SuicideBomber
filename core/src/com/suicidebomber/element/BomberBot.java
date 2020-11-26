@@ -12,6 +12,10 @@ public class BomberBot extends WalkingBot {
             if (GameHelper.instance().random.nextInt(100) < 10) {
                 dropBomb();
             }
+        } else {
+            if (GameHelper.instance().random.nextInt(100) < 3) {
+                dropBomb();
+            }
         }
     }
 }

@@ -149,6 +149,7 @@ public class PlayGround extends Scene {
         walkingBot.setMap(mapPlay);
         walkingBot.playerName = "WALKING";
         playerManager.addChild(walkingBot);
+        playerManager.addPlayer(walkingBot);
 
         DodgeBot dodgeBot = new DodgeBot();
         dodgeBot.name = "dodgebot";
@@ -170,7 +171,7 @@ public class PlayGround extends Scene {
         root.addChild(tagManager);
         tagManager.connectPlayer(player);
         tagManager.connectPlayer(playeralt);
-        tagManager.connectPlayer(walkingBot);
+        tagManager.connectPlayer(bomberBot);
         tagManager.connectPlayer(dodgeBot);
 
         gui = new Gui();

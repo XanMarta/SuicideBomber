@@ -78,7 +78,7 @@ public class Actor extends MapElement {
         } else {
             nearbyBlock.set(new Vector2(exactMargin).nor().add(currentBlock));
         }
-        isNearCenter = (exactMargin.len() < GameElement.nearCenterMargin);
+        isNearCenter = (exactMargin.len() < 5);
     }
 
     public void setBlock(Vector2 block) {
