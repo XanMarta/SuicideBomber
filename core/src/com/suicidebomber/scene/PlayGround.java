@@ -52,7 +52,7 @@ public class PlayGround extends Scene {
         TileMap mapPlay = new TileMap();
         mapPlay.blockSize.set(GameElement.blockSize);
         mapPlay.name = "mapplay";
-        mapPlay.generateMap(MapLoader.instance().loadMap("SANDSTORM"));
+        mapPlay.generateMap(MapLoader.instance().loadMap());
         mapPlay.position.set(GameElement.mapPosition);
         root.addChild(mapPlay);
 

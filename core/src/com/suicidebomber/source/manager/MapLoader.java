@@ -3,6 +3,7 @@ package com.suicidebomber.source.manager;
 import com.suicidebomber.source.Map;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -25,6 +26,7 @@ public class MapLoader {
 
     public void create() {
         importMap("SANDSTORM", "core/assets/map/Sandstorm.dll");
+        importMap("LEVIATHAN", "core/assets/map/Leviathan.dll");
     }
 
     public Map loadMap(String mapName) {
@@ -33,6 +35,14 @@ public class MapLoader {
         } else {
             return null;
         }
+    }
+
+    public Map loadMap() {
+        ArrayList<String> map = new ArrayList<>();
+        for (String mapName : mapList.keySet()) {
+            map.add(mapName);
+        }
+        return mapList.get(map.get(GameHelper.instance().random.nextInt(map.size())));
     }
 
     private void importMap(String mapName, String path) {
