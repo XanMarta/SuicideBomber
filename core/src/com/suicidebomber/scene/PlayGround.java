@@ -14,15 +14,16 @@ import java.util.ArrayList;
 
 public class PlayGround extends Scene {
 
-    public PlayerManager playerManager;
-    public TransitionScene transitionScene;
-    public Canvas2D bomb;
-    public Canvas2D fire;
-    public Canvas2D box;
-    public Canvas2D wall;
-    public Canvas2D item;
-    public Canvas2D other;
-    public Gui gui;
+    private PlayerManager playerManager;
+    private TransitionScene transitionScene;
+    private Canvas2D bomb;
+    private Canvas2D fire;
+    private Canvas2D box;
+    private Canvas2D wall;
+    private Canvas2D item;
+    private Canvas2D other;
+    private Gui gui;
+    private Button returnButton;
 
     private boolean isPLaying = true;
 
@@ -36,6 +37,9 @@ public class PlayGround extends Scene {
                 } else if (signal.equals("change_scene")) {
                     change_scene();
                 } else if (signal.equals("text_out")) {
+                    text_out();
+                } else if (signal.equals("button_return")) {
+                    isPLaying = false;
                     text_out();
                 }
             }
@@ -166,6 +170,13 @@ public class PlayGround extends Scene {
         gui.connect_signal("time_out", root, "end_game");
         gui.connect_signal("text_out", root, "text_out");
         root.addChild(gui);
+
+        returnButton = new Button();
+        returnButton.mouseInTexture = "BUTTON_RETURN";
+        returnButton.position.set(58, 42);
+        returnButton.size.set(200, 106);
+        returnButton.connect_signal("button_pressed", root, "button_return");
+        root.addChild(returnButton);
 
         transitionScene = new TransitionScene();
         transitionScene.connect_signal("disappear_ended", root, "change_scene");

@@ -39,6 +39,7 @@ BLUE_DOWN_5 | image/player/blue/blue_down_5.png
 START_SCENE | image/scene/startScene.png
 BUTTON_START | image/scene/buttonStart.png
 BUTTON_QUIT | image/scene/buttonQuit.png
+BUTTON_RETURN | image/scene/buttonReturn.png
 BLACK_SCREEN_1 | image/scene/Transition/BLACK_SCREEN_1.png
 BLACK_SCREEN_2 | image/scene/Transition/BLACK_SCREEN_2.png
 BLACK_SCREEN_3 | image/scene/Transition/BLACK_SCREEN_3.png
