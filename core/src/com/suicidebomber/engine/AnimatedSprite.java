@@ -8,6 +8,8 @@ import java.util.HashMap;
 
 public class AnimatedSprite extends Sprite {
 
+    public String currentSprite = "";
+
     private HashMap<String, AnimationSprite> animations = new HashMap<>();
     private String currentAnimation = "";
     private boolean isPlaying = false;
@@ -76,9 +78,8 @@ public class AnimatedSprite extends Sprite {
             if (isPlaying) {
                 timingWhile = TimeUtils.timeSinceMillis(startTime);
             }
-            ImageManager.instance().drawImage(
-                    animations.get(currentAnimation).getSprite(timingWhile),
-                    global_position);
+            currentSprite = animations.get(currentAnimation).getSprite(timingWhile);
+            ImageManager.instance().drawImage(currentSprite, global_position);
         }
     }
 }

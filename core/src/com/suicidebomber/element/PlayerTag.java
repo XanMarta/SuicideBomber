@@ -14,14 +14,18 @@ public class PlayerTag extends Canvas2D {
     private Canvas2D powers;
     private Canvas2D speeds;
     private Label playerName;
+    private Sprite playerSprite;
+    private Sprite specialSprite;
 
     public boolean hasPlayer = false;
+    public Player currentPlayer = null;
 
     public void create() {
         super.create();
         Sprite mainImage = new Sprite();
         mainImage.image = "PLAYER_TAG";
         addChild(mainImage);
+
         bombs = new Canvas2D();
         hearts = new Canvas2D();
         powers = new Canvas2D();
@@ -30,6 +34,7 @@ public class PlayerTag extends Canvas2D {
         addChild(hearts);
         addChild(powers);
         addChild(speeds);
+
         int range = 180 / GameElement.max_element;
         for (int i = 0; i < GameElement.max_element; i++) {
             Sprite bomb = new Sprite();
@@ -52,7 +57,19 @@ public class PlayerTag extends Canvas2D {
         playerName = new Label();
         playerName.position.set(10, 30);
         addChild(playerName);
+
+        playerSprite = new Sprite();
+        playerSprite.position.set(22, 70);
+        addChild(playerSprite);
+
+        specialSprite = new Sprite();
+        addChild(specialSprite);
+
         update(null);
+    }
+
+    public void update() {
+        update(currentPlayer);
     }
 
     public void update(Player player) {
@@ -69,6 +86,7 @@ public class PlayerTag extends Canvas2D {
             for (Node node : speeds.getChildren()) {
                 ((Sprite) node).visible = false;
             }
+            specialSprite.image = "TAG_NOPLAYER";
         } else {
             for (int i = 0; i < GameElement.max_element; i++) {
                 ((Sprite) bombs.getChild(i)).visible = (i < player.bomb);
@@ -77,6 +95,12 @@ public class PlayerTag extends Canvas2D {
                 ((Sprite) speeds.getChild(i)).visible = (i < player.speed);
             }
             playerName.text = player.playerName;
+            playerSprite.image = player.getCurrentSprite();
+            if (player.isLiving) {
+                specialSprite.image = "";
+            } else {
+                specialSprite.image = "TAG_DIE";
+            }
         }
     }
 }

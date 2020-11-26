@@ -198,13 +198,11 @@ public class PlayGround extends Scene {
     }
 
     public void end_game() {
-        String end_text = playerManager.getWinner();
-        if (end_text.equals("")) {
-            end_text = "DRAW";
-        } else {
-            end_text += " WIN";
+        String winner = playerManager.getWinner();
+        if (!(winner.equals("LOSE") || winner.equals("DRAW"))) {
+            winner += " WIN";
         }
-        gui.show_text(end_text);
+        gui.show_text(winner);
         isPLaying = false;
     }
 

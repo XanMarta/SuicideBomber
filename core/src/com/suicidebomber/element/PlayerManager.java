@@ -8,9 +8,18 @@ import java.util.ArrayList;
 public class PlayerManager extends Canvas2D {
 
     private ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Player> bots = new ArrayList<>();
+    private int remainPlayer = 0;
+    private int remainBot = 0;
 
     public void addPlayer(Player player) {
-        players.add(player);
+        if (player instanceof Bot) {
+            bots.add(player);
+            remainBot += 1;
+        } else {
+            players.add(player);
+            remainPlayer += 1;
+        }
         player.connect_signal("player_die", this, "player_die");
     }
 
@@ -22,31 +31,38 @@ public class PlayerManager extends Canvas2D {
     }
 
     public void player_die() {
-        int remainPlayer = 0;
+        remainPlayer = 0;
+        remainBot = 0;
         for (Player player : players) {
             if (player.isLiving) {
                 remainPlayer += 1;
             }
         }
-        if (remainPlayer <= 1) {
+        for (Player bot : bots) {
+            if (bot.isLiving) {
+                remainBot += 1;
+            }
+        }
+        if (remainPlayer < 1) {
+            emit_signal("end_game");
+        } else if (remainPlayer == 1 && remainBot < 1) {
             emit_signal("end_game");
         }
     }
 
     public String getWinner() {
-        String remain = "";
-        int remainPlayer = 0;
-        for (Player player : players) {
-            if (player.isLiving) {
-                remainPlayer += 1;
-                remain = player.playerName;
+        if (remainPlayer < 1) {
+            return "LOSE";
+        } else if (remainPlayer == 1 && remainBot < 1) {
+            for (Player player : players) {
+                if (player.isLiving) {
+                    return player.playerName;
+                }
             }
-        }
-        if (remainPlayer > 1) {
-            return "";
         } else {
-            return remain;
+            return "DRAW";
         }
+        return "";
     }
 
     public void dispose() {

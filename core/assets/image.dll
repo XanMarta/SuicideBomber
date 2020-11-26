@@ -75,3 +75,5 @@ FIRE_3 | image/animation/fire/FIRE_3.png
 FIRE_4 | image/animation/fire/FIRE_4.png
 FIRE_5 | image/animation/fire/FIRE_5.png
 FIRE_6 | image/animation/fire/FIRE_6.png
+TAG_NOPLAYER | image/no_player.png
+TAG_DIE | image/die.png

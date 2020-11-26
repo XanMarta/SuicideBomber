@@ -118,6 +118,10 @@ public class Player extends Actor {     // Of course this is Player
         }
     }
 
+    public String getCurrentSprite() {
+        return animatedSprite.currentSprite;
+    }
+
     protected void dropBomb() {
         if (used_bomb < bomb) {
             if (currentMap.getMapBlock(currentBlock).blockType == GameElement.BlockType.GRASS) {
