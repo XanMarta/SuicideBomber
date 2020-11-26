@@ -1,9 +1,7 @@
 package com.suicidebomber.element;
 
-import com.suicidebomber.engine.Sprite;
+import com.suicidebomber.engine.*;
 import com.suicidebomber.autoload.GameElement;
-import com.suicidebomber.engine.MapElement;
-import com.suicidebomber.engine.Timing;
 
 
 public class Fire extends MapElement {
@@ -11,14 +9,26 @@ public class Fire extends MapElement {
     public Player owner = null;
     public Timing timer;
 
-    private Sprite sprite;
+    private AnimatedSprite sprite;
 
     public Fire() {
         super();
-        sprite = new Sprite();
-        sprite.image = "FIRE";
+        sprite = new AnimatedSprite();
         renderElement.add(sprite);
         addChild(sprite);
+
+        AnimationSprite fireAnim = new AnimationSprite();
+        fireAnim.addSprite("FIRE_1");
+        fireAnim.addSprite("FIRE_2");
+        fireAnim.addSprite("FIRE_3");
+        fireAnim.addSprite("FIRE_4");
+        fireAnim.addSprite("FIRE_5");
+        fireAnim.addSprite("FIRE_6");
+        fireAnim.delay = 70;
+        fireAnim.looping = false;
+        sprite.addAnimation("FIRE", fireAnim);
+        sprite.play("FIRE");
+
         timer = new Timing();
         timer.wait_time = GameElement.fireTiming;
         timer.connect_signal("time_out", this, "runoff");

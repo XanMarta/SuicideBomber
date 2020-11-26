@@ -1,11 +1,8 @@
 package com.suicidebomber.element;
 
 import com.badlogic.gdx.math.Vector2;
-import com.suicidebomber.engine.SoundPlayer;
-import com.suicidebomber.engine.Sprite;
+import com.suicidebomber.engine.*;
 import com.suicidebomber.autoload.GameElement;
-import com.suicidebomber.engine.MapElement;
-import com.suicidebomber.engine.Timing;
 
 
 public class Bomb extends MapElement {
@@ -14,14 +11,24 @@ public class Bomb extends MapElement {
     public int power = 3;
 
     private Timing timer;
-    private Sprite sprite;
+    private AnimatedSprite sprite;
     private SoundPlayer soundPlayer;
 
     public Bomb() {
         super();
-        sprite = new Sprite();
-        sprite.image = "BOMB";
+        sprite = new AnimatedSprite();
+        AnimationSprite bombAnim = new AnimationSprite();
+        bombAnim.addSprite("BOMB_1");
+        bombAnim.addSprite("BOMB_2");
+        bombAnim.addSprite("BOMB_3");
+        bombAnim.addSprite("BOMB_4");
+        bombAnim.addSprite("BOMB_5");
+        bombAnim.addSprite("BOMB_6");
+        bombAnim.delay = 500;
+        bombAnim.looping = false;
+        sprite.addAnimation("BOMB", bombAnim);
         renderElement.add(sprite);
+        sprite.play("BOMB");
         addChild(sprite);
 
         timer = new Timing();

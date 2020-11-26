@@ -18,6 +18,7 @@ public class Portal extends MapElement {
     public void create() {
         super.create();
         sprite = new AnimatedSprite();
+        renderElement.add(sprite);
         addChild(sprite);
 
         AnimationSprite spinAnim = new AnimationSprite();
@@ -37,11 +38,6 @@ public class Portal extends MapElement {
         portalTimer.start();
         blockType = GameElement.BlockType.PORTAL;
         setRandomBlock();
-    }
-
-    public void renderImage() {
-        super.renderImage();
-        sprite.renderImage();
     }
 
     public void setRandomBlock() {
