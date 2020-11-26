@@ -6,6 +6,7 @@ import com.suicidebomber.source.manager.SoundManager;
 public class SoundPlayer extends Node {
 
     public boolean looping = false;
+    public boolean stopWhenDispose = true;
 
     private String currentSound = "";
     private long currentCode = -1;
@@ -23,6 +24,8 @@ public class SoundPlayer extends Node {
 
     public void dispose() {
         super.dispose();
-        stop();
+        if (stopWhenDispose) {
+            stop();
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.suicidebomber.source.manager;
 
 import com.badlogic.gdx.Gdx;
+import com.suicidebomber.autoload.Autoload;
 import com.suicidebomber.engine.Node;
 import com.suicidebomber.scene.Lobby;
 import com.suicidebomber.source.Scene;
@@ -12,6 +13,7 @@ public class SceneManager {
     private Scene currentScene = null;
     private Node node;
     private Scene upcomingScene = null;
+    public static Autoload autoload;
 
     private SceneManager() {
 
@@ -33,14 +35,18 @@ public class SceneManager {
                 }
             }
         };
+        autoload = new Autoload();
+        autoload.create();
         setScene(new Lobby());     // MainScene
     }
 
     public void render() {
+        autoload.render();
         currentScene.render();
     }
 
     public void dispose() {
+        autoload.dispose();
         currentScene.dispose();
         currentScene = null;
     }

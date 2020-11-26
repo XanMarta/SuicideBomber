@@ -39,6 +39,7 @@ public class Bomb extends MapElement {
 
         soundPlayer = new SoundPlayer();
         soundPlayer.play("BOMB_TIMER");
+        soundPlayer.stopWhenDispose = false;
         addChild(soundPlayer);
 
         blockType = GameElement.BlockType.BOMB;
@@ -67,6 +68,7 @@ public class Bomb extends MapElement {
         }
         boom(new Vector2(currentBlock), new Vector2(0, 0), power);
         soundPlayer.stop();
+        soundPlayer.play("BOOM");
         safefree();
     }
 

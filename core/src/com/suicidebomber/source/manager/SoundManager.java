@@ -23,6 +23,10 @@ public class SoundManager {
 
     public void create() {
         loadSound("BOMB_TIMER", "sound/bomb_timer.wav");
+        loadSound("BOOM", "sound/boom.wav");
+        loadSound("CHOOSE", "sound/choose.wav");
+        loadSound("MUSIC", "sound/music.wav");
+        loadSound("READY", "sound/ready.wav");
     }
 
     public void dispose() {

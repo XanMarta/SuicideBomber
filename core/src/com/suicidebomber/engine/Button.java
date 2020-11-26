@@ -14,6 +14,7 @@ public class Button extends Canvas2D {
     public String mouseOutTexture = "";
     
     private Sprite sprite;
+    private SoundPlayer soundPlayer;
 
     public Button() {
         super();
@@ -24,6 +25,9 @@ public class Button extends Canvas2D {
         super.create();
         addChild(sprite);
         sprite.image = mouseOutTexture;
+
+        soundPlayer = new SoundPlayer();
+        addChild(soundPlayer);
     }
 
     public void render() {
@@ -34,6 +38,7 @@ public class Button extends Canvas2D {
                     && GameElement.windowsSize.y - Gdx.input.getY() <= global_position.y + size.y) {
                 sprite.image = mouseInTexture;
                 if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) || Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)) {
+                    soundPlayer.play("CHOOSE");
                     emit_signal("button_pressed");
                 }
             }

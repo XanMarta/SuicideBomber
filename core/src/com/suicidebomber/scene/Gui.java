@@ -1,10 +1,7 @@
 package com.suicidebomber.scene;
 
 import com.badlogic.gdx.math.Vector2;
-import com.suicidebomber.engine.Canvas2D;
-import com.suicidebomber.engine.Label;
-import com.suicidebomber.engine.Sprite;
-import com.suicidebomber.engine.Timing;
+import com.suicidebomber.engine.*;
 import com.suicidebomber.autoload.GameElement;
 
 // Signal: time_out, text_out
@@ -17,6 +14,7 @@ public class Gui extends Canvas2D {
     private Timing textCount;
     private Sprite winSprite;
     private int remainTime;
+    private SoundPlayer soundPlayer;
 
     public void create() {
         super.create();
@@ -40,7 +38,8 @@ public class Gui extends Canvas2D {
         //
         textLabel = new Label();
         textLabel.font = "COMIC_LARGE";
-        textLabel.position.set(new Vector2(GameElement.windowsSize).scl(0.5f));
+        textLabel.position.set(new Vector2(GameElement.windowsSize).scl(0.5f).add(100, 0));
+        textLabel.center = true;
         textLabel.visible = false;
         addChild(textLabel);
         //
@@ -52,6 +51,10 @@ public class Gui extends Canvas2D {
         remainTime = GameElement.matchTime;
         countTime();
         timerCount.start();
+        //
+        soundPlayer = new SoundPlayer();
+        soundPlayer.stopWhenDispose = false;
+        addChild(soundPlayer);
     }
 
     public void execute_signal(String signal) {
@@ -89,6 +92,7 @@ public class Gui extends Canvas2D {
         textLabel.visible = true;
         winSprite.visible = true;
         textCount.start();
+        soundPlayer.play("READY");
     }
 
     protected void text_out() {
