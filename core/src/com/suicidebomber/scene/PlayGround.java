@@ -143,6 +143,14 @@ public class PlayGround extends Scene {
         playerManager.addChild(bomberBot);
         playerManager.addPlayer(bomberBot);
 
+        BomberBot bomberBotalt = new BomberBot();
+        bomberBotalt.name = "bomberbot";
+        bomberBotalt.defaultBlock.set(11, 3);
+        bomberBotalt.setMap(mapPlay);
+        bomberBotalt.playerName = "BOMBER";
+        playerManager.addChild(bomberBotalt);
+        playerManager.addPlayer(bomberBotalt);
+
         WalkingBot walkingBot = new WalkingBot();
         walkingBot.name = "walkingbot";
         walkingBot.defaultBlock.set(13, 1);

@@ -6,8 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -33,7 +31,7 @@ public class ImageManager {
     public void create() {
         images = new HashMap<>();
         batch = new SpriteBatch();
-        loadImageFile("core/assets/image.dll");
+        loadImageFile("image.dll");
     }
 
     public void dispose() {
@@ -44,7 +42,7 @@ public class ImageManager {
 
     private void loadImageFile(String path) {              // Load image from file.       name|path
         try {
-            Scanner scan = new Scanner(new File(path));
+            Scanner scan = new Scanner(Gdx.files.internal(path).read());
             while (scan.hasNextLine()) {
                 String[] temp = scan.nextLine().split("\\|");
                 if (temp.length == 2) {
@@ -52,7 +50,7 @@ public class ImageManager {
                 }
             }
             scan.close();
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             System.out.println("File not found: " + path);
         }
     }

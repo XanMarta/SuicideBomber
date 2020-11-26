@@ -1,5 +1,6 @@
 package com.suicidebomber.source.manager;
 
+import com.badlogic.gdx.Gdx;
 import com.suicidebomber.source.Map;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,8 +26,8 @@ public class MapLoader {
     }
 
     public void create() {
-        importMap("SANDSTORM", "core/assets/map/Sandstorm.dll");
-        importMap("LEVIATHAN", "core/assets/map/Leviathan.dll");
+        importMap("SANDSTORM", "map/Sandstorm.dll");
+        importMap("LEVIATHAN", "map/Leviathan.dll");
     }
 
     public Map loadMap(String mapName) {
@@ -48,7 +49,11 @@ public class MapLoader {
     private void importMap(String mapName, String path) {
         try {
             Map map = new Map();
-            Scanner scan = new Scanner(new File(path));
+            if (!Gdx.files.internal(path).exists()) {
+                System.out.println("File not found: " + path);
+                return;
+            }
+            Scanner scan = new Scanner(Gdx.files.internal(path).read());
             int width = scan.nextInt();
             int height = scan.nextInt();
             map.setMap(width, height);
@@ -61,7 +66,7 @@ public class MapLoader {
             }
             scan.close();
             mapList.put(mapName, map);
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             System.out.println("File not found: " + path);
         }
     }

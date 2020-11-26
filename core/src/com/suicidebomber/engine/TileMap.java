@@ -68,7 +68,7 @@ public class TileMap extends Canvas2D {
             element.specialScore();
         }
         elementScore.clear();
-//        printMapScore();
+        printMapScore();
         updateMapScore.copy(mapScore);
         mapScore.reset();
     }
